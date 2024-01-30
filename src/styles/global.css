@@ -1,0 +1,96 @@
+:root{
+    --colorMain: #3C8DBB;
+    --colorMainBlack: #367FA6;
+    --colorSecundary: #2D3C42;
+    --colorSecundaryBlack: #222D30;
+    --colorGris: #dde1e2;
+    --colorRed: #DA4E3B;
+    --colorRedBlack: #e4412b;
+    --colorWhite: #ffffff;
+    --colorGreen: #00A758;
+    --colorYellow: #fd910c;
+    --colorSend: #07eaff;
+    --colorGris: #B8B6B5;
+    --colorPurple: #7069d9;
+    --colorGreenSecond: #0EBA84;
+    --colorGreenSoft:  #88B93D;
+}
+
+.btn-gral{
+    display: inline-flex;
+    gap: .3rem;
+    align-items: center;
+    padding: .3rem 1rem;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid var(--colorMain);
+    border-radius: 5px;
+    color: var(--colorMain);
+    background-color: var(--colorWhite);
+    transition: background-color 0.3s, color 0.3s;
+}  
+
+/* Btns */
+.btn--main{
+    color: var(--colorMain);
+    border: 1px solid var(--colorMain);
+}
+.btn--success{
+    color: var(--colorGreen);
+    border: 1px solid var(--colorGreen);
+}
+.btn--error{
+    border: 1px solid var(--colorRed);
+    color: var(--colorRed);
+}
+.btn--new{
+    color: var(--colorGreen);
+    border: 1px solid var(--colorGreen);
+}
+
+/* Inputs */
+input:focus {
+    outline: none;
+}
+  
+.input{
+    width: 100%;
+    height: 2.8rem;
+    border-radius: 5px;
+    padding: 0.5rem 15px;
+    border: 1px solid var(--colorGris);
+}
+
+.select{ 
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    border: 1px solid var(--colorGris);
+}
+.select:focus{
+    outline: none;
+}
+
+/* Errors */
+.f-error{
+    color: var(--colorRed);
+    font-size: 0.875rem;
+}
+
+/* Images */
+.image{
+    width: 100%;
+    height: auto;
+}
+
+.image img{
+    width: 100%;
+    height: auto;
+}
+
+.image--row{
+    max-width: 67px;
+}
