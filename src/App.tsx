@@ -1,15 +1,12 @@
-
+import { Route, Routes } from 'react-router-dom'
+import { Product } from './components/product/Product'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-import Category from './ui/components/category/Category'
-import User from './ui/components/user/User';
-
+import './styles/global.css'
 function App() {
   return (
-    <>
-    { /*<Category/>*/}
-     <User/>
-    </>
+      <Routes>
+        <Route path="/product" element={<Product />} />
+      </Routes>
   )
 }
 
