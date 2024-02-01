@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
-import { ModalCourse } from "./ModalCourse";
 import { APISERVICE, AxiosService } from "../../service/api.service";
 import { Brand, Category, PageInfo, Product } from "../../models/models";
 import ProductTable from "./ProductTable";
 import SearchRow from "../../shared/search/SearchRow";
 import Button from "../../shared/btns/Button";
 import { BiPlus } from "react-icons/bi";
+import { ModalProduct } from "./ModalProduct";
 
 interface AppState{
     products: Product [],
@@ -43,43 +43,20 @@ export function Product (){
   
     const getBrands = async () => {
       const url = 'brand';
-      /* const response = await AxiosService.get(url, '');
+      const response = await AxiosService.get(url, '');
       if(true){
           const { data } = response.data;
           setBrands(data);
-      } */
-
-      const brands = [
-        {
-          id: 5,
-          name: 'Dimax',
-        },
-        {
-          id: 6,
-          name: 'Dahua',
-        }
-      ]
-        setBrands(brands);
+      }
     }
     const getCategories = async () => {
       const url = 'category';
     
-      /* const response = await AxiosService.get(url, '');
+      const response = await AxiosService.get(url, '');
       if(true){
           const { data } = response.data;
           setCategories(data);
-        } */
-      const categories = [
-        {
-          id: 1,
-          name: 'Control de acceso',
-        },
-        {
-          id: 2,
-          name: 'Camaras',
         }
-      ]
-      setCategories(categories);
     }
   
     const getProducts = async (page: number) => {
@@ -120,13 +97,13 @@ export function Product (){
     
     };
   
-    const updateCourse = async (body: Product, image: File | null, params: string) => {
+    const updateCourse = async (body: Product, image: File | null, pdfFile: File | null, params: string) => {
       try {
         setLoading(true)
         const formData = new FormData();
         formData.append('data', JSON.stringify(body));
-        //let params = `/${idProduct}`;
         if(image)formData.append('file', image);
+        if(pdfFile)formData.append('filePdf', pdfFile);
         const { success, message } = await APISERVICE.posWithImage(formData, 'product', params, 'POST');
         if ( success ) {
           getProducts(pageInfo?.page ?? 1);
@@ -174,8 +151,7 @@ export function Product (){
             loading={loading}
             pageInfo={pageInfo}
           />
-          <ModalCourse
-           /*  create={create} */
+          <ModalProduct
             updateCourse={updateCourse}
           />
         </div>

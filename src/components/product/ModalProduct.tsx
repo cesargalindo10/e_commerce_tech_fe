@@ -10,8 +10,7 @@ import Button from "../../shared/btns/Button";
 import { RowImage } from "../../shared/rowImage/RowImage";
 const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 interface Props {
-  //create: (product: Product, image: File | null) => void,
-  updateCourse: (product: Product, image: File | null, params: string) => void;
+  updateCourse: (product: Product, image: File | null,pdfFile: File | null,  params: string) => void;
 }
 let initialState: Product = {
   name: "",
@@ -23,14 +22,22 @@ let initialState: Product = {
   state: "",
   description: "",
 };
+
+enum typeFile {
+  image = "image",
+  pdf = "pdf",
+} 
+
 let initialValues = initialState;
-export const ModalCourse = ({ updateCourse }: Props) => {
+export const ModalProduct = ({ updateCourse }: Props) => {
   const [image, setImage] = useState<File | null>(null);
   const [selectedImage, setSelectedImage] = useState<
     string | ArrayBuffer | null
   >(null);
   const [urlImage, setUrlImage] = useState("");
   const contextValue = useContext<ContextProductType | null>(ContextProduct);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);  
+
   if (!contextValue) return;
 
   const {
@@ -82,21 +89,21 @@ export const ModalCourse = ({ updateCourse }: Props) => {
       brand_id: values.brand_id,
     };
     if (productToUpdate === null) {
-      updateCourse(product, image, "");
+      updateCourse(product, image,pdfFile ,"");
     } else {
       const params = `/${productToUpdate.id}`;
-      updateCourse(product, image, params);
+      updateCourse(product, image, pdfFile,  params);
     }
     reset();
   };
 
   const reset = () => {
     setShowModal(false);
-    setProductToUpdate(null);
     initialValues = initialState;
     setSelectedImage(null);
     setImage(null);
     setUrlImage("");
+    setProductToUpdate(null);
   };
 
   const yupSchema = Yup.object().shape({
@@ -121,12 +128,12 @@ export const ModalCourse = ({ updateCourse }: Props) => {
     category_id: Yup.string().required(EM.requiredMessage),
   });
 
-  const handleManageImage = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleManageFile = (event: ChangeEvent<HTMLInputElement>, set: React.Dispatch<React.SetStateAction<File | null>>, type: string) => {
     const file = event.target.files;
     if (file && file.length > 0) {
       const selected = file[0];
-      setImage(selected);
-      if (event.target.files && event.target.files[0]) {
+      set(selected);
+      if (event.target.files && event.target.files[0] && type === typeFile.image  ) {
         const reader = new FileReader();
         reader.onload = (e) => {
           setSelectedImage(e.target?.result ?? null);
@@ -211,7 +218,8 @@ export const ModalCourse = ({ updateCourse }: Props) => {
               className="input-file"
               type="file"
               name="image"
-              onChange={handleManageImage}
+              accept="image/png, image/jpeg, image/jpg, image/web3"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleManageFile(e, setImage, typeFile.image)}
             />
 
             {selectedImage ? (
@@ -224,12 +232,20 @@ export const ModalCourse = ({ updateCourse }: Props) => {
               </>
             )}
 
+            <Field
+              className="input-file"
+              type="file"
+              name="pdfFile"
+              accept=".pdf"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => handleManageFile(e, setPdfFile, typeFile.pdf)}
+            />
+
             <div className="modal__btns mt-3">
               <Button variant="error" onClick={reset} text="Cancelar" />{" "}
               <Button
                 variant="main"
                 type="submit"
-                text={productToUpdate ? "Actualizar" : "Crear"}
+                text={productToUpdate?.id ? "Actualizar" : "Crear"}
               />
             </div>
           </Form>

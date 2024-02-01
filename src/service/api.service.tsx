@@ -62,4 +62,13 @@ export const AxiosService = {
     get: (url: string, params: any) => {
         return axios.get(`${APIURL+ url}`, {params: params});
     },
+
+    post: <T,>(body: T,url: string, params: string) => {
+        return axios.post(`${APIURL +url + params}`, body);
+    },
+
+    patch: <T,> (body: T, url: string, params: string) => {
+        return axios.patch(`${APIURL + url + params}`, body);
+    }
+    
 }
