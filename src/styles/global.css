@@ -16,6 +16,15 @@
     --colorGreenSoft:  #88B93D;
 }
 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: Franklin Gothic Medium,Arial Narrow,Arial,sans-serif;
+}
+
 .btn-gral{
     display: inline-flex;
     gap: .3rem;
@@ -30,6 +39,7 @@
     color: var(--colorMain);
     background-color: var(--colorWhite);
     transition: background-color 0.3s, color 0.3s;
+    margin: 0px;
 }  
 
 /* Btns */
@@ -49,6 +59,10 @@
     color: var(--colorGreen);
     border: 1px solid var(--colorGreen);
 }
+.btn--disable{
+    color: var(--colorSecundary);
+    border: 1px solid var(--colorGris);
+}
 
 /* Inputs */
 input:focus {
@@ -57,9 +71,8 @@ input:focus {
   
 .input{
     width: 100%;
-    height: 2.8rem;
     border-radius: 5px;
-    padding: 0.5rem 15px;
+    padding: 0.33rem 1rem;
     border: 1px solid var(--colorGris);
 }
 

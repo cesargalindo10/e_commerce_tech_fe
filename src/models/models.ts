@@ -31,3 +31,21 @@ export interface Brand{
     name: string,
     description?: string
 }
+
+export interface Sale{
+    id?: number,
+    total: number,
+    order_number: number,
+    state: string,
+    customer_name: string,
+    customer_phone: string
+    created_at: string
+}
+export interface OrderDetail{
+    id?: number,
+    name: string,
+    quantity: number,
+    total: number,
+    sale_price: number,
+    url_image: string
+}
