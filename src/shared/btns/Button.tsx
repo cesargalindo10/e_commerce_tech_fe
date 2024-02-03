@@ -29,6 +29,8 @@ const FactoryStyle = (variant : string): string => {
       return 'btn--new';
     case 'main':
         return 'btn--main';
+    case 'disable':
+        return 'btn--disable';
     default:
        return '';
   }
