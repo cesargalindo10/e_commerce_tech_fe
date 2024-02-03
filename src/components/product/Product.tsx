@@ -51,11 +51,11 @@ export function Product (){
 
       const brands = [
         {
-          id: 5,
+          id: 1,
           name: 'Dimax',
         },
         {
-          id: 6,
+          id: 1,
           name: 'Dahua',
         }
       ]

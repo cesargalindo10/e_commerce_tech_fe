@@ -31,3 +31,11 @@ export interface Brand{
     name: string,
     description?: string
 }
+export interface CategoryData{
+    id:number;
+    name: string;
+    description: string;
+    state:boolean;
+    create_at: string | null;
+    update_at: string | null;
+}

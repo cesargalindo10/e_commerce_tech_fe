@@ -13,10 +13,14 @@ const columns = [
       title: "description",
       id: 3,
     },
+    {
+      title: "state",
+      id: 4,
+    },
  
     {
         title:"Actions",
-        id:4
+        id:5
     }
   ];
 export default function CategoryTableHeader() {
@@ -25,7 +29,7 @@ export default function CategoryTableHeader() {
   return (
     <thead>
       <tr>
-        {columns.map((column) => (
+        {columns && columns.map((column) => (
           <th key={column.id}>{column.title}</th>
         ))}
       </tr>

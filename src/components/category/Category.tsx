@@ -1,61 +1,39 @@
 import { useEffect, useState } from "react";
-import { APISERVICE } from "../../../infrastructure/api/api.service";
+import { APISERVICE } from "../../infrastructure/api/api.service";
 import CategoryTable from "./CategoryTable";
-import "./Category.css";
 import CategoryModal from "./CategoryModal";
-import Paginator from "./Paginator";
-interface FormData {
-  id: number | "";
-  name: string;
-  description: string;
-  create_at: string | null;
-  update_at: string | null;
+import { CategoryData, PageInfo } from "../../models/models";
+import Button from "../../shared/btns/Button";
+
+interface AppState {
+  pageInfo: PageInfo | null;
+  categories: CategoryData[];
 }
 
 export default function Category() {
-  const initialData: FormData = {
-    id: "",
+  const initialData: CategoryData = {
+    id: 0,
     name: "",
     description: "",
+    state:true,
     create_at: "",
     update_at: "",
   };
 
   const [categories, setCategories] = useState([]);
   const [categoryToEdit, setCategoriToEdit] = useState(initialData);
-  const [pageInfo, setPageInfo] = useState({
-    current_page: 1,
-    data: [],
-    first_page_url: "",
-    from: 0,
-    last_page: 1,
-    last_page_url: "",
-    links: [],
-    next_page_url: null,
-    path: "",
-    per_page: 5, // Ajusta según tus necesidades
-    prev_page_url: "",
-    to: 0,
-    total: 0,
-  });
+  const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const getCategories = async (pageNum: string = "1"): Promise<void> => {
+ 
+  const getCategories = async (page: number = 1): Promise<void> => {
     try {
-      const url = `categories?page=${pageNum}`;
+      const url = `api/categories?page=${page}`;
       const response = await APISERVICE.get(url);
       if (response.status === 200) {
         setCategories(response.data.data);
-        setPageInfo(response.data);
+        setpageInfo(response.data.pageInfo);
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -65,33 +43,34 @@ export default function Category() {
   };
   const createCategory = async (category: any): Promise<void> => {
     try {
-      let url: string = "categories";
+      let url: string = "api/categories";
       const response = await APISERVICE.post(category, url);
 
       if (response.status === 201) {
       }
-      getCategories("categories/1");
+      getCategories();
     } catch (error) {
       console.error(error);
     }
   };
   const updateCategory = async (
-    categoryUpdate: FormData,
+    categoryUpdate: CategoryData,
     id: string
   ): Promise<void> => {
     try {
-      let url: string = `categories/${id}`;
-      const response = await APISERVICE.put(categoryUpdate, url);
+      let url: string = `api/categories/${id}`;
+      const response = await APISERVICE.post(categoryUpdate, url);
 
       if (response.status === 201) {
       }
-      getCategories(pageInfo.first_page_url);
+      getCategories();
     } catch (error) {
       console.error(error);
     }
   };
   const deleteCategory = async (id: string) => {
-    let url = `categories/${id}`;
+    let url = `api/categories/${id}`;
+    console.log(url);
     const response = await APISERVICE.delete(url);
     if (response.status === 200) {
       getCategories();
@@ -104,18 +83,19 @@ export default function Category() {
 
   return (
     <>
-      <button onClick={openModal}>+ Nuevo</button>
+      <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
       <CategoryTable
         items={categories}
         setCategoriToEdit={setCategoriToEdit}
-        setIsModalOpen={setIsModalOpen}
+        setShowModal={setShowModal}
         deleteCategory={deleteCategory}
+        pageInfo={pageInfo}
+        getCategories={getCategories}
       />
-      <Paginator pageInfo={pageInfo} getData={getCategories} />
-
-      {isModalOpen && (
+      {showModal && (
         <CategoryModal
-          closeModal={closeModal}
+          showModal={showModal}
+          setShowModal={setShowModal}
           createCategory={createCategory}
           updateCategory={updateCategory}
           categoryToEdit={categoryToEdit}

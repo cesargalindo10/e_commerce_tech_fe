@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { APISERVICE } from "../../../infrastructure/api/api.service";
+import { APISERVICE } from "../../infrastructure/api/api.service";
 import UserTable from "./UserTable";
 import "./User.css";
 import UserModal from "./UserModal";
