@@ -68,27 +68,34 @@ export default function Login() {
             </div>
             <Form className="login-form">
               <h2>Login</h2>
-              <Field
-                type="text"
-                name="username"
-                placeholder="Username"
-                className={`form-control ${errors.username && "is-invalid"}`}
-                touched={touched.username ? "false" : "true"}
-              />
-              <div className="invalid-feedback">
-                {errors.username && errors.username}
+              <div>
+                <Field
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  className={`form-control ${errors.username && "is-invalid"}`}
+                  touched={touched.username ? "false" : "true"}
+                />
+                <div className="invalid-feedback">
+                  {errors.username && errors.username}
+                </div>
               </div>
-              <Field
-                type="password"
-                name="password"
-                placeholder="Password"
-                className={`form-control ${errors.password && "is-invalid"}`}
-                touched={touched.password ? "false" : "true"}
-              />
-              <div className="invalid-feedback">
-                {errors.password && errors.password}
+              <div>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className={`form-control ${errors.password && "is-invalid"}`}
+                  touched={touched.password ? "false" : "true"}
+                />
+                <div className="invalid-feedback">
+                  {errors.password && errors.password}
+                </div>
               </div>
-              <Button variant="main" type="submit" text={"Login"} />
+
+              <button type="submit" className="btn-login">
+                Login
+              </button>
             </Form>
           </div>
         </div>

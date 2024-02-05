@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-//import { Private } from '../pages/Private';
 import { AppStore } from "../redux/store";
 import { PrivateRoutes, PublicRoutes } from "../models/routes";
 
