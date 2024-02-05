@@ -1,88 +1,80 @@
-import { useState, FormEvent } from "react";
-import Modal from "./Modal";
+import { useState } from "react";
 import { FormikValues } from "formik";
+import { User } from "../../models/models";
+import { Modal } from "react-bootstrap";
 import UserForm from "./UserForm";
 
-
-interface FormData {
-  id: number | "";
-  firstname: string;
-  lastname: string;
-  username: string;
-  phone: string | null;
-  email: string | null;
-  address: string | null;
-  password: string | null;
-}
-
-interface CategoryModalProps {
-  closeModal: () => void;
-  createCategory: (user: FormData) => void;
-  updateUser: (categoryE: FormData, id: string) => void;
-  categoryToEdit: FormData;
-  setCategoriToEdit: ([]: any) => void;
+interface UserModalProps {
+  showModal: boolean;
+  setShowModal: (value: boolean) => void;
+  createUser: (user: User) => void;
+  updateUser: (userE: User, id: string) => void;
+  userToEdit: User;
+  setUserToEdit: ([]: any) => void;
 }
 
 export default function UserModal({
-  closeModal,
-  createCategory,
+  showModal,
+  setShowModal,
+  createUser,
   updateUser,
-  categoryToEdit,
-  setCategoriToEdit,
-}: CategoryModalProps) {
-  const initialData: FormData = {
-    id: "",
-    firstname: "",
-    lastname: "",
+  userToEdit,
+  setUserToEdit,
+}: UserModalProps) {
+  const initialData: User = {
+    id:0,
+    name: "",
     username: "",
-    phone: "",
-    email: "",
-    address: "",
-    password: "",
+    phone:"",
+    state: true,
+    password:'',
+    role:"",   
   };
 
-  const [formData, setFormData] = useState<FormData>(
-    categoryToEdit === null ? initialData : categoryToEdit
+  const [formData, setFormData] = useState<User>(
+    userToEdit === null ? initialData : userToEdit
   );
 
-  const handleSubmit = (values:FormikValues) => {
-    const formData: FormData = {
-      id: values.id || "",
-      firstname: values.firstname ?? "",
-      lastname: values.lastname ?? "",
-      username: values.username ?? "",
-      phone: values.phone ?? "",
-      email: values.email ?? "",
-      address: values.address ?? "",
-      password: values.password ?? "",
+  const handleSubmit = (values: FormikValues) => {
+    const formData: User = {
+      id:values.id,
+      name: values.name || "",
+      username: values.username || "",
+      phone: values.phone || "",
+      password:values.password,
+      state: values.state,
+      role:values.role,
     };
-    
-
-    if (formData.id === "") {
-      // Crear nuevo registro
-      createCategory(formData);
+    if (formData.id === 0) {
+      console.log("hereCreate")
+      createUser(formData);
     } else {
-      // Actualizar registro existente
+      console.log("here update")
       updateUser(formData, "" + formData.id);
     }
-    setCategoriToEdit(initialData);
-    closeModal();
+    setUserToEdit(initialData);
+    setShowModal(false);
   };
   const handleCancel = () => {
-    setCategoriToEdit(initialData);
-    closeModal();
+    setUserToEdit(initialData);
+    setShowModal(false);
   };
 
   return (
-    <Modal>
-      <h2>
-        {formData.id === "" ? "Crear Nueva Categoria" : "Editar Categoria"}
-      </h2>
-      <UserForm
-        formData={formData}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />
+    <Modal show={showModal}>
+      <Modal.Header>
+        <h5 className="title-header__modal">
+          {userToEdit ? "Actualizar Usuario" : "Crear nueva usuario"}
+        </h5>
+      </Modal.Header>
+      <Modal.Body>
+        <UserForm
+          userToEdit={userToEdit}
+          formData={formData}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />
+      </Modal.Body>
     </Modal>
   );
 }

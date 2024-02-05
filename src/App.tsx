@@ -8,6 +8,7 @@ import { PrivateRoutes, PublicRoutes } from "./models/routes";
 import AuthGuard from "./guards/auth.guard";
 import ProductByCategory from "./components/client/ProductByCategory";
 import Borrar from "./components/client/Borrar";
+
 function App() {
   return (
     <RoutesWithNotFound>

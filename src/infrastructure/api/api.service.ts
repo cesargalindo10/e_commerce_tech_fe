@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8000/";
 
-let token: string|null;
+let token: string | null;
 function getToken(): void {
   const tokenLocal = JSON.parse(localStorage.getItem("user") as string);
   token = tokenLocal ? `bearer ${tokenLocal.token}` : "";
@@ -10,7 +10,7 @@ function getToken(): void {
 getToken();
 
 export const APISERVICE = {
-  get: async (url: string): Promise<any> => {
+  get: async (url: string) => {
     try {
       const response = await axios.get(`${API_URL}${url}`, {
         headers: {
@@ -26,9 +26,9 @@ export const APISERVICE = {
       throw error; // Puedes manejar el error aquí o dejarlo propagar
     }
   },
-  post: async (body: any, url: string): Promise<any> => {
+  post: async (body: any, url: string) => {
     try {
-      console.log(`${API_URL}${url}`)
+      console.log(`${API_URL}${url}`);
       const response = await axios.post(`${API_URL}${url}`, body, {
         headers: {
           Authorization: token,
@@ -46,24 +46,23 @@ export const APISERVICE = {
     }
   },
 
-  delete: async (url: string): Promise<any> => {
+  delete: async (url: string)=> {
     try {
-      const response = await axios.delete(`${API_URL + url}`,
-      {
+      const response = await axios.delete(`${API_URL + url}`, {
         headers: {
           Authorization: token,
         },
       });
       const data = response.data;
       data.status = response.status;
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       console.error(error);
       throw error;
     }
   },
-  put: async (body: any, url: string): Promise<any> => {
+  put: async (body: any, url: string) => {
     try {
       const response = await axios.put(`${API_URL}${url}`, body, {
         headers: {
@@ -78,5 +77,25 @@ export const APISERVICE = {
       console.error(error);
       throw error;
     }
+  },
+};
+export const AxiosService = {
+  get: (url: string, params: any) => {
+    console.log(`${API_URL + url}`)
+    return axios.get(`${API_URL + url}`, {
+      params: params,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json", // Puedes ajustar el tipo de contenido según tus necesidades
+      },
+    });
+  },
+
+  post: <T>(body: T, url: string, params: string) => {
+    return axios.post(`${API_URL + url + params}`, body);
+  },
+
+  patch: <T>(body: T, url: string, params: string) => {
+    return axios.patch(`${API_URL + url + params}`, body);
   },
 };

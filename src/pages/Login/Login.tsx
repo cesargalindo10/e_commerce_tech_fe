@@ -37,11 +37,12 @@ export default function Login() {
           name:response.user.name,
           username: response.user.username,
           token: response.token,         
-          //role: response.user.role,
+          role: response.user.role,
           permissions:response.permissions
         }
         dispatch(createUser({ ...sesion, rol: Roles.USER }));
         navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
+        //navigate(0)
       }else{
         console.log("Invalid username or password")
  

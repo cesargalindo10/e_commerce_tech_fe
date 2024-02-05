@@ -1,31 +1,22 @@
-//import "./Category.css";
-
-interface FormData {
-  id: number | "";
-  firstname: string;
-  lastname: string;
-  username: string;
-  phone: string | null;
-  email: string | null;
-  address: string | null;
-  password: string | null;
-}
+import { MdPersonAddDisabled, MdModeEdit } from "react-icons/md";
+import { User } from "../../models/models";
+import Button from "../../shared/btns/Button";
 
 interface Props {
-  users: FormData[];
-  setCategoriToEdit: ([]: any) => void;
-  setIsModalOpen: (boolean: any) => void;
+  users: User[];
+  setUserToEdit: ([]: any) => void;
+  setShowModal: (boolean: any) => void;
   deleteCategory: (id: string) => void;
 }
 export default function UserTableBody({
   users,
-  setCategoriToEdit,
-  setIsModalOpen,
+  setUserToEdit,
+  setShowModal,
   deleteCategory,
 }: Props) {
-  const onEdit = (category: any) => {
-    setCategoriToEdit(category);
-    setIsModalOpen(true);
+  const onEdit = (user: User) => {
+    setUserToEdit(user);
+    setShowModal(true);
   };
   const onDelete = (id: string) => {
     deleteCategory(id);
@@ -35,24 +26,28 @@ export default function UserTableBody({
       {users &&
         users.map((user) => (
           <tr key={user.id}>
-            <td>{user.id}</td>
-            <td>{user.firstname}</td>
-            <td>{user.lastname}</td>
+            <td>{user.name}</td>
             <td>{user.username}</td>
             <td>{user.phone}</td>
-            <td>{user.email}</td>
-            <td>{user.address}</td>
+            <td>{user.role}</td>
+            <td>
+              {user.state ? (
+                <Button text="Activo" variant="success" />
+              ) : (
+                <Button text="Inactivo" variant="error" />
+              )}
+            </td>
+            <td>
+              <Button variant="main" onClick={() => onEdit(user)}>
+                <MdModeEdit />
+              </Button>
 
-            <td className="action-buttons">
-              <button className="edit-button" onClick={() => onEdit(user)}>
-                Editar
-              </button>
-              <button
-                className="delete-button"
+              <Button
+                variant="error"
                 onClick={() => onDelete("" + user.id)}
               >
-                Eliminar
-              </button>
+                <MdPersonAddDisabled />
+              </Button>
             </td>
           </tr>
         ))}

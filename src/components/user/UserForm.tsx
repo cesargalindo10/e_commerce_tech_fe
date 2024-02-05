@@ -1,34 +1,26 @@
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
-interface FormData {
-  id: number | "";
-  firstname: string;
-  lastname: string;
-  username: string;
-  phone: string | null;
-  email: string | null;
-  address: string | null;
-  password: string | null;
-}
+import FormField from "../../shared/FormField";
+import Button from "../../shared/btns/Button";
+import { User } from "../../models/models";
 
 interface CategoryFormProps {
-  formData: FormData;
-  handleSubmit: (formData: FormData) => void;
+  userToEdit: User;
+  formData: User;
+  handleSubmit: (formData: User) => void;
   handleCancel: () => void;
 }
 const CategoryFormSchema = Yup.object().shape({
-  firstname: Yup.string().required("Firstname is required"),
-  lastname: Yup.string().required("Lastname is required"),
-  username: Yup.string().required("Username is required"),
-  phone: Yup.string().required("Phone is required"),
-  email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
-  address: Yup.string().required("Address is required"),
-  password: Yup.string().required("Password is required"),
+  name: Yup.string().required("* El nombre es obligatorio"),
+  username: Yup.string().required('El nombre de usuario es obligatorio'),
+  phone: Yup.string().matches(/^\d+$/, 'Ingrese un número de teléfono válido'),
+  password: Yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
+  //rol: Yup.string().required('Seleccione un rol').oneOf(['Seller', 'Admin'], 'Rol no válido'),
+  //state: Yup.string().required('Seleccione un estado').oneOf(['1', '0'], 'Estado no válido'),
+  
 });
 export default function UserForm({
+  userToEdit,
   formData,
   handleSubmit,
   handleCancel,
@@ -39,55 +31,62 @@ export default function UserForm({
       validationSchema={CategoryFormSchema}
       onSubmit={(values) => {
         handleSubmit(values);
+
       }}
     >
-      <Form className="form-container">
-        {/* Nuevos campos */}
-        <label className="label-form">Name:</label>
-        <Field
-          id="firstname"
-          className="input-form"
+      <Form>
+        <FormField
+          name="name"
           type="text"
-          name="firstname"
+          placeHolder="Juan"
+          label="Nombre de la categoria"
         />
-        <ErrorMessage name="firstname" component="span" />
-        <label className="label-form">Username:</label>
-        <Field
-          id="username"
-          className="input-form"
-          type="text"
+        <FormField
           name="username"
+          type="text"
+          placeHolder="Nombre de usuario"
+          label="Username"
         />
-        <ErrorMessage name="username" component="p" />
-
-        <label className="label-form">Phone:</label>
-        <Field id="phone" className="input-form" type="text" name="phone" />
-        <ErrorMessage name="phone" component="p" />
-
-        <label className="label-form">Email:</label>
-        <Field id="email" className="input-form" type="email" name="email" />
-        <ErrorMessage name="email" component="p" />
-
-        <label className="label-form">Address:</label>
-        <Field id="address" className="input-form" type="text" name="address" />
-        <ErrorMessage name="address" component="p" />
-
-        <label className="label-form">Password:</label>
-        <Field
-          id="password"
-          className="input-form"
-          type="password"
+        <FormField
+          name="phone"
+          type="text"
+          placeHolder="Numero de telefono"
+          label="Phone"
+        />
+        <FormField
           name="password"
+          type="text"
+          placeHolder="Password"
+          label="Password"
         />
-        <ErrorMessage name="password" component="p" />
+        <FormField
+          name="role"
+          type="select"
+          label="Rol"
+          selectOptions={[
+            ["2", "Seleccione un Rol"],
+            ["Admin", "Admin"],
+            ["Seller", "Seller"],
+          ]}
+        />
+           <FormField
+              name="state"
+              type="select"
+              label="Estado"
+              selectOptions={[
+                ["2", "Seleccione un estado"],
+                ["1", "Activo"],
+                ["0", "Inactivo"],
+              ]}
+            />
 
-        <div className="button-container">
-          <button className="button-form" type="submit">
-            Guardar
-          </button>
-          <button className="button-form" type="button" onClick={handleCancel}>
-            Cancelar
-          </button>
+        <div className="modal__btns mt-3">
+          <Button
+            variant="main"
+            type="submit"
+            text={userToEdit ? "Actualizar" : "Crear"}
+          />
+          <Button variant="error" onClick={handleCancel} text="Cancelar" />{" "}
         </div>
       </Form>
     </Formik>

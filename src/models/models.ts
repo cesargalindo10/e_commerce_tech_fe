@@ -56,3 +56,26 @@ export interface OrderDetail{
     sale_price: number,
     url_image: string
 }
+export interface ProductBrand{
+    brand:Brand,
+    id?:number,
+    name: string,
+    code: string,
+    url_image?: string,
+    url_pdf?: string,
+    sale_price?: number,
+    cost_price?: number,
+    state: boolean | string,
+    description?: string,
+    brand_id?: number
+    category_id?: number
+}  
+export interface User {
+    id:number,
+    name:string,
+    username:string,
+    phone:string,
+    state:true,
+    password:string,
+    role:string
+}

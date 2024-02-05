@@ -1,67 +1,39 @@
 import { useEffect, useState } from "react";
 import { APISERVICE } from "../../infrastructure/api/api.service";
+import { PageInfo, User } from "../../models/models";
+import Button from "../../shared/btns/Button";
 import UserTable from "./UserTable";
-import "./User.css";
 import UserModal from "./UserModal";
-import Paginator from "./Paginator";
-interface FormData {
-  id: number | "";
-  firstname: string;
-  lastname: string;
-  username: string;
-  phone: string | null;
-  email: string | null;
-  address: string | null;
-  password: string | null;
+
+interface AppState {
+  pageInfo: PageInfo | null;
+  users: User[];
 }
 
 export default function User() {
-  const initialData: FormData = {
-    id: "",
-    firstname: "",
-    lastname: "",
+  const initialData: User = {
+    id:0,
+    name: "",
     username: "",
-    phone: "",
-    email: "",
-    address: "",
-    password: "",
+    phone:"",
+    state: true,
+    password:'',
+    role:"",   
   };
 
-  const [users, setCategories] = useState([]);
-  const [categoryToEdit, setCategoriToEdit] = useState(initialData);
-  const [pageInfo, setPageInfo] = useState({
-    current_page: 1,
-    data: [],
-    first_page_url: "",
-    from: 0,
-    last_page: 1,
-    last_page_url: "",
-    links: [],
-    next_page_url: null,
-    path: "",
-    per_page: 5, // Ajusta según tus necesidades
-    prev_page_url: "",
-    to: 0,
-    total: 0,
-  });
+  const [users, setUsers] = useState([]);
+  const [userToEdit, setUserToEdit] = useState(initialData);
+  const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const getUsers = async (pageNum: string = "1"): Promise<void> => {
+ 
+  const getUsers = async (page: number = 1) => {
     try {
-      const url = `users?page=${pageNum}`;
+      const url = `api/users?page=${page}`;
       const response = await APISERVICE.get(url);
       if (response.status === 200) {
-        setCategories(response.data.data);
-        setPageInfo(response.data);
+        setUsers(response.data.data);
+        setpageInfo(response.data.pageInfo);
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -69,64 +41,65 @@ export default function User() {
       console.error(error);
     }
   };
-
-  const createUser = async (user: any): Promise<void> => {
+  const createUser = async (user: User) => {
     try {
-      let url: string = "users";
+      console.log("here")
+      let url: string = "api/users";
       const response = await APISERVICE.post(user, url);
-
       if (response.status === 201) {
       }
-      getUsers("users/1");
+      getUsers();
     } catch (error) {
       console.error(error);
     }
   };
   const updateUser = async (
-    categoryUpdate: FormData,
+    user: User,
     id: string
   ): Promise<void> => {
     try {
-      let url: string = `users/${id}`;
-      const response = await APISERVICE.put(categoryUpdate, url);
-
+      console.log(user)
+      let url: string = `api/users/${id}`;
+      const response = await APISERVICE.put(user, url);
       if (response.status === 201) {
       }
-      getUsers(pageInfo.first_page_url);
+      getUsers();
     } catch (error) {
       console.error(error);
     }
   };
   const deleteCategory = async (id: string) => {
-    let url = `users/${id}`;
+    let url = `api/categories/${id}`;
+    console.log(url);
     const response = await APISERVICE.delete(url);
     if (response.status === 200) {
       getUsers();
     }
   };
-  console.log(users);
+
   useEffect(() => {
     getUsers();
   }, []);
 
   return (
     <>
-      <button onClick={openModal}>+ Nuevo</button>
+      <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
       <UserTable
-        items={users}
-        setCategoriToEdit={setCategoriToEdit}
-        setIsModalOpen={setIsModalOpen}
+        users={users}
+        setUserToEdit={setUserToEdit}
+        setShowModal={setShowModal}
         deleteCategory={deleteCategory}
+        pageInfo={pageInfo}
+        getCategories={getUsers}
       />
-      <Paginator pageInfo={pageInfo} getData={getUsers} />
-
-      {isModalOpen && (
+      {showModal && (
         <UserModal
-          closeModal={closeModal}
-          createCategory={createUser}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          createUser={createUser}
           updateUser={updateUser}
-          categoryToEdit={categoryToEdit}
-          setCategoriToEdit={setCategoriToEdit}
+          userToEdit={userToEdit}
+          setUserToEdit={setUserToEdit}
         />
       )}
     </>

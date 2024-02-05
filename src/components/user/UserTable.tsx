@@ -1,40 +1,40 @@
 import { Table } from "react-bootstrap";
-import UserTableBody from "./UserTableBody";
 import CategoryTableHeader from "./UserTableHeader";
-
-interface FormData {
-  id: number | "";
-  firstname: string;
-  lastname: string;
-  username: string;
-  phone: string | null;
-  email: string | null;
-  address: string | null;
-  password: string | null;
-}
+import Pagination from "../../shared/pagination/Pagination";
+import {  PageInfo, User } from "../../models/models";
+import UserTableBody from "./UserTableBody";
 
 interface Props {
-  items: FormData[];
-  setCategoriToEdit: ([]: any) => void;
-  setIsModalOpen: (boolean: any) => void;
+  users: User[];
+  setUserToEdit: ([]: any) => void;
+  setShowModal: (boolean: any) => void;
   deleteCategory: (id: string) => void;
+  pageInfo: PageInfo |null;
+  getCategories: (page: number) => void;
 }
 export default function UserTable({
-  items,
-  setCategoriToEdit,
-  setIsModalOpen,
+  users,
+  setUserToEdit,
+  setShowModal,
   deleteCategory,
+  pageInfo,
+  getCategories,
 }: Props) {
   //console.log(items)
   return (
-    <Table striped bordered hover>
-      <CategoryTableHeader />
-      <UserTableBody
-        users={items}
-        setCategoriToEdit={setCategoriToEdit}
-        setIsModalOpen={setIsModalOpen}
-        deleteCategory={deleteCategory}
-      />
-    </Table>
+    <>
+      <Table striped bordered hover>
+        <CategoryTableHeader />
+        <UserTableBody
+          users={users}
+          setUserToEdit={setUserToEdit}
+          setShowModal={setShowModal}
+          deleteCategory={deleteCategory}
+        />
+      </Table>
+      {users.length > 0 && (
+        <Pagination pageInfo={pageInfo} getData={getCategories} />
+      )}
+    </>
   );
 }

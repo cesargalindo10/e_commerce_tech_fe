@@ -2,46 +2,37 @@
 
 const columns = [
   {
-    title: "#",
+    title: "Name",
     id: 1,
   },
   {
-    title: "Firstname",
+    title: "Username",
     id: 2,
   },
   {
-    title: "Lastname",
+    title: "Phone",
     id: 3,
   },
-
   {
-    title: "Username",
+    title: "Role",
     id: 4,
   },
   {
-    title: "Phone",
+    title: "state",
     id: 5,
   },
-  {
-    title: "Email",
-    id: 6,
-  },
-  {
-    title: "Address",
-    id: 7,
-  },
+
   {
     title: "Actions",
-    id: 8,
+    id: 6,
   },
 ];
-export default function UserTableHeader() {
+export default function CategoryTableHeader() {
   return (
     <thead>
       <tr>
-        {columns.map((column) => (
-          <th key={column.id}>{column.title}</th>
-        ))}
+        {columns &&
+          columns.map((column) => <th key={column.id}>{column.title}</th>)}
       </tr>
     </thead>
   );

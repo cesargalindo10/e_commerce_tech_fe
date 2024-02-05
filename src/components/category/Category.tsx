@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { APISERVICE } from "../../infrastructure/api/api.service";
+import { APISERVICE, AxiosService } from "../../infrastructure/api/api.service";
 import CategoryTable from "./CategoryTable";
 import CategoryModal from "./CategoryModal";
 import { CategoryData, PageInfo } from "../../models/models";
@@ -20,6 +20,7 @@ export default function Category() {
     update_at: "",
   };
 
+
   const [categories, setCategories] = useState([]);
   const [categoryToEdit, setCategoriToEdit] = useState(initialData);
   const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
@@ -27,7 +28,7 @@ export default function Category() {
   const [showModal, setShowModal] = useState(false);
 
  
-  const getCategories = async (page: number = 1): Promise<void> => {
+  const getCategories = async (page: number=1)=> {
     try {
       const url = `api/categories?page=${page}`;
       const response = await APISERVICE.get(url);
@@ -41,14 +42,14 @@ export default function Category() {
       console.error(error);
     }
   };
-  const createCategory = async (category: any): Promise<void> => {
+  const createCategory = async (category: any)=> {
     try {
       let url: string = "api/categories";
       const response = await APISERVICE.post(category, url);
 
       if (response.status === 201) {
       }
-      getCategories();
+      getCategories(1);
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +57,7 @@ export default function Category() {
   const updateCategory = async (
     categoryUpdate: CategoryData,
     id: string
-  ): Promise<void> => {
+  ) => {
     try {
       let url: string = `api/categories/${id}`;
       const response = await APISERVICE.post(categoryUpdate, url);

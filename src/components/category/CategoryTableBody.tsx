@@ -1,4 +1,4 @@
-import { MdDelete, MdModeEdit } from "react-icons/md";
+import { MdPersonAddDisabled, MdModeEdit } from "react-icons/md";
 import { CategoryData } from "../../models/models";
 import Button from "../../shared/btns/Button";
 
@@ -45,7 +45,7 @@ export default function CategoryTableBody({
                 variant="error"
                 onClick={() => onDelete("" + category.id)}
               >
-                <MdDelete />
+                <MdPersonAddDisabled />
               </Button>
             </td>
           </tr>
