@@ -10,7 +10,7 @@ interface AppState {
   users: User[];
 }
 
-export default function UserCrud() {
+export default function User() {
   const initialData: User = {
     id:0,
     name: "",
