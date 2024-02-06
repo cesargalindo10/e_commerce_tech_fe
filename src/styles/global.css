@@ -3,14 +3,17 @@
     --colorMainBlack: #367FA6;
     --colorSecundary: #2D3C42;
     --colorSecundaryBlack: #222D30;
-    --colorGris: #dde1e2;
-    --colorRed: #DA4E3B;
+   /*  --colorGris: #dde1e2; */
+    --colorRed: #FF0001;
     --colorRedBlack: #e4412b;
     --colorWhite: #ffffff;
     --colorGreen: #00A758;
     --colorYellow: #fd910c;
     --colorSend: #07eaff;
-    --colorGris: #B8B6B5;
+    --colorGris: #7F7F7F;
+    --colorGrisSoft: #F5F5F5;
+    --colorGrisSoft2: #e3e9ef;
+    --colorGrisSecundary: #5E6062;
     --colorPurple: #7069d9;
     --colorGreenSecond: #0EBA84;
     --colorGreenSoft:  #88B93D;
@@ -106,4 +109,10 @@ input:focus {
 
 .image--row{
     max-width: 67px;
+}
+
+.content-page {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
 }

@@ -1,0 +1,49 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--colorWhite);
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.header-logo{
+    display: inherit;
+    align-items: center;
+    gap: .3rem;
+    text-decoration: none;
+}
+.header-logo h2{
+    margin: 0;
+    font-weight: 600;
+    color: var(--colorMain);
+    font-size: 1.3rem;
+    padding-top: 0.4rem;
+}
+.header-icons{
+    align-items: center;
+    display: inherit;
+    gap: .5rem;
+}
+
+.header-icons-cart{
+    color: var(--colorSecundary);
+    text-decoration: none;
+    position: relative;
+}
+.header-icons-cart span{
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    background-color: var(--colorMain);
+    color: var(--colorWhite);
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    padding-top: 2px;
+    border-radius: 50%;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}

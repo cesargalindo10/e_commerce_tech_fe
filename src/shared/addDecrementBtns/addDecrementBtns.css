@@ -1,0 +1,23 @@
+.add-decrement{
+    display: flex;
+    gap: .3rem;
+}
+.add-decrement button{
+    border: none;
+    background-color: transparent;
+}
+.add-decrement input{
+    max-width: 2.1rem;
+    text-align: center;
+    border: 1px solid var(--colorGrisSoft2);
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
