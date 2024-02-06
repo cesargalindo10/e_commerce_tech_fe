@@ -4,8 +4,8 @@ export interface Product{
     code: string,
     url_image?: string,
     url_pdf?: string,
-    sale_price?: number,
-    cost_price?: number,
+    sale_price: number,
+    cost_price: number,
     state: boolean | string,
     description?: string,
     brand_id?: number
@@ -48,4 +48,8 @@ export interface OrderDetail{
     total: number,
     sale_price: number,
     url_image: string
+}
+
+export interface ProductWithQuantity extends Product{
+    quantity: number
 }
