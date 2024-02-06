@@ -1,0 +1,122 @@
+.shop-cart{
+}
+.shop-cart-nav{
+   /*  background-color: var(--colorGris); */
+   background-color: #3b4355;
+    padding: 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 4px solid var(--colorMain);
+    color: var(--colorWhite);
+}
+.shop-cart-nav h5{
+    font-weight: bold;
+    margin: 0;
+}
+.shop-cart-nav h4{
+    font-size: 0.8rem;
+    margin: 0;
+}
+.shop-cart-nav-link {
+    display: flex;
+    gap: .2rem;
+    align-items: center;
+    text-decoration: none;
+    color: var(--colorWhite);
+}
+.shop-cart-nav-link--gris{
+    color: var(--colorGrisSoft2);
+}
+
+.cart-total{
+    display: flex;
+    justify-content: space-between;   
+}
+.product-price-total{
+    font-size: 1.1rem;
+}
+
+.btn-next{
+    background-color: var(--colorMain);
+    border: none;
+    padding: .5rem 1rem;
+    width: 100%;
+    color: var(--colorWhite);
+    border-radius: 0.2rem;
+}
+/* Cart Product */
+.cart-products{
+    padding: 0;
+}
+.cart-product{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--colorGrisSoft2);
+    padding: .5rem;
+    border-radius: .3rem;
+    gap: .5rem;
+}
+.cart-product p{
+    margin: 0;
+}
+.cart-product-info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.product-price{
+    display: flex;
+    color: var(--colorRed);
+    font-size: .75rem;
+}
+.product-price-total{
+    font-size: 1.1rem;
+}
+.product-price-after{
+    font-size: 9px;
+}
+.product-price-after-total{
+    font-size: .8rem;
+}
+.modal-cart-title{
+    font-size: 1.3rem;
+    margin: 0;
+}
+.cart-product-name{
+    font-size: 0.75rem;
+    max-width: 100%;
+    font-weight: 600;
+    color: var(---colorGrisSecundary);
+}
+.cart-list-header tr th{
+    color: var(--colorGris);
+    font-weight: 300;
+}
+.cart-list tr td{
+    color: #212529;
+}
+.cart-list-row{
+    font-size: .85rem;
+}
+.total-to-pay > td{
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.phone-input{
+    width: 100%;
+    border-radius: 5px;
+    padding: 0.33rem 1rem;
+    border: 1px solid var(--colorGris);
+}
+
+.phone-input input{
+    width: 100%;
+    border: none;
+}
+.input-user-info{
+    width: 100%;
+    margin-bottom: .5rem;
+}

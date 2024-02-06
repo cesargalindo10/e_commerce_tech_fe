@@ -1,30 +1,30 @@
-import { useDispatch, useSelector } from 'react-redux';
-import './Header.css'
-import {FiLogOut} from "react-icons/fi"
-import { useNavigate } from 'react-router-dom';
-import { ReactNode } from 'react';
-import { AppStore } from '../../redux/store';
-import { resetUser } from '../../redux/state/user';
-interface Props{
-    children:ReactNode
-}
-export default function Header({children}:Props) {
-
- const user = useSelector((store: AppStore) => store.user)
- const dispatch = useDispatch();
- const navigate = useNavigate()
- const logOut=()=>{
-    dispatch(resetUser())
-    navigate("/login")
- }
-
+import { RowImage } from '../rowImage/RowImage'
+import logo from '../../assets/img/logo.png'
+import { BiSearch } from 'react-icons/bi'
+import { PiShoppingCart } from 'react-icons/pi'
+import './header.css'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { AppStore } from '../../redux/store'
+function Header() {
+  const cartList = useSelector((store: AppStore) => store.shop);
   return (
-    <div>
-      <div className="container-header">
-        <h3 className='tc-white pe-4'>hola, {user.name}</h3>
-        <button onClick={()=>logOut()} className=' btn-logout tc-white pe-4'><FiLogOut/></button>
-      </div>
-      {children}
-    </div>
-  );
+    <header className='header'>
+        <Link className='header-logo' to={"/"}>
+            <RowImage url_image={logo} width={80} />
+            <h2>Sedelec</h2>
+        </Link>
+        <div className='header-icons'>
+            <BiSearch size={20}/>
+            <Link to={'/shop-cart'} className='header-icons-cart'>
+              <PiShoppingCart size={20}/>
+              <span>
+                {cartList.length}
+              </span>
+            </Link>
+        </div>
+    </header>
+  )
 }
+
+export default Header

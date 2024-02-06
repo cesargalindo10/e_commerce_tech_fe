@@ -218,7 +218,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
               className="input-file"
               type="file"
               name="image"
-              accept="image/png, image/jpeg, image/jpg, image/web3"
+              accept="image/png, image/jpeg, image/jpg, image/web3, image/webp"
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleManageFile(e, setImage, typeFile.image)}
             />
 
