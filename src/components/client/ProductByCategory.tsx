@@ -1,24 +1,31 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ProductForCategory from "./ProductForCategory";
-import { ProductBrand } from "../../models/models";
+import { PageInfo, Product, ProductBrand } from "../../models/models";
 import "./ProductByCategory.css";
 import { APISERVICE } from "../../infrastructure/api/api.service";
 import { useSelector } from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
-export default function ScrollInfinito() {
+interface AppState {
+  pageInfo: PageInfo | null;
+  product: Product[];
+}
+export default function ProductByCategory() {
   const clientState = useSelector((store: any) => store.client);
   const [productos, setProductos] = useState<ProductBrand[]>([]);
-  const [paginaActual, setPaginaActual] = useState(1);
+  const [pageInfo, setPageInfo] = useState<AppState["pageInfo"] | null>(null);
+  const [verMas, setVerMas] = useState(true);
 
-  const getCategories = async (): Promise<void> => {
+  const getProductsByCategory = async (page: string = "1") => {
     try {
-      console.log(clientState.name);
-      const url = `api/cate/${clientState.id}`;
-      const response = await APISERVICE.get(url);
-      console.log(response.data)
-      if (response.status === 200) {
-        setProductos(response.data.data);
-        setPaginaActual(response.data.pageInfo);
+      const url = `api/product/${clientState.id}?page=${page}`;
+      const { data } = await APISERVICE.get(url);
+      console.log(data);
+      if (data) {
+        setProductos(data.data);
+        setPageInfo(data.pageInfo);
+        return data;
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -26,20 +33,39 @@ export default function ScrollInfinito() {
       console.error(error);
     }
   };
+  const moreProducts = async () => {
+    const next = pageInfo?.next?.slice(-1);
+    console.log(next);
+    const response = await getProductsByCategory(next);
+    setProductos((prev) => [...prev, ...response.data]);
+    response.pageInfo.next === null && setVerMas(false);
+  };
 
   useEffect(() => {
-    getCategories();
+    getProductsByCategory();
   }, []);
 
   return (
     <div className="container_products">
-      
       <h2>Category</h2>
-      <div className="fila">
-        {productos.map((producto) => (
-          <ProductForCategory key={producto.id} producto={producto} />
-        ))}
-      </div>
+      <InfiniteScroll
+        dataLength={productos.length}
+        next={moreProducts}
+        hasMore={verMas}
+        loader={<h2>Cargando</h2>}
+        endMessage={<h3>No hay mas</h3>}
+        className="infinite-scroll"
+      >
+        <div className="fila">
+          {productos.map((producto) => (
+            <Link to={"/detalle"} className="link-detalle" key={crypto.randomUUID()}>
+              <ProductForCategory                
+                producto={producto}
+              />
+            </Link>
+          ))}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 }

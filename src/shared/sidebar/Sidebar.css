@@ -1,3 +1,6 @@
+:root{
+  --coloMain:#3C8DBB;
+}
 .sidebar-container {
   display: flex;
 }
@@ -5,7 +8,7 @@ main {
   width: 100%;
 }
 .sidebar {
-  background: #d2dffb;
+  background: #3d434d;
   color: #fff;
   height: 100vh;
   width: 200px;
@@ -17,7 +20,7 @@ main {
   height: 10vh;
   padding: 12px 15px;
 }
-.logo {
+.logo-side {
   margin: 0 auto;
   width: 100%;
   padding-left: 30px;
@@ -27,7 +30,7 @@ main {
   font-size: 25px;
   margin-left: 10px;
 }
-.link {
+.link-side {
   text-decoration: none;
   display: flex;
   color: #fff;
@@ -36,7 +39,7 @@ main {
   transition: all 0.5s;
 }
 
-.link:hover {
+.link-side:hover {
   background: lightskyblue;
   color: #000;
   transition: all 0.5s;
@@ -48,5 +51,5 @@ main {
 .icon,
 .link_text {
   font-size: 20px;
-  color: #6372e7;
+  color: var(--coloMain)
 }

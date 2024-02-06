@@ -32,7 +32,7 @@ export default function Login() {
     let url = "api/login";
     try {
       const response = await APISERVICE.post(values, url);
-      if (response.status === 200) {
+      if (response) {
         let sesion = {
           id: response.user.id,
           name: response.user.name,
@@ -62,42 +62,37 @@ export default function Login() {
     >
       {({ errors, touched }) => (
         <div className="container-login-page">
-          <div className="container-login">
-            <div className="image-login">
-              <img src={logo} alt="" />
+          <Form className="login-form">
+            <h2>Login</h2>
+            <div>
+              <Field
+                type="text"
+                name="username"
+                placeholder="Username"
+                className={`form-control ${errors.username && "is-invalid"}`}
+                touched={touched.username ? "false" : "true"}
+              />
+              <div className="invalid-feedback">
+                {errors.username && errors.username}
+              </div>
             </div>
-            <Form className="login-form">
-              <h2>Login</h2>
-              <div>
-                <Field
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  className={`form-control ${errors.username && "is-invalid"}`}
-                  touched={touched.username ? "false" : "true"}
-                />
-                <div className="invalid-feedback">
-                  {errors.username && errors.username}
-                </div>
+            <div>
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={`form-control ${errors.password && "is-invalid"}`}
+                touched={touched.password ? "false" : "true"}
+              />
+              <div className="invalid-feedback">
+                {errors.password && errors.password}
               </div>
-              <div>
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className={`form-control ${errors.password && "is-invalid"}`}
-                  touched={touched.password ? "false" : "true"}
-                />
-                <div className="invalid-feedback">
-                  {errors.password && errors.password}
-                </div>
-              </div>
+            </div>
 
-              <button type="submit" className="btn-login">
-                Login
-              </button>
-            </Form>
-          </div>
+            <button type="submit" className="btn-login">
+              Login
+            </button>
+          </Form>
         </div>
       )}
     </Formik>

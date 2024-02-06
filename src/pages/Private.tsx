@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
 import Sidebar from "../shared/sidebar/Sidebar";
-import Header from "../shared/header/Header";
+import Header from "../shared/headerAdmin/Header";
 import RoutesWithNotFound from "../utilities/RoutesWithNotFound";
 import { Product } from "../components/product/Product";
 import Category from "../components/category/Category";

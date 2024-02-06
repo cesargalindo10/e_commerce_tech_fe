@@ -1,0 +1,26 @@
+ /* Search bar  */
+ .search-bar{
+    width: 96%;
+    display: flex;
+    gap: 10px;
+    height: auto;
+    margin: 0 auto;
+}
+.row-table-notExist{
+    text-align: center;
+}
+.btn-close-search{
+    position: absolute;
+    top: 7px;
+    right: 8px;
+}
+
+.content-search{
+    width: 100%;
+    position: relative;
+    border: none;
+
+}
+.input{
+    border: 2px solid #D9D9D9;
+}
