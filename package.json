@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.1.0",
     "@react-pdf/renderer": "^3.3.4",
     "@reduxjs/toolkit": "^2.1.0",
     "@types/axios": "^0.14.0",
+    "@types/react-bootstrap": "^0.32.35",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.2",
     "formik": "^2.4.5",

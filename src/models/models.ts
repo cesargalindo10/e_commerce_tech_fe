@@ -31,7 +31,14 @@ export interface Brand{
     name: string,
     description?: string
 }
-
+export interface CategoryData{
+    id:number;
+    name: string;
+    description: string;
+    state:boolean;
+    create_at: string | null;
+    update_at: string | null;
+}
 export interface Sale{
     id?: number,
     total: number,
@@ -52,4 +59,27 @@ export interface OrderDetail{
 
 export interface ProductWithQuantity extends Product{
     quantity: number
+}
+export interface ProductBrand{
+    brand:Brand,
+    id?:number,
+    name: string,
+    code: string,
+    url_image?: string,
+    url_pdf?: string,
+    sale_price?: number,
+    cost_price?: number,
+    state: boolean | string,
+    description?: string,
+    brand_id?: number
+    category_id?: number
+}  
+export interface User {
+    id:number,
+    name:string,
+    username:string,
+    phone:string,
+    state:true,
+    password:string,
+    role:string
 }
