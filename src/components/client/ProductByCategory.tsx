@@ -23,11 +23,11 @@ export default function ProductByCategory() {
   const getProductsByCategory = async (page: string = "1") => {
     try {
       const url = `api/product/${id}?page=${page}`;
-      const { data } = await APISERVICE.get(url);
-      if (data) {
-        setProductos(data.data);
-        setPageInfo(data.pageInfo);
-        return data;
+      const response: any = await APISERVICE.get(url);
+      if (response.data) {
+        setProductos(response.data);
+        setPageInfo(response.pageInfo);
+        return response;
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -37,7 +37,7 @@ export default function ProductByCategory() {
   };
   const moreProducts = async () => {
     const next = pageInfo?.next?.slice(-1);
-    const response = await getProductsByCategory(next);
+    const response: any = await getProductsByCategory(next);
     setProductos((prev) => [...prev, ...response.data]);
     response.pageInfo.next === null && setVerMas(false);
   };
@@ -51,7 +51,7 @@ export default function ProductByCategory() {
       const { data } = await APISERVICE.get(url);
 
       if (data) {
-        setCategory(data.data);
+        setCategory(data);
         return data;
       } else {
         console.log("Ocurrio un error al obtener ");

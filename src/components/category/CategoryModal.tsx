@@ -60,10 +60,10 @@ export default function CategoryModal({
   };
 
   return (
-    <Modal show={showModal}>
+    <Modal show={showModal} centered>
       <Modal.Header>
         <h5 className="title-header__modal">
-          {categoryToEdit ? "Actualizar Categoria" : "Crear nueva categoria"}
+          {categoryToEdit.id ? "Actualizar Categoria" : "Crear nueva categoria"}
         </h5>
       </Modal.Header>
       <Modal.Body>

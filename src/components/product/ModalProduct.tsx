@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
 import { Brand, Category, Product } from "../../models/models";
 import { Modal } from "react-bootstrap";
@@ -8,6 +8,7 @@ import { ErroMessages as EM } from "../../utilities/messageError";
 import FormField from "../../shared/FormField";
 import Button from "../../shared/btns/Button";
 import { RowImage } from "../../shared/rowImage/RowImage";
+import { FaFileArrowDown } from "react-icons/fa6";
 const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 interface Props {
   updateCourse: (product: Product, image: File | null,pdfFile: File | null,  params: string) => void;
@@ -37,7 +38,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
   const [urlImage, setUrlImage] = useState("");
   const contextValue = useContext<ContextProductType | null>(ContextProduct);
   const [pdfFile, setPdfFile] = useState<File | null>(null);  
-
+  const [fileNameDescription, setFileDescription] = useState('');
   if (!contextValue) return;
 
   const {
@@ -104,6 +105,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
     setImage(null);
     setUrlImage("");
     setProductToUpdate(null);
+    setFileDescription('');
   };
 
   const yupSchema = Yup.object().shape({
@@ -232,15 +234,32 @@ export const ModalProduct = ({ updateCourse }: Props) => {
               </>
             )}
 
-            <Field
+          {/*   <Field
               className="input-file"
               type="file"
               name="pdfFile"
               accept=".pdf"
               onChange={(e: ChangeEvent<HTMLInputElement>) => handleManageFile(e, setPdfFile, typeFile.pdf)}
-            />
+            /> */}
 
-            <div className="modal__btns mt-3">
+            <label 
+                className="custom-file"
+                htmlFor="justifiactionfile"
+                >
+                <span className="custom-file-icon">
+                   <FaFileArrowDown />
+                </span>
+                {fileNameDescription.length > 0 ? fileNameDescription : "Select a file" }
+            </label>
+            <input 
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {handleManageFile(e, setPdfFile, typeFile.pdf), setFileDescription(e.target.value)}}
+              type="file" 
+              id="justifiactionfile"
+              accept=".pdf"
+              hidden
+              />
+
+            <div className="modal-btns">
               <Button variant="error" onClick={reset} text="Cancelar" />{" "}
               <Button
                 variant="main"

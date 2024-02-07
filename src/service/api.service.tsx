@@ -55,9 +55,9 @@ export const APISERVICE = {
     posWithImage: async(body: any, url: string, params: string, method: string) => {
         const response = await fetch(`${APIURL + url + params}`, {
             method: method,
-        /*     headers: {
-                "content-type": "application/json",
-            }, */
+            headers: {
+                'authorization': token ,
+            },
             body: body
         })      
         if(!response.ok){
