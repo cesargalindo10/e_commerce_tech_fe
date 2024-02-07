@@ -2,7 +2,7 @@
 }
 .shop-cart-nav{
    /*  background-color: var(--colorGris); */
-   background-color: #3b4355;
+   background-color: var(--colorMainSecundary);
     padding: 1rem 0rem;
     display: flex;
     flex-direction: column;

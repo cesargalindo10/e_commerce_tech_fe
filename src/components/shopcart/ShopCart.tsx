@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 import { AppStore } from "../../redux/store"
 import { useState } from "react"
 import ModalDetail from "./ModalDetail"
-import ModalConfirm from "../../shared/confirmModal/ModalConfirm"
+import ModalSuccess from "./ModalSuccess"
 import Header from "../../shared/header/Header"
 function ShopCart() {
 
@@ -64,7 +64,8 @@ function ShopCart() {
       </main>
     </div>
       <ModalDetail show={showModal} onHide={() => setShowModal(false)} setShowModalConfirm={() => setShowModalConfirm(true)} />
-      <ModalConfirm show={showModalConfirm} onHide={() => setShowModalConfirm(false)} deleteSomething={() => setShowModal(false)} message="¿Deseas confirmar tu pedido?" />
+      <ModalSuccess show={showModalConfirm} onHide={() => setShowModalConfirm(false)} deleteSomething={() => setShowModal(false)} message="Su pedido ha sido enviado, en seguida nos pondremos en contacto con usted" />
+
     </>
   )
 }

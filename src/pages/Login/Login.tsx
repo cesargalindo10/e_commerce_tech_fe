@@ -32,7 +32,7 @@ export default function Login() {
   const HandleonSubmit = async (values: User) => {
     let url = "api/login";
     try {
-      const response = await APISERVICE.post(values, url);
+      const response: any = await APISERVICE.post(values, url);
       if (response) {
         let sesion = {
           id: response.user.id,

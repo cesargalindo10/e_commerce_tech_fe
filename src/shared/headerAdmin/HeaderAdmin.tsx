@@ -21,8 +21,10 @@ export default function HeaderAdmin({children}:Props) {
   return (
     <div>
       <div className="container-header">
-        <h3 className='tc-white pe-4'>hola, {user.name}</h3>
-        <button onClick={()=>logOut()} className=' btn-logout tc-white pe-4'><FiLogOut/></button>
+        <div className='d-flex align-items-center'>
+          <h3 className='tc-white pe-4'>hola, {user.name}</h3>
+          <button onClick={()=>logOut()} className=' btn-logout tc-white pe-4'><FiLogOut/></button>
+        </div>
       </div>
       {children}
     </div>

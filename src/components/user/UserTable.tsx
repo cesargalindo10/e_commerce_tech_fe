@@ -22,7 +22,7 @@ export default function UserTable({
 }: Props) {
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <CategoryTableHeader />
         <UserTableBody
           users={users}

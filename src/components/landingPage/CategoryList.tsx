@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './landingpage.css'; // Asegúrate de tener este archivo para los estilos
 import { AppState } from './LandingPage';
-import { Link } from 'react-router-dom';
 
 interface Props {
     categories: AppState["categoriesWithProducts"];
@@ -66,7 +65,6 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
            // test(scrollDirection)
           // Actualiza el estado y detiene la iteración
           //setSelectedCategory(Number(item.id));
-          //console.log(item.getBoundingClientRect())
           found = true;
           prevScrollPos = window.scrollY;
          // console.log(before, px.width)

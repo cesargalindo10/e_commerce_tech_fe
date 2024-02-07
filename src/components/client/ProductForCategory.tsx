@@ -1,6 +1,5 @@
 import { ProductBrand } from "../../models/models";
-import imgProduct from "../../assets/camara.jpeg";
-
+const APIURL = import.meta.env.VITE_REACT_APP_API_URL_IMG
 interface Props {
   producto: ProductBrand;
 }
@@ -17,7 +16,7 @@ export default function ProductForCategory({ producto }: Props) {
     <div className="card_product">
       <div className="card-body">
         <div className="image-product">
-          <img src={imgProduct} alt={name} />
+          <img src={APIURL + url_image} alt={name} />
         </div>
         <div className="product-info">
           <p>{name}</p>

@@ -6,6 +6,8 @@ import useSale from "./useSale";
 import { AxiosService } from "../../service/api.service";
 import { MdDelete } from "react-icons/md";
 import ModalConfirm from "../../shared/confirmModal/ModalConfirm";
+import { useSelector } from "react-redux";
+import { AppStore } from "../../redux/store";
 interface Props {
   sale: Sale;
 }
@@ -25,6 +27,8 @@ enum typeStatesSale {
 export default function SaleTableRow({ sale }: Props) {
   const contextValue = useContext<ContextSaleType | null>(ContextSale);
   const [showAlert, setShowAlert] = useState(false);
+  const user = useSelector((store: AppStore) => store.user)
+
   const { fetchOrderDetails } = useSale();
   if (!contextValue) return;
   const { setSaleToShow, getOrderDetails, getSales} = contextValue;
@@ -37,11 +41,11 @@ export default function SaleTableRow({ sale }: Props) {
   };
 
   const changeState = async (state: string) => { 
-    await AxiosService.patch({state: state}, `sale/${sale.id}`, '');
+    await AxiosService.patch({state: state}, `api/sale/${sale.id}`, '');
   }
 
   const updateSale = async () => {
-    await AxiosService.patch({user_id: 1}, `sale/${sale.id}`, '');
+    await AxiosService.patch({user_id: user.id}, `api/sale/${sale.id}`, '');
   }
   const sendMessageConfirm = async (idSale: number) => {
     if(sale.state === typeStatesSale.confirmado || sale.state === typeStatesSale.cancelado) return
@@ -70,7 +74,7 @@ export default function SaleTableRow({ sale }: Props) {
       );
     });
     window.open(
-      `https://wa.me/591${sale.customer_phone}?text=${message}%0A%0A${ordereDetailMessage}%0A%0A${orderDetails}`
+      `https://wa.me/${sale.customer_phone}?text=${message}%0A%0A${ordereDetailMessage}%0A%0A${orderDetails}`
     );
   };
 

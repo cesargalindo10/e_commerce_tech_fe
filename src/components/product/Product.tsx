@@ -45,17 +45,15 @@ export function Product() {
     const url = "api/brands";
     const response = await AxiosService.get(url, "");
     if (true) {
-      const { data } = response.data;
-      setBrands(data);
+      setBrands(response.data);
     }
   };
   const getCategories = async () => {
     const url = "api/categories";
 
     const response = await AxiosService.get(url, "");
-    if (true) {
-      const { data } = response.data;
-      setCategories(data);
+    if (response) {
+      setCategories(response.data);
     }
   };
 
@@ -64,9 +62,9 @@ export function Product() {
     const params = {
       page,
     };
-    const response = await AxiosService.get(url, params);
+    const response: any = await AxiosService.get(url, params);
     if (response) {
-      const { data, pageInfo } = response.data;
+      const { data, pageInfo } = response;
       setProducts(data);
       setpageInfo(pageInfo);
     }
@@ -142,12 +140,11 @@ export function Product() {
       }}
     >
       <div className="container-component">
-        <h3>Productos</h3>
+        <h3 className="title-page">Productos</h3>
         <SearchRow
           filterSomething={filtercategories}
           placeHolder="Nombre del curso"
           handleClear={clearFilter}
-          setShow={setShowModal}
         >
           <Button variant="new" onClick={() => setShowModal(true)} text="Nuevo">
             <BiPlus />

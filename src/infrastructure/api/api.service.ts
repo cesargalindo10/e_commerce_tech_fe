@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:8000/";
+const API_URL = import.meta.env.VITE_REACT_APP_API_URL
 
 let token: ''|any;
 function getToken(): void {
@@ -28,16 +28,13 @@ export const APISERVICE = {
   },
   post: async (body: any, url: string) => {
     try {
-      const {data} = await axios.post(`${API_URL}${url}`, body, {
+      const response = await axios.post(`${API_URL}${url}`, body, {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
       });
-      
-      setToken(data.token)
-
-      return data;
+      return response;
     } catch (error) {
       console.error(error);
       throw error;

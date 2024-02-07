@@ -31,7 +31,8 @@ export default function SearchProductPage() {
       const url = `api/product?page=${page}`;
 
         body.name = value.toLowerCase();
-        const { data, pageInfo } = await APISERVICE.post(body, url);
+        const response: any = await APISERVICE.post(body, url);
+        const { data, pageInfo } = response
         if (data) {
           setProductos(data);
           setPageInfo(pageInfo);
@@ -62,7 +63,6 @@ export default function SearchProductPage() {
   useEffect(() => {
     getProductsSearch();
   }, []);
-
   return (
     <div className="container_products">
       <Header />

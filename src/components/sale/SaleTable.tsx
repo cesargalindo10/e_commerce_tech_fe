@@ -16,7 +16,7 @@ export default function SaleTable({
 }: Props) {
   return (
     <>
-        <Table responsive>
+        <Table responsive striped bordered hover>
           <thead >
             <tr>
               <th>Fecha</th>  
@@ -49,7 +49,7 @@ export default function SaleTable({
           </tbody>
         </Table>
         <div className="mt-2">
-       {sales.length > 0 && (
+       {sales?.length > 0 && (
             <Pagination pageInfo={pageInfo} getData={getSales} />
       )}
     </div>

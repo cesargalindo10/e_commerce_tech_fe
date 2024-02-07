@@ -8,6 +8,10 @@ function getToken(): void {
 }
 getToken();
 
+export const setToken=(token:string)=>{
+token = `bearer ${token}`
+}
+
 export const APISERVICE = {
   get: async (url: string, params: string) => {
     const res = await fetch(`${APIURL}${url}${params}`, {
