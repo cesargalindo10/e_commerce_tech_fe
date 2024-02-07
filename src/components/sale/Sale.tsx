@@ -41,7 +41,7 @@ export function Sale (){
       getSales(1);
     }, []);
     const getSales = async (page: number = pageInfo?.page || 1) => {
-      const url = 'sale';
+      const url = 'api/sale';
       const params = {  
         page,
       }

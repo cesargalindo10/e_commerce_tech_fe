@@ -7,7 +7,7 @@ function useSale() {
 
     const fetchOrderDetails = async (idSale: number) => {
         try {
-            const url = 'sale-detail/' + idSale;
+            const url = 'api/sale-detail/' + idSale;
             setLoading(true);
             const response = await AxiosService.get(url, '');
             const { data } = response.data
