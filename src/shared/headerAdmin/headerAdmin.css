@@ -1,9 +1,5 @@
-:root{
-  --colorMain: #3C8DBB;
- 
-}
 .container-header{
-    background-color: var(--colorMain);
+    background-color: #4a7df0;
     height: 8vh;
     width: 100%;
     display: flex;
@@ -32,4 +28,3 @@
   color:#fff;
    margin-left:240px
 }
-  

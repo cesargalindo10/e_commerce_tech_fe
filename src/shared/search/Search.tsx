@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
-import "./Search.css"
+import "./search.css"
 
 interface SearchRowProps {
   placeHolder: string;

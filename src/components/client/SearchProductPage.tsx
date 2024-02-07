@@ -3,10 +3,11 @@ import ProductForCategory from "./ProductForCategory";
 import { PageInfo, Product, ProductBrand } from "../../models/models";
 import "./ProductByCategory.css";
 import { APISERVICE } from "../../infrastructure/api/api.service";
-import { useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Search from "./Search";
 import { Link } from "react-router-dom";
+import Search from "../../shared/search/Search";
+import Header from "../../shared/header/Header";
+import Loading from "../../shared/loading/Loading";
 
 interface AppState {
   pageInfo: PageInfo | null;
@@ -17,7 +18,6 @@ interface search {
 }
 
 export default function SearchProductPage() {
-  const clientState = useSelector((store: any) => store.client);
   const [productos, setProductos] = useState<ProductBrand[]>([]);
   const [pageInfo, setPageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [verMas, setVerMas] = useState(true);
@@ -63,12 +63,13 @@ export default function SearchProductPage() {
   console.log(productos);
   return (
     <div className="container_products">
+      <Header />
       <InfiniteScroll
         dataLength={productos && productos.length}
         next={moreProducts}
         hasMore={verMas}
-        loader={<h2></h2>}
-        endMessage={<h3>No hay mas</h3>}
+        loader={<Loading/>}
+        endMessage={<h3></h3>}
         className="infinite-scroll"
       >
         <Search
@@ -79,11 +80,12 @@ export default function SearchProductPage() {
         <div className="fila">
           {productos &&
             productos.map((producto) => (
-              <Link key={crypto.randomUUID()} to={"/detalle"} className="link-detalle">
-                <ProductForCategory
-                  
-                  producto={producto}
-                />
+              <Link
+                key={crypto.randomUUID()}
+                to={`/product/${producto.id}`}
+                className="link-detalle"
+              >
+                <ProductForCategory producto={producto} />
               </Link>
             ))}
         </div>

@@ -68,8 +68,8 @@ export default function UserCrud() {
       console.error(error);
     }
   };
-  const deleteCategory = async (id: string) => {
-    let url = `api/categories/${id}`;
+  const deleteUser = async (id: string) => {
+    let url = `api/users/${id}`;
     console.log(url);
     const response = await APISERVICE.delete(url);
     if (response.status === 200) {
@@ -82,13 +82,13 @@ export default function UserCrud() {
   }, []);
 
   return (
-    <>
+    <div className="container-component">
       <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
       <UserTable
         users={users}
         setUserToEdit={setUserToEdit}
         setShowModal={setShowModal}
-        deleteCategory={deleteCategory}
+        deleteUser={deleteUser}
         pageInfo={pageInfo}
         getCategories={getUsers}
       />
@@ -102,6 +102,6 @@ export default function UserCrud() {
           setUserToEdit={setUserToEdit}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -1,20 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { UserInfo } from "../models/user.model";
 import { userSlice } from "./state/user";
-import { clientSlice } from "./state/client";
-interface Category {
-  id:number;
-  name: string;
-}
+import shopSlice from "./state/shop"
+import { ProductDetail } from "../components/detailProduct/DetailProduct";
+
 export interface AppStore {
     user: UserInfo;
-    client:Category
+    shop:ProductDetail[]
   }
   
   export default configureStore<AppStore>({
     reducer: {
       user: userSlice.reducer,
-      client:clientSlice.reducer
+      shop:shopSlice
     }
   });
   
