@@ -108,7 +108,7 @@ export function Product() {
       if (pdfFile) formData.append("filePdf", pdfFile);
       const { success, message } = await APISERVICE.posWithImage(
         formData,
-        "product",
+        "api/product",
         params,
         "POST"
       );

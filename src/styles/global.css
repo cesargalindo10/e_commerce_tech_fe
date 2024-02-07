@@ -128,3 +128,28 @@ input:focus {
     font-weight: 600;
     font-size: 1.5rem;
 }
+
+.modal-btns{
+    display: flex;
+    gap: .5rem;
+    justify-content: right;
+    margin-top: 1rem;
+}
+
+.custom-file{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    box-shadow: 3px 6px 20px -5px rgba(0,0,0,0.23);
+    -webkit-box-shadow: 3px 6px 20px -5px rgba(0,0,0,0.23);
+    -moz-box-shadow: 3px 6px 20px -5px rgba(0,0,0,0.23);
+    margin-top: 0.5rem;
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+}
+.custom-file-icon{
+    padding: 0.4rem;
+    background-color: var(--colorPrincipal);
+    border-top-left-radius: .3rem;
+    border-bottom-left-radius: .3rem;
+}

@@ -62,7 +62,7 @@ export default function UserModal({
     <Modal show={showModal}>
       <Modal.Header>
         <h5 className="title-header__modal">
-          {userToEdit ? "Actualizar Usuario" : "Crear nueva usuario"}
+          {userToEdit?.id ? "Actualizar Usuario" : "Crear nueva usuario"}
         </h5>
       </Modal.Header>
       <Modal.Body>

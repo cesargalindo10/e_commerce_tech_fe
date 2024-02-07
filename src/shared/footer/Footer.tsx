@@ -19,7 +19,7 @@ function Footer() {
           <h4>Enlaces</h4>
           <ul>
             <li>
-              <Link to={"/search"}>Buscar</Link>
+              <Link to={"/searchproduct"}>Buscar</Link>
             </li>
             <li>
               <Link to={"/shop-cart"}>Pedidos</Link>

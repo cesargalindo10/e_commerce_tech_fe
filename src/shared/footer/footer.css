@@ -53,6 +53,7 @@
 
 .footer-copyright{
     text-align: center;
+    color: var(--colorGrisSoft);
     background-color: var(--colorMain);
 }
 .footer-copyright p{
