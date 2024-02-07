@@ -9,7 +9,7 @@ const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 import "./detailProduct.css";
 import defaultimg from '../../assets/img/defaulimg.png'
 import AddDementBtns from "../../shared/addDecrementBtns/AddDementBtns";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AppStore } from "../../redux/store";
 export interface ProductDetail extends ProductWithQuantity{
   brand?: string;

@@ -5,6 +5,7 @@ import { Category } from '../../models/models'
 import './landingpage.css'
 import CategoriesAll from './Category/CategoryAll'
 import Header from '../../shared/header/Header'
+import Footer from '../../shared/footer/Footer'
 
 
 export interface ProductCat{  
@@ -57,27 +58,7 @@ function LandingPage() {
     <main className='content-page'>
         <CategoriesAll categories={categoriesWithProducts} categoryListRef={categoryListRef}/>
     </main>
-    {/* footer */}
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <p>footer</p>
+    <Footer/>
     </>
   )
 }
