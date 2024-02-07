@@ -29,7 +29,7 @@ const Sidebar = ({ children }: Props) => {
     <div className="sidebar-container">
       <div style={{ width: isOpen ? "260px" : "50px" }} className="sidebar">
         <div className="top_section">
-          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
+          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo-side">
             <img style={{ height: "120px" }} src={logo} />
           </h1>
           <div className="container-bars">
@@ -45,7 +45,7 @@ const Sidebar = ({ children }: Props) => {
           <NavLink
             to={item}
             key={clave}
-            className="link"
+            className="link-side"
             //activeclassname="active"
           >
             <div className="icon">{icons[item]}</div>

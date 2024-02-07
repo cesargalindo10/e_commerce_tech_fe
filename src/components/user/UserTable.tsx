@@ -8,7 +8,7 @@ interface Props {
   users: User[];
   setUserToEdit: ([]: any) => void;
   setShowModal: (boolean: any) => void;
-  deleteCategory: (id: string) => void;
+  deleteUser: (id: string) => void;
   pageInfo: PageInfo |null;
   getCategories: (page: number) => void;
 }
@@ -16,7 +16,7 @@ export default function UserTable({
   users,
   setUserToEdit,
   setShowModal,
-  deleteCategory,
+  deleteUser,
   pageInfo,
   getCategories,
 }: Props) {
@@ -29,7 +29,7 @@ export default function UserTable({
           users={users}
           setUserToEdit={setUserToEdit}
           setShowModal={setShowModal}
-          deleteCategory={deleteCategory}
+          deleteUser={deleteUser}
         />
       </Table>
       {users.length > 0 && (

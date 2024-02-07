@@ -6,20 +6,20 @@ interface Props {
   users: User[];
   setUserToEdit: ([]: any) => void;
   setShowModal: (boolean: any) => void;
-  deleteCategory: (id: string) => void;
+  deleteUser: (id: string) => void;
 }
 export default function UserTableBody({
   users,
   setUserToEdit,
   setShowModal,
-  deleteCategory,
+  deleteUser,
 }: Props) {
   const onEdit = (user: User) => {
     setUserToEdit(user);
     setShowModal(true);
   };
   const onDelete = (id: string) => {
-    deleteCategory(id);
+    deleteUser(id);
   };
   return (
     <tbody>

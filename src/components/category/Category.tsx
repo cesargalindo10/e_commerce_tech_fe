@@ -83,7 +83,8 @@ export default function Category() {
   }, []);
 
   return (
-    <>
+    <div className="container-component">
+      <h3>Usuarios</h3>
       <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
       <CategoryTable
         items={categories}
@@ -103,6 +104,6 @@ export default function Category() {
           setCategoriToEdit={setCategoriToEdit}
         />
       )}
-    </>
+    </div>
   );
 }

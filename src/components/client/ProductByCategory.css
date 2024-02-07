@@ -1,21 +1,56 @@
+:root {
+  --colorMain: #3c8dbb;
+}
+
 .container_products {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
 }
+.category{
+ width: 100%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin: 0 auto;
+ border-bottom: 3px solid #D9D9D9;
+ 
+}
+.category h2{ 
+  width: 40%;
+  border-bottom: 3px solid #007BFF;
+  margin-bottom: -3px;
+  text-align: center;
+  max-width: 200px;
+  
+}
+.infinite-scroll {
+  width: 100%;
+}
+
 .fila {
   display: flex;
   flex-wrap: wrap;
   justify-content: center !important;
 }
-
+.link-detalle {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.link-detalle:hover {
+  color: inherit;
+  background-color: transparent;
+  
+}
 .card_product {
   position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  padding: 10px;
+  padding: 6px;
 }
 
 .card-body {
@@ -25,16 +60,16 @@
   background-clip: border-box;
   border: 2px solid #aea6a6;
   border-radius: 0.25rem;
-  width: 260px;
 }
 .card-body:hover {
-  border: 2px solid #00692e;
+  border: 2px solid var(--colorMain);
   cursor: pointer;
 }
 .image-product {
   width: 100%;
   height: auto;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .image-product img {
@@ -42,7 +77,6 @@
   height: auto;
   display: block;
   margin: 0px;
-  
 }
 
 /* Resto de tus estilos... */
@@ -73,6 +107,7 @@
   align-items: flex-end;
   color: #ff0001;
   margin-right: 5px;
+  
 }
 .exponent {
   position: relative;
@@ -80,18 +115,17 @@
   font-size: 0.75em;
 }
 @media only screen and (max-width: 600px) {
-  .card-body  {
+  .card-body {
     display: grid;
     grid-template-columns: 1fr 2fr 0.5fr;
     grid-template-rows: 1fr;
-    grid-column-gap: 10px;
+    grid-column-gap: 6px;
     grid-row-gap: 0px;
     border: 2px solid #aea6a6;
     backdrop-filter: blur(6px);
-    border-radius: 5px;
+    border-radius: 3px;
     margin: 0 auto;
     margin-top: 5px;
-    width: 95%;
   }
   .product-info p {
     margin: 0;
@@ -104,5 +138,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .infinite-scroll {
+    height: 400px;
+    overflow-y: scroll;
+    padding: 10px;
   }
 }

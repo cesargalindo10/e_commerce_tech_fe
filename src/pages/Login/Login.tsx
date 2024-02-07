@@ -1,14 +1,14 @@
+import React,{useState} from "react"
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import "./Login.css";
 import { APISERVICE } from "../../infrastructure/api/api.service";
-import Button from "../../shared/btns/Button";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PrivateRoutes } from "../../models/routes";
 import { createUser } from "../../redux/state/user";
 import { Roles } from "../../models/roles";
-import logo from "../../assets/logo.svg";
+import FormField from "../../shared/FormField";
 
 interface User {
   username: string;
@@ -17,6 +17,7 @@ interface User {
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [errorUserPass, setErrorUserPass] = useState<String>('');
 
   let initialState: User = {
     username: "",
@@ -32,7 +33,7 @@ export default function Login() {
     let url = "api/login";
     try {
       const response = await APISERVICE.post(values, url);
-      if (response.status === 200) {
+      if (response) {
         let sesion = {
           id: response.user.id,
           name: response.user.name,
@@ -42,13 +43,13 @@ export default function Login() {
           permissions: response.permissions,
         };
         dispatch(createUser({ ...sesion, rol: Roles.USER }));
-        navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true });
+        navigate(`/${PrivateRoutes.PRIVATE}/ventas`, { replace: true });
         navigate(0);
       } else {
         console.log("Invalid username or password");
       }
     } catch (error) {
-      console.log("An error ocurred. Please try again later");
+      setErrorUserPass("*Invalid username or password");
     }
   };
 
@@ -60,46 +61,31 @@ export default function Login() {
         HandleonSubmit(values);
       }}
     >
-      {({ errors, touched }) => (
-        <div className="container-login-page">
-          <div className="container-login">
-            <div className="image-login">
-              <img src={logo} alt="" />
-            </div>
-            <Form className="login-form">
-              <h2>Login</h2>
-              <div>
-                <Field
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  className={`form-control ${errors.username && "is-invalid"}`}
-                  touched={touched.username ? "false" : "true"}
-                />
-                <div className="invalid-feedback">
-                  {errors.username && errors.username}
-                </div>
-              </div>
-              <div>
-                <Field
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  className={`form-control ${errors.password && "is-invalid"}`}
-                  touched={touched.password ? "false" : "true"}
-                />
-                <div className="invalid-feedback">
-                  {errors.password && errors.password}
-                </div>
-              </div>
-
-              <button type="submit" className="btn-login">
-                Login
-              </button>
-            </Form>
+      <div className="container-login-page">
+        <Form className="login-form">
+          <h2>Login</h2>
+          <div>
+            <FormField
+              name="username"
+              type="text"
+              placeHolder=""
+              label="Username"
+            />
           </div>
-        </div>
-      )}
+          <div>
+            <FormField
+              name="password"
+              type="password"
+              placeHolder=""
+              label="Password"
+            />
+          </div>
+          <p className="error-login">{errorUserPass}</p>
+          <button type="submit" className="btn-login">
+            Login
+          </button>
+        </Form>
+      </div>
     </Formik>
   );
 }
