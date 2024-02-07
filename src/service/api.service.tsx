@@ -63,9 +63,11 @@ export const APISERVICE = {
   ) => {
     const response = await fetch(`${APIURL + url + params}`, {
       method: method,
-      /*     headers: {
-                "content-type": "application/json",
-            }, */
+
+          headers: {
+            Authorization: token,
+                
+            }, 
       body: body,
     });
     if (!response.ok) {

@@ -30,10 +30,10 @@ export default function UserCrud() {
   const getUsers = async (page: number = 1) => {
     try {
       const url = `api/users?page=${page}`;
-      const response = await APISERVICE.get(url);
-      if (response.status === 200) {
-        setUsers(response.data.data);
-        setpageInfo(response.data.pageInfo);
+      const {data,pageInfo}:any = await APISERVICE.get(url);
+      if (data) {
+        setUsers(data);
+        setpageInfo(pageInfo);
       } else {
         console.log("Ocurrio un error al obtener ");
       }

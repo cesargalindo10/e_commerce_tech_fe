@@ -22,11 +22,11 @@ export default function ProductByCategory() {
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
     try {
-      const url = `api/product/${id}?page=${page}`;
-      const { data } = await APISERVICE.get(url);
+      const url = `products/${id}?page=${page}`;
+      const { data, pageInfo}:any = await APISERVICE.get(url);
       if (data) {
-        setProductos(data.data);
-        setPageInfo(data.pageInfo);
+        setProductos(data);
+        setPageInfo(pageInfo);
         return data;
       } else {
         console.log("Ocurrio un error al obtener ");
@@ -51,7 +51,7 @@ export default function ProductByCategory() {
       const { data } = await APISERVICE.get(url);
 
       if (data) {
-        setCategory(data.data);
+        setCategory(data);
         return data;
       } else {
         console.log("Ocurrio un error al obtener ");
@@ -73,7 +73,7 @@ export default function ProductByCategory() {
       </div>
 
       <InfiniteScroll
-        dataLength={productos.length}
+        dataLength={productos?.length}
         next={debouncedMoreProducts}
         hasMore={verMas}
         loader={<Loading/>}
@@ -81,7 +81,7 @@ export default function ProductByCategory() {
         className="infinite-scroll"
       >
         <div className="fila">
-          {productos.map((producto) => (
+          {productos?.map((producto) => (
             <Link
               to={`/product/${producto.id}`}
               className="link-detalle"
