@@ -86,7 +86,7 @@ export const SaleDetail = ({ orderDetails, setShowPdf }: Props) => {
         </Table>
         <p>Total: {saleToShow?.total}</p>
 
-        <div className="modal__btns mt-2">
+        <div className="modal-btns mt-2">
               <Button variant="error" onClick={reset} text="Volver" />{" "}
               <Button
                 onClick={showPdf}

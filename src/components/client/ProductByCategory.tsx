@@ -22,12 +22,12 @@ export default function ProductByCategory() {
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
     try {
-      const url = `products/${id}?page=${page}`;
-      const { data, pageInfo}:any = await APISERVICE.get(url);
-      if (data) {
-        setProductos(data);
-        setPageInfo(pageInfo);
-        return data;
+      const url = `api/product/${id}?page=${page}`;
+      const response: any = await APISERVICE.get(url);
+      if (response.data) {
+        setProductos(response.data);
+        setPageInfo(response.pageInfo);
+        return response;
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -37,7 +37,7 @@ export default function ProductByCategory() {
   };
   const moreProducts = async () => {
     const next = pageInfo?.next?.slice(-1);
-    const response = await getProductsByCategory(next);
+    const response: any = await getProductsByCategory(next);
     setProductos((prev) => [...prev, ...response.data]);
     response.pageInfo.next === null && setVerMas(false);
   };

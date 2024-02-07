@@ -80,7 +80,7 @@ export default function UserForm({
               ]}
             />
 
-        <div className="modal__btns mt-3">
+        <div className="modal-btns">
           <Button
             variant="main"
             type="submit"
