@@ -22,7 +22,7 @@ export default function ProductByCategory() {
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
     try {
-      const url = `api/product/${id}?page=${page}`;
+      const url = `products/${id}?page=${page}`;
       const response: any = await APISERVICE.get(url);
       if (response.data) {
         setProductos(response.data);
