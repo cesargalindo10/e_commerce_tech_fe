@@ -32,7 +32,6 @@ export default function SearchProductPage() {
 
         body.name = value.toLowerCase();
         const { data, pageInfo } = await APISERVICE.post(body, url);
-        console.log(data);
         if (data) {
           setProductos(data);
           setPageInfo(pageInfo);

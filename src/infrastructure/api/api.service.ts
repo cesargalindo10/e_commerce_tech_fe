@@ -53,7 +53,6 @@ export const APISERVICE = {
       });
       const data = response.data;
       data.status = response.status;
-      console.log(data);
       return data;
     } catch (error) {
       console.error(error);

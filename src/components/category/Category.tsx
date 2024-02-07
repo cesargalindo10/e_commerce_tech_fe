@@ -71,7 +71,6 @@ export default function Category() {
   };
   const deleteCategory = async (id: string) => {
     let url = `api/categories/${id}`;
-    console.log(url);
     const response = await APISERVICE.delete(url);
     if (response.status === 200) {
       getCategories();

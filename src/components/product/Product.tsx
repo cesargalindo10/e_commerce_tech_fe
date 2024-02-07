@@ -42,7 +42,7 @@ export function Product() {
   }, []);
 
   const getBrands = async () => {
-    const url = "brand";
+    const url = "api/brands";
     const response = await AxiosService.get(url, "");
     if (true) {
       const { data } = response.data;
@@ -50,7 +50,7 @@ export function Product() {
     }
   };
   const getCategories = async () => {
-    const url = "category";
+    const url = "api/categories";
 
     const response = await AxiosService.get(url, "");
     if (true) {
@@ -60,7 +60,7 @@ export function Product() {
   };
 
   const getProducts = async (page: number) => {
-    const url = "product";
+    const url = "api/product";
     const params = {
       page,
     };

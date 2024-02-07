@@ -20,7 +20,6 @@ export default function UserTable({
   pageInfo,
   getCategories,
 }: Props) {
-  //console.log(items)
   return (
     <>
       <Table striped bordered hover>

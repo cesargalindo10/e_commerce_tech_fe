@@ -51,6 +51,7 @@
   min-width: 0;
   word-wrap: break-word;
   padding: 6px;
+  
 }
 
 .card-body {
@@ -60,7 +61,8 @@
   background-clip: border-box;
   border: 2px solid #aea6a6;
   border-radius: 0.25rem;
-  min-width: 350px;
+  min-width: 300px;
+  height: 400px;
 }
 .card-body:hover {
   border: 2px solid var(--colorMain);
@@ -128,6 +130,7 @@
     margin: 0 auto;
     margin-top: 5px;
     min-width: 350px;
+    height: 140px;
   }
   .product-info p {
     margin: 0;

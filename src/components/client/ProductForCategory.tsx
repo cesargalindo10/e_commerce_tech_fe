@@ -1,4 +1,5 @@
 import { ProductBrand } from "../../models/models";
+import imgProduct from "../../assets/camara.jpeg";
 
 interface Props {
   producto: ProductBrand;
@@ -16,7 +17,7 @@ export default function ProductForCategory({ producto }: Props) {
     <div className="card_product">
       <div className="card-body">
         <div className="image-product">
-          <img src={url_image} alt={name} />
+          <img src={imgProduct} alt={name} />
         </div>
         <div className="product-info">
           <p>{name}</p>
