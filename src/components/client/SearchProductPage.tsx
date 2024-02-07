@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback } from "react";
+import debounce from 'just-debounce-it';
 import ProductForCategory from "./ProductForCategory";
 import { PageInfo, Product, ProductBrand } from "../../models/models";
 import "./ProductByCategory.css";
@@ -25,12 +26,11 @@ export default function SearchProductPage() {
   const body: search = {
     name: "",
   };
-  const getProductsSearch = async (value: string = "", page: string = "1") => {
+  const getProductsSearch = async (value: string = '', page: string = "1") => {
     try {
       const url = `api/product?page=${page}`;
-      console.log(body);
-      if (value !== "") {
-        body.name = value;
+
+        body.name = value.toLowerCase();
         const { data, pageInfo } = await APISERVICE.post(body, url);
         console.log(data);
         if (data) {
@@ -40,7 +40,7 @@ export default function SearchProductPage() {
         } else {
           console.log("Ocurrio un error al obtener ");
         }
-      }
+
     } catch (error) {
       console.error(error);
     }
@@ -53,20 +53,23 @@ export default function SearchProductPage() {
       response.pageInfo.next === null && setVerMas(false);
     }
   };
+  const debouncedMoreProducts = useCallback(
+    debounce(moreProducts, 500), // Ajusta el tiempo de espera según tus necesidades (300 ms en este ejemplo)
+    [moreProducts] // Incluye todas las dependencias necesarias aquí
+  );
   const clearFilter = () => {
     setProductos([]);
   };
   useEffect(() => {
-    getProductsSearch((body.name = "we"));
+    getProductsSearch();
   }, []);
 
-  console.log(productos);
   return (
     <div className="container_products">
       <Header />
       <InfiniteScroll
         dataLength={productos && productos.length}
-        next={moreProducts}
+        next={debouncedMoreProducts}
         hasMore={verMas}
         loader={<Loading/>}
         endMessage={<h3></h3>}
