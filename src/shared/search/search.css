@@ -5,6 +5,8 @@
     height: auto;
     margin: 0 auto;
     margin-bottom: 10px;
+    max-width: 600px;
+    width: 400px;
 }
 .row-table-notExist{
     text-align: center;

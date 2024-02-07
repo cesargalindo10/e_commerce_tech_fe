@@ -19,7 +19,7 @@ export default function ProductForCategory({ producto }: Props) {
           <img src={APIURL + url_image} alt={name} />
         </div>
         <div className="product-info">
-          <p>{name}</p>
+          <p className="product-info-name">{name}</p>
           <p>
             <span>Codigo:</span>
             {code}
