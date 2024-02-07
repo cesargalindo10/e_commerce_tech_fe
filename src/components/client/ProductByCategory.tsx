@@ -24,7 +24,6 @@ export default function ProductByCategory() {
     try {
       const url = `api/product/${id}?page=${page}`;
       const { data } = await APISERVICE.get(url);
-      console.log(data);
       if (data) {
         setProductos(data.data);
         setPageInfo(data.pageInfo);

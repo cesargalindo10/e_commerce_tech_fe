@@ -17,7 +17,7 @@ export default function ProductTable({
 }: Props) {
   return (
     <>
-        <Table responsive>
+        <Table responsive striped bordered hover>
           <thead >
             <tr>
               <th>Nombre</th>  
@@ -51,7 +51,7 @@ export default function ProductTable({
           </tbody>
         </Table>
         <div className="mt-2">
-       {products.length > 0 && (
+       {products?.length > 0 && (
             <Pagination pageInfo={pageInfo} getData={getProducts} />
       )}
     </div>

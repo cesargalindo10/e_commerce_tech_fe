@@ -20,10 +20,9 @@ export default function UserTable({
   pageInfo,
   getCategories,
 }: Props) {
-  //console.log(items)
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <CategoryTableHeader />
         <UserTableBody
           users={users}

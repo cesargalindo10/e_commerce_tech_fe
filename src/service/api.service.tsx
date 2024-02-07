@@ -2,6 +2,16 @@ import axios from "axios"
 
 const APIURL = import.meta.env.VITE_REACT_APP_API_URL
 
+let token: ''|any;
+function getToken(): void {
+  const tokenLocal = JSON.parse(localStorage.getItem('user') as string);
+  token = tokenLocal ? `bearer ${tokenLocal.token}` : '';
+}
+getToken();
+export const setToken=(token:string)=>{
+token = `bearer ${token}`
+}
+
 export const APISERVICE = {
     get: async (url: string, params: string) => {
         const res = await fetch(`${APIURL}${url}${params}`);

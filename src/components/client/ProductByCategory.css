@@ -61,6 +61,7 @@
   border: 2px solid #aea6a6;
   border-radius: 0.25rem;
   min-width: 350px;
+  max-width: 350px;
 }
 .card-body:hover {
   border: 2px solid var(--colorMain);

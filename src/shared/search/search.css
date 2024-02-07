@@ -1,7 +1,5 @@
  /* Search bar  */
  .search-bar{
-    width: 96%;
-    max-width: 600px;
     display: flex;
     gap: 10px;
     height: auto;

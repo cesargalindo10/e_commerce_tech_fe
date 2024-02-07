@@ -12,9 +12,9 @@ export default function Dashboard() {
     <Sidebar>
       <HeaderAdmin>
         <RoutesWithNotFound>
-          <Route path="/products" element={<Product />} />
-          <Route path="/categories" element={<Category />} />
-          <Route path="/users" element={<UserCrud />} />
+          <Route path="/productos" element={<Product />} />
+          <Route path="/categorias" element={<Category />} />
+          <Route path="/usuarios" element={<UserCrud />} />
           <Route path="/ventas" element={<Sale />} />
         </RoutesWithNotFound>
       </HeaderAdmin>

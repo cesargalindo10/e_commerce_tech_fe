@@ -153,7 +153,7 @@ const DocumentPdf = ({
   saleToShow
 }: Props) => {
   const numberOfItem = 7;
-  const pageNumbers = Math.floor(orderDetails.length / numberOfItem);
+  const pageNumbers = Math.floor(orderDetails?.length / numberOfItem);
   const newOrderDetails = [];
   let i = 0;
   for (i = 0; i < pageNumbers; i++) {
