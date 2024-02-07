@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect,useCallback} from "react";
+import debounce from 'just-debounce-it';
 import ProductForCategory from "./ProductForCategory";
 import { Category, PageInfo, Product, ProductBrand } from "../../models/models";
 import "./ProductByCategory.css";
@@ -41,7 +42,10 @@ export default function ProductByCategory() {
     setProductos((prev) => [...prev, ...response.data]);
     response.pageInfo.next === null && setVerMas(false);
   };
-
+  const debouncedMoreProducts = useCallback(
+    debounce(moreProducts, 500), // Ajusta el tiempo de espera según tus necesidades (300 ms en este ejemplo)
+    [moreProducts] // Incluye todas las dependencias necesarias aquí
+  );
   const getCategoryById = async () => {
     try {
       const url = `category/${id}`;
@@ -71,7 +75,7 @@ export default function ProductByCategory() {
 
       <InfiniteScroll
         dataLength={productos.length}
-        next={moreProducts}
+        next={debouncedMoreProducts}
         hasMore={verMas}
         loader={<Loading/>}
         endMessage={<h3></h3>}

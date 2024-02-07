@@ -60,6 +60,7 @@
   background-clip: border-box;
   border: 2px solid #aea6a6;
   border-radius: 0.25rem;
+  min-width: 350px;
 }
 .card-body:hover {
   border: 2px solid var(--colorMain);
@@ -126,6 +127,7 @@
     border-radius: 3px;
     margin: 0 auto;
     margin-top: 5px;
+    min-width: 350px;
   }
   .product-info p {
     margin: 0;
