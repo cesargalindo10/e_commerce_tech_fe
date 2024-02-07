@@ -73,7 +73,7 @@ export default function ProductByCategory() {
       </div>
 
       <InfiniteScroll
-        dataLength={productos.length}
+        dataLength={productos?.length}
         next={debouncedMoreProducts}
         hasMore={verMas}
         loader={<Loading/>}
@@ -81,7 +81,7 @@ export default function ProductByCategory() {
         className="infinite-scroll"
       >
         <div className="fila">
-          {productos.map((producto) => (
+          {productos?.map((producto) => (
             <Link
               to={`/product/${producto.id}`}
               className="link-detalle"

@@ -28,9 +28,9 @@ export default function SearchProductPage() {
   };
   const getProductsSearch = async (value: string = '', page: string = "1") => {
     try {
-      const url = `api/product?page=${page}`;
+      const url = `products?page=${page}`;
 
-        body.name = value.toLowerCase();
+        body.name = value;
         const response: any = await APISERVICE.post(body, url);
         const { data, pageInfo } = response
         if (data) {

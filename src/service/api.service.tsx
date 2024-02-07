@@ -5,16 +5,16 @@ const APIURL = import.meta.env.VITE_REACT_APP_API_URL
 let token: ''|any;
 function getToken(): void {
   const tokenLocal = JSON.parse(localStorage.getItem('user') as string);
-  token = tokenLocal ? `bearer ${tokenLocal.token}` : '';
+  token = tokenLocal ? bearer ${tokenLocal.token} : '';
 }
 getToken();
 export const setToken=(token:string)=>{
-token = `bearer ${token}`
+token = bearer ${token}
 }
 
 export const APISERVICE = {
     get: async (url: string, params: string) => {
-        const res = await fetch(`${APIURL}${url}${params}`);
+        const res = await fetch(${APIURL}${url}${params});
         if(!res.ok){
             throw new Error('Error http:' + res.status);
         }
@@ -22,7 +22,7 @@ export const APISERVICE = {
         return data;
     },
     post: async <T,>(body: T,url: string, params: string) => {
-        const response = await fetch(`${APIURL +url + params}`,{
+        const response = await fetch(${APIURL +url + params},{
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -37,7 +37,7 @@ export const APISERVICE = {
         return data;
     },
     put: async <T,> (body: T, url: string, params: string) => {
-        const reponse = await fetch(`${APIURL + url + params}`, {
+        const reponse = await fetch(${APIURL + url + params}, {
             method: 'PUT',
             headers: {
                 "content-type": 'aplication/json',
@@ -53,7 +53,7 @@ export const APISERVICE = {
 
     ,
     posWithImage: async(body: any, url: string, params: string, method: string) => {
-        const response = await fetch(`${APIURL + url + params}`, {
+        const response = await fetch(${APIURL + url + params}, {
             method: method,
             headers: {
                 'authorization': token ,
@@ -70,15 +70,15 @@ export const APISERVICE = {
 
 export const AxiosService = {
     get: (url: string, params: any) => {
-        return axios.get(`${APIURL+ url}`, {params: params});
+        return axios.get(${APIURL+ url}, {params: params});
     },
 
     post: <T,>(body: T,url: string, params: string) => {
-        return axios.post(`${APIURL +url + params}`, body);
+        return axios.post(${APIURL + url + params}, body);
     },
 
     patch: <T,> (body: T, url: string, params: string) => {
-        return axios.patch(`${APIURL + url + params}`, body);
+        return axios.patch(${APIURL + url + params}, body);
     }
     
 }
