@@ -31,10 +31,10 @@ export default function Category() {
   const getCategories = async (page: number=1)=> {
     try {
       const url = `api/categories?page=${page}`;
-      const response = await APISERVICE.get(url);
-      if (response.status === 200) {
-        setCategories(response.data.data);
-        setpageInfo(response.data.pageInfo);
+      const response: any = await APISERVICE.get(url);
+      if (response.success) {
+        setCategories(response.data);
+        setpageInfo(response.pageInfo);
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -71,7 +71,6 @@ export default function Category() {
   };
   const deleteCategory = async (id: string) => {
     let url = `api/categories/${id}`;
-    console.log(url);
     const response = await APISERVICE.delete(url);
     if (response.status === 200) {
       getCategories();
@@ -84,7 +83,7 @@ export default function Category() {
 
   return (
     <div className="container-component">
-      <h3>Usuarios</h3>
+      <h3 className="title-page">Categorias</h3>
       <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
       <CategoryTable
         items={categories}

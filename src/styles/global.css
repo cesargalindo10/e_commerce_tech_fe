@@ -1,5 +1,6 @@
 :root{
     --colorMain: #3C8DBB;
+    --colorMainSecundary: #3b4355;
     --colorMainBlack: #367FA6;
     --colorSecundary: #2D3C42;
     --colorSecundaryBlack: #222D30;
@@ -120,4 +121,10 @@ input:focus {
     width: 95%;
     margin: 0 auto;
     margin-top: 20px;
+}
+
+.title-page{
+    color: var(--colorMain);
+    font-weight: 600;
+    font-size: 1.5rem;
 }

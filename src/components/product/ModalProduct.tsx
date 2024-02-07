@@ -49,13 +49,13 @@ export const ModalProduct = ({ updateCourse }: Props) => {
     categories,
   } = contextValue;
 
-  const categoryMapped: [string, string][] = categories.map(
+  const categoryMapped: [string, string][] = categories?.map(
     (category: Category) => {
       return [String(category.id), category.name];
     }
   );
 
-  const brandMapped: [string, string][] = brands.map((brand: Brand) => {
+  const brandMapped: [string, string][] = brands?.map((brand: Brand) => {
     return [String(brand.id), brand.name];
   });
 

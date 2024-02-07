@@ -10,7 +10,7 @@ function useSale() {
             const url = 'api/sale-detail/' + idSale;
             setLoading(true);
             const response = await AxiosService.get(url, '');
-            const { data } = response.data
+            const { data } = response
             return data;
         } catch (error) {
             

@@ -1,7 +1,6 @@
 import { Modal, Table } from "react-bootstrap";
 import { AppStore } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import PhoneInput from "react-phone-number-input/input";
 import 'react-phone-number-input/style.css'
 import { useState } from "react";
 import PhoneInputWithCountrySelect from "react-phone-number-input";
@@ -35,7 +34,6 @@ function ModalDetail({ show, onHide, setShowModalConfirm}: Props) {
     }
     if(errors.name.length === 0 && errors.phone.length === 0 && userInfo.name !== '' && userInfo.phone !== ''){
       sendInfo()
-      console.log('here')
     }
   }
 

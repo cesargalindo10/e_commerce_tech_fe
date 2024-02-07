@@ -20,7 +20,6 @@ export default function CategoryTable({
   pageInfo,
   getCategories,
 }: Props) {
-  //console.log(items)
   return (
     <>
       <Table striped bordered hover>

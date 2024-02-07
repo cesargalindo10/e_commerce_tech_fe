@@ -46,10 +46,8 @@ export default function UserModal({
       role:values.role,
     };
     if (formData.id === 0) {
-      console.log("hereCreate")
       createUser(formData);
     } else {
-      console.log("here update")
       updateUser(formData, "" + formData.id);
     }
     setUserToEdit(initialData);

@@ -14,7 +14,7 @@ const CategoryFormSchema = Yup.object().shape({
   name: Yup.string().required("* El nombre es obligatorio"),
   username: Yup.string().required('El nombre de usuario es obligatorio'),
   phone: Yup.string().matches(/^\d+$/, 'Ingrese un número de teléfono válido'),
-  password: Yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres'),
+  password: Yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres')
   //rol: Yup.string().required('Seleccione un rol').oneOf(['Seller', 'Admin'], 'Rol no válido'),
   //state: Yup.string().required('Seleccione un estado').oneOf(['1', '0'], 'Estado no válido'),
   

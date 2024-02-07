@@ -34,7 +34,7 @@ function LandingPage() {
     try {
         const response = await AxiosService.get('categories/products', '')
         if(response){
-            setCategoriesWithProducts(response.data.data)
+            setCategoriesWithProducts(response.data)
         }
     } catch (error) {
         

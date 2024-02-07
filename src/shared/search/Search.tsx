@@ -20,7 +20,6 @@ export default function Search({ placeHolder, filterSomething, handleClear, chil
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-   // console.log(value)
     filterSomething(value);
     setSearch(value);
   };

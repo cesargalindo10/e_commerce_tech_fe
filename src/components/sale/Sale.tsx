@@ -45,9 +45,9 @@ export function Sale (){
       const params = {  
         page,
       }
-      const response = await AxiosService.get(url, params);
+      const response: any = await AxiosService.get(url, params);
       if(response){
-          const { data, pageInfo } = response.data;
+          const { data, pageInfo } = response;
           setSales(data);
           setpageInfo(pageInfo);
         }
@@ -72,13 +72,12 @@ export function Sale (){
     return (
       <ContextSale.Provider value={{saleToShow, setSaleToShow, showModal, setShowModal, getOrderDetails, getSales}}>
         <div className="container-component">
-         <h3>saleos</h3>
-          <SearchRow
+         <h3 className="title-page">Ventas</h3>
+         {/*  <SearchRow
             filterSomething={filtercategories}
             placeHolder="Nombre del curso"
             handleClear={clearFilter}   
-            setShow={setShowModal}
-          />
+          /> */}
           <SaleTable
             sales={sales}
             getSales={getSales}

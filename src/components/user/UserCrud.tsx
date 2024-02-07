@@ -43,7 +43,6 @@ export default function UserCrud() {
   };
   const createUser = async (user: User) => {
     try {
-      console.log("here")
       let url: string = "api/users";
       const response = await APISERVICE.post(user, url);
       if (response.status === 201) {
@@ -58,7 +57,6 @@ export default function UserCrud() {
     id: string
   ): Promise<void> => {
     try {
-      console.log(user)
       let url: string = `api/users/${id}`;
       const response = await APISERVICE.put(user, url);
       if (response.status === 201) {
@@ -70,7 +68,6 @@ export default function UserCrud() {
   };
   const deleteUser = async (id: string) => {
     let url = `api/users/${id}`;
-    console.log(url);
     const response = await APISERVICE.delete(url);
     if (response.status === 200) {
       getUsers();
@@ -83,6 +80,7 @@ export default function UserCrud() {
 
   return (
     <div className="container-component">
+      <h3 className="title-page">Usuarios</h3>
       <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
       <UserTable
         users={users}

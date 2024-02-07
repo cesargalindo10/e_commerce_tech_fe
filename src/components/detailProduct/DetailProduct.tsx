@@ -11,6 +11,7 @@ import defaultimg from '../../assets/img/defaulimg.png'
 import AddDementBtns from "../../shared/addDecrementBtns/AddDementBtns";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../redux/store";
+import Footer from "../../shared/footer/Footer";
 export interface ProductDetail extends ProductWithQuantity{
   brand?: string;
 }
@@ -26,7 +27,7 @@ function DetailProduct() {
     try {
       const response = await AxiosService.get("product/" + id, "");
       if (response) {
-        const { data } = response.data;
+        const { data } = response;
         const existsProduct = cartList?.length > 0 && cartList.find((product: ProductDetail) => product?.id === data[0].id);
         let newProduct;
         if(existsProduct){
@@ -56,7 +57,7 @@ function DetailProduct() {
   return (
     <div>
       <Header />
-      <main className="content-page product-detail">
+      <main className="content-page product-detail mb-4">
         {
           product?.url_image ? 
           <RowImage url_image={APIURLIMG + product?.url_image} alt={product?.name} />
@@ -124,6 +125,7 @@ function DetailProduct() {
         </div>
 
       </main>
+      <Footer/>
     </div>
   );
 }
