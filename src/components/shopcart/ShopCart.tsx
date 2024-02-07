@@ -1,5 +1,4 @@
 import { PiShoppingCart } from "react-icons/pi"
-import Header from "../../shared/header/Header"
 import './shopcart.css'
 import { AiOutlineHome } from "react-icons/ai"
 import { FaAngleRight } from "react-icons/fa"
@@ -9,8 +8,8 @@ import { useSelector } from "react-redux"
 import { AppStore } from "../../redux/store"
 import { useState } from "react"
 import ModalDetail from "./ModalDetail"
-import ModalConfirm from "../../shared/confirmModal/ModalConfirm"
 import ModalSuccess from "./ModalSuccess"
+import Header from "../../shared/header/Header"
 function ShopCart() {
 
   const cartList = useSelector((store: AppStore) => store.shop);

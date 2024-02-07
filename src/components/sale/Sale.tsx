@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { SaleDetail } from "./SaleDetail";
 import { AxiosService } from "../../service/api.service";
 import { OrderDetail, PageInfo, Sale } from "../../models/models";
-import SearchRow from "../../shared/search/SearchRow";
+import SearchRow from "../../shared/search/Search";
 import SaleTable from "./SaleTable";
 import useSale from "./useSale";
 import { PDFViewer } from "@react-pdf/renderer";
@@ -71,7 +71,7 @@ export function Sale (){
 
     return (
       <ContextSale.Provider value={{saleToShow, setSaleToShow, showModal, setShowModal, getOrderDetails, getSales}}>
-        <div className="">
+        <div className="container-component">
          <h3>saleos</h3>
           <SearchRow
             filterSomething={filtercategories}

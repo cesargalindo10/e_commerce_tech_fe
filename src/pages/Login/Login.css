@@ -1,5 +1,6 @@
 :root{
-  --colorYellow:rgba(231,166,26,1);
+  --colorMain: #3C8DBB;
+ 
 }
 .container-login-page {
   width: 100vw;
@@ -8,68 +9,43 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #030300;
+  background-color: var(--colorMain);
 
 }
-.container-login{
-  width: 60%;
-  height: auto;
-  display: flex;
-  border-radius: 3px;
-  box-shadow: 0px 0px 8px 3px var(--colorYellow);
-}
+
 .login-form {
-  width: 50%;
+  width: 25%;
+  height: 350px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  background-color: white;
+  border-radius: 5px;
  
 }
 .login-form h2 {
-  color: rgba(231,166,26,1);
+  color: #636a6e;
 }
-/* logo img */
-.image-login{
-  width: 50%;
-  
-}
-.form-control {
-  width: 100%;
-  font-size: 14px;
-  border-color:var(--colorYellow);
-  border-radius: 4px;
-  background-color: #030300;
-  color: rgb(214, 201, 201);
-  
-}
-.form-control::placeholder{
-  color: rgb(214, 201, 201);
-}
-.form-control:focus{
-  outline: none;
-  background-color: #030300;
-  border-color: var(--colorYellow);
-  box-shadow: 0px 0px 8px 3px var(--colorYellow);
-  color: azure;
-}
+
 /* Estilos para los mensajes de error */
 .invalid-feedback {
   color: #c92d42;
   font-size: 13px;
   text-align: center;
 }
-.is-invalid {
-  border-color: #dc3545;
-}
 
 .btn-login{
-  width: 50%;
-  border-radius: 15px;
-  box-shadow: 0px 0px 8px 3px var(--colorYellow);
+  width: 100%;
+  height: 40px;
   border: none;
-  background-color: var(--colorYellow);
+  background-color: var(--colorMain);
   margin-top: 10px;
+  border-radius: 3px;
+  color: white;
 
+}
+.error-login{
+  color: #c92d42;
 }
