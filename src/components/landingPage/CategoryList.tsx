@@ -1,5 +1,5 @@
 // CategoryList.tsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './landingpage.css'; // Asegúrate de tener este archivo para los estilos
 import { AppState } from './LandingPage';
 
@@ -45,22 +45,19 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
   let before =  categoryListRef.current?.querySelectorAll('.category-card')[0]?.querySelector('h4')?.
   getBoundingClientRect().width || 0;
   
-  let other = 0;
-  const categoryReffff= useRef<HTMLUListElement>()
-  let direction = 'down';
+  //let direction='';
   const handleScroll = () => {
     if (categoryListRef.current) {
       const categoryItems = categoryListRef.current.querySelectorAll('.category-card');
       let found = false;
-  
       categoryItems.forEach((item: any) => {
         const rect = item.getBoundingClientRect();
         
         if (rect.top <= 0 && rect.bottom >= 0 && !found) {
           // La categoría es visible en la ventana
-          const currentScrollPos = window.scrollY;
-          const scrollDirection = currentScrollPos > prevScrollPos ? 'down' : 'up';
-          direction = scrollDirection;
+          //const currentScrollPos = window.scrollY;
+          //const scrollDirection = currentScrollPos > prevScrollPos ? 'down' : 'up';
+          //direction = scrollDirection;
           const px = item.querySelector('h4')?.getBoundingClientRect();
            // test(scrollDirection)
           // Actualiza el estado y detiene la iteración
@@ -81,7 +78,6 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
           before = px.width;
         }
       });
-      other = 0;
       // Actualiza la posición anterior al final de la función
       prevScrollPos = window.scrollY;
     }
@@ -106,17 +102,14 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
     setSelectedCategory(categoryId);
   };
 
-
+/* 
 const test = ( type: string, px: number ) => {
-/*   console.log(type, px)
-  if(px !== before)
-  console.log(before, px) */
 
   if(categoryReffff.current){
     let value = type === 'down' ?  px : - px;
     categoryReffff.current.scrollLeft += value;
   }
-}
+} */
   return (
     <>
     <div className="category-list-container" /* ref={categoryReffff} */>

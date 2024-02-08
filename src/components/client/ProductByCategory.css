@@ -108,7 +108,8 @@
 .product-price-name-client {
   color: #ff0001;
   display: flex;
-  align-items: end;
+  /* align-items: end; */
+  /* Change the name of the class */
 }
 .exponent {
   position: relative;

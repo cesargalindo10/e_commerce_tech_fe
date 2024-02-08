@@ -1,4 +1,3 @@
-import React from "react";
 import { Modal } from "react-bootstrap";
 import Button from "../../shared/btns/Button";
 import { useNavigate } from "react-router-dom";

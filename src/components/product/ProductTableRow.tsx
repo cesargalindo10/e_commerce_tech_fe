@@ -2,10 +2,9 @@ import { useContext } from "react";
 import { Product } from "../../models/models";
 import { ContextProduct, ContextProductType } from "./Product";
 import Button from "../../shared/btns/Button";
-import { MdDelete, MdModeEdit } from "react-icons/md";
+import { MdModeEdit } from "react-icons/md";
 import { RowImage } from "../../shared/rowImage/RowImage";
 import defaultimg from '../../assets/img/defaulimg.png'
-import ModalConfirm from "../../shared/confirmModal/ModalConfirm";
 const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 interface Props{
   product: Product

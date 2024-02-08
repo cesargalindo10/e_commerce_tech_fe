@@ -6,7 +6,6 @@ import { useState } from "react";
 import PhoneInputWithCountrySelect from "react-phone-number-input";
 import { APISERVICE } from "../../service/api.service";
 import { cleanCart } from "../../redux/state/shop";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   show: boolean;
@@ -20,7 +19,6 @@ function ModalDetail({ show, onHide, setShowModalConfirm}: Props) {
   const [errors, setErrors] = useState({ name: '', phone: '' })
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const handleConfirm = () => {
     if(userInfo.name === ''){
       setErrors(lastState => ({...lastState, name: 'El nombre es requerido'}))
@@ -67,6 +65,7 @@ function ModalDetail({ show, onHide, setShowModalConfirm}: Props) {
       
     } finally{
       setLoading(false)
+      loading
     }
   }
   const getTotal = () => {

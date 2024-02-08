@@ -31,7 +31,7 @@ export default function UserModal({
     role:"",   
   };
 
-  const [formData, setFormData] = useState<User>(
+  const [formData, ] = useState<User>(
     userToEdit === null ? initialData : userToEdit
   );
 

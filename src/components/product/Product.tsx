@@ -6,6 +6,7 @@ import SearchRow from "../../shared/search/Search";
 import Button from "../../shared/btns/Button";
 import { BiPlus } from "react-icons/bi";
 import { ModalProduct } from "./ModalProduct";
+import toast from "react-hot-toast";
 
 interface AppState {
   products: Product[];
@@ -70,10 +71,6 @@ export function Product() {
     }
   };
 
-  const deleteRoadModal = async () => {
-    /*  setShowModalConfirm(true);
-      setCustomerToDelete(id); */
-  };
 
   const deleteProduct = async () => {
     /*  try {
@@ -114,6 +111,7 @@ export function Product() {
       );
       if (success) {
         getProducts(pageInfo?.page ?? 1);
+        toast.success(message);
       } else {
       }
     } catch (error) {

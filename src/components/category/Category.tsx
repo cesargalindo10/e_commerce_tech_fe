@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { APISERVICE, AxiosService } from "../../infrastructure/api/api.service";
+import { APISERVICE } from "../../infrastructure/api/api.service";
 import CategoryTable from "./CategoryTable";
 import CategoryModal from "./CategoryModal";
 import { CategoryData, PageInfo } from "../../models/models";

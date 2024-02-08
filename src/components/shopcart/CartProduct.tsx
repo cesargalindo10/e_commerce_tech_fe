@@ -1,10 +1,10 @@
 import AddDementBtns from "../../shared/addDecrementBtns/AddDementBtns";
 import { RowImage } from "../../shared/rowImage/RowImage";
-import { ProductDetail } from "../detailProduct/DetailProduct";
+//import { ProductDetail } from "../detailProduct/DetailProduct";
 import imgDefault from '../../assets/img/defaulimg.png' 
 const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 interface Props{
-    product: ProductDetail
+    product: any
 }
 function CartProduct({product}: Props) {
 

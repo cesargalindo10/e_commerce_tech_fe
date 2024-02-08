@@ -6,6 +6,7 @@ import Category from "../components/category/Category";
 import { Sale } from "../components/sale/Sale";
 import UserCrud from "../components/user/UserCrud";
 import HeaderAdmin from "../shared/headerAdmin/HeaderAdmin";
+import { Toaster } from "react-hot-toast";
 
 export default function Dashboard() {
   return (
@@ -18,6 +19,7 @@ export default function Dashboard() {
           <Route path="/ventas" element={<Sale />} />
         </RoutesWithNotFound>
       </HeaderAdmin>
+      <Toaster />
     </Sidebar>
   );
 }

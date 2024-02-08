@@ -49,6 +49,9 @@
 /* Cart Product */
 .cart-products{
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
 }
 .cart-product{
     display: flex;

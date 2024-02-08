@@ -1,4 +1,4 @@
-.header{
+.header-landing{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,8 +17,8 @@
 .header-logo h2{
     margin: 0;
     font-weight: 600;
-    color: var(--colorMain);
-    font-size: 1.3rem;
+    color: var(--colorGris);
+    font-size: 1.4rem;
     padding-top: 0.4rem;
 }
 .header-icons{
