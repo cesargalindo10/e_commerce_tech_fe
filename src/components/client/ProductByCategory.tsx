@@ -68,7 +68,7 @@ export default function ProductByCategory() {
   return (
     <div className="container_products">
       <Header />
-      <div className="category">
+      <div className="category-client">
         <h2>{category?.name}</h2>
       </div>
 

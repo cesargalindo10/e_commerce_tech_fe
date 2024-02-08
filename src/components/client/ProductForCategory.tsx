@@ -7,19 +7,20 @@ interface Props {
 export default function ProductForCategory({ producto }: Props) {
   const { name, url_image, sale_price, code, brand } = producto;
   const cero = 0;
+  console.log(producto)
   const [integerPart, decimalPart] = sale_price
     ? sale_price.toString().split(".")
     : cero.toString().split(".");
 
   const superscriptExponent = `${decimalPart}`;
   return (
-    <div className="card_product">
-      <div className="card-body">
-        <div className="image-product">
+    <div className="card_product-client">
+      <div className="card-body-client">
+        <div className="image-product-client">
           <img src={APIURL + url_image} alt={name} />
         </div>
-        <div className="product-info">
-          <p className="product-info-name">{name}</p>
+        <div className="product-info-client">
+          <p className="product-info-name-client">{name}</p>
           <p>
             <span>Codigo:</span>
             {code}
@@ -28,7 +29,7 @@ export default function ProductForCategory({ producto }: Props) {
             <span>Marca:</span> {brand?.name}
           </p>
         </div>
-        <div className="product-price">
+        <div className="product-price-name-client">
           <span>{integerPart}</span>
           <span className="exponent">{superscriptExponent}</span>
           Bs.

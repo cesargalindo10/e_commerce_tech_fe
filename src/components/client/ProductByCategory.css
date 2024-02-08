@@ -7,7 +7,7 @@
   margin-right: auto;
   margin-left: auto;
 }
-.category {
+.category-client {
   width: 100%;
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@
   margin: 0 auto;
   border-bottom: 3px solid #d9d9d9;
 }
-.category h2 {
+.category-client h2 {
   width: 40%;
   border-bottom: 3px solid #007bff;
   margin-bottom: -3px;
@@ -41,7 +41,7 @@
   color: inherit;
   background-color: transparent;
 }
-.card_product {
+.card_product-client {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -51,7 +51,7 @@
   margin: 0 auto;
 }
 
-.card-body {
+.card-body-client {
   height: 300px;
   width: 200px;
   display: flex;
@@ -63,17 +63,17 @@
   border: 2px solid #aea6a6;
   border-radius: 0.25rem;
 }
-.card-body:hover {
+.card-body-client:hover {
   border: 2px solid var(--colorMain);
   cursor: pointer;
 }
-.image-product {
+.image-product-client {
   width: 99px;
   height: 99px;
   margin: 0 auto;
 }
 
-.image-product img {
+.image-product-client img {
   max-width: 99%; /* Ajusta el tamaño de la imagen según tus necesidades */
   height: 99px;
 }
@@ -81,22 +81,22 @@
 /* Resto de tus estilos... */
 /**info*/
 
-.product-info {
+.product-info-client {
   max-width: 100%;
   padding-left: 10px;
 
 }
-.product-info p {
+.product-info-client p {
   margin: 0;
 }
-.product-info span {
+.product-info-client span {
   font-size: small;
   margin: 2px 0;
   color: #7f7f7f;
   opacity: 0.7;
 }
 
-.product-info-name {
+.product-info-name-client {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -105,7 +105,7 @@
   font-weight: 600;
 }
 /*price*/
-.product-price {
+.product-price-name-client {
   color: #ff0001;
   display: flex;
   align-items: end;
@@ -116,7 +116,7 @@
   font-size: 0.75em;
 }
 @media only screen and (max-width: 430px) {
-  .card-body {
+  .card-body-client{
     height: 140px;
     width: 400px;
     display: grid;
@@ -131,7 +131,7 @@
     margin-top: 5px;
   }
  
-  .product-info {
+  .product-info-client {
     max-width: 200px;
     padding-left: 10px;
     display: flex;
