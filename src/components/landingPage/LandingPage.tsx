@@ -6,7 +6,7 @@ import './landingpage.css'
 import CategoriesAll from './Category/CategoryAll'
 import Header from '../../shared/header/Header'
 import Footer from '../../shared/footer/Footer'
-
+import Skeleton from 'react-loading-skeleton'
 
 export interface ProductCat{  
     id: number,
@@ -24,14 +24,14 @@ export interface AppState {
 function LandingPage() {
     const [categoriesWithProducts, setCategoriesWithProducts] = useState<AppState['categoriesWithProducts']>([]);
     const categoryListRef = useRef<HTMLUListElement>(null);
-
-
+    const [loading, setLoading] = useState(false);
    useEffect(() => {
     getProductWithCategories()
    },[])
      
   const getProductWithCategories = async () => {
     try {
+        setLoading(true)
         const response = await AxiosService.get('categories/products', '')
         if(response){
             setCategoriesWithProducts(response.data)
@@ -39,7 +39,7 @@ function LandingPage() {
     } catch (error) {
         
     } finally {
-
+      setLoading(false)
     }
   }
 
@@ -48,6 +48,69 @@ function LandingPage() {
   top: 0,
   boxShadow: '-1px 2px 6px 0px rgba(0,0,0,0.55)',
  }
+
+ if(loading) return <div className='content-page mt-3'>
+        <div className='d-flex gap-2 align-items-center justify-content-between'>
+          <div className='d-flex gap-2 align-items-center'>
+            <div style={{width: '50px'}}>
+              <Skeleton circle width={50} height={50}/>
+            </div>
+            <div style={{width: '70px'}}>
+              <Skeleton height={20}/>
+            </div>
+          </div>
+
+          <div style={{width: '8%', alignItems: 'right'}}>
+            <Skeleton height={20}/>
+          </div>
+        </div>
+
+        <div className='d-flex gap-2'>
+          <div style={{width: '25%'}}><Skeleton height={25}/></div>
+          <div style={{width: '25%'}}><Skeleton height={25}/></div>
+          <div style={{width: '25%'}}><Skeleton height={25}/></div>
+          <div style={{width: '25%'}}><Skeleton height={25}/></div>
+        </div>
+
+        <br/>
+
+        <Skeleton height={20} width={"25%"}/>
+        <div className='d-flex gap-2 mb-2'>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+        </div>
+
+        <Skeleton height={20} width={"25%"}/>
+        <div className='d-flex gap-2 mb-2'>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+        </div>
+
+
+        <Skeleton height={20} width={"25%"}/>
+        <div className='d-flex gap-2 mb-2'>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+        </div>
+
+        <Skeleton height={20} width={"25%"}/>
+        <div className='d-flex gap-2 mb-2'>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+        </div>
+
+        <Skeleton height={20} width={"25%"}/>
+        <div className='d-flex gap-2 mb-2'>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+          <div style={{width: '33%'}}><Skeleton height={90}/></div>
+        </div>
+    
+    </div>
  return (
     <>
     <div style={styles}>

@@ -9,11 +9,11 @@ import { AppStore } from "../../redux/store";
 function Header() {
   const cartList = useSelector((store: AppStore) => store.shop);
   return (
-    <header className="header">
+    <header className="header-landing">
       <Link className="header-logo" to={"/"}>
         <RowImage url_image={logo} width={80} />
         <h2>Sedelec</h2>
-      </Link>
+      </Link> 
       <div className="header-icons">
         <Link to={"/searchproduct"} className="header-icons-cart">
           <BiSearch size={20} />

@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik";
-import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Brand, Category, Product } from "../../models/models";
 import { Modal } from "react-bootstrap";

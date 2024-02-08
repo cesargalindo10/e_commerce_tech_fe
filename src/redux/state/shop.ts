@@ -43,7 +43,7 @@ const shopSlice = createSlice({
             window.localStorage.setItem(keyLocalStorage, JSON.stringify(newState));
             return newState;
         },
-        cleanCart (state) {
+        cleanCart () {
             window.localStorage.setItem(keyLocalStorage, JSON.stringify([]));
             return [];
         }
