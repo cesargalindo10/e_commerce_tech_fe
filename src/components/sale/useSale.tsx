@@ -2,7 +2,6 @@ import { useState } from "react"
 import { AxiosService } from "../../service/api.service";
 
 function useSale() {    
-    const [data, setData] = useState([])
     const [loading, setLoading] = useState(false);
 
     const fetchOrderDetails = async (idSale: number) => {
@@ -20,7 +19,7 @@ function useSale() {
      
     }
 
-    return {fetchOrderDetails, loading, data}
+    return {fetchOrderDetails, loading}
 }
 
 export default useSale

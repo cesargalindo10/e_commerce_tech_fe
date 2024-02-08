@@ -12,12 +12,15 @@ import AddDementBtns from "../../shared/addDecrementBtns/AddDementBtns";
 import { useSelector } from "react-redux";
 import { AppStore } from "../../redux/store";
 import Footer from "../../shared/footer/Footer";
+import Skeleton from 'react-loading-skeleton'
+
 export interface ProductDetail extends ProductWithQuantity{
   brand?: string;
 }
 function DetailProduct() {
   const { id } = useParams();
-  const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [product, setProduct] = useState<any | null>(null);
+  const [loading, setLoading] = useState(false);
   const cartList = useSelector((store: AppStore) => store.shop); 
   useEffect(() => { 
     getDetailProduct();
@@ -25,6 +28,7 @@ function DetailProduct() {
 
   const getDetailProduct = async () => {
     try {
+      setLoading(true)
       const response = await AxiosService.get("product/" + id, "");
       if (response) {
         const { data } = response;
@@ -40,6 +44,8 @@ function DetailProduct() {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -53,6 +59,32 @@ function DetailProduct() {
       setProduct({...product, quantity: 1});
     }
   }
+
+  if(loading) return <div className='content-page mt-3 mb-3'>
+        <div className='d-flex gap-2 align-items-center'>
+          <div style={{width: '50px'}}>
+            <Skeleton circle width={50} height={50}/>
+          </div>
+          <div style={{width: '25%'}}>
+            <Skeleton height={20}/>
+          </div>
+        </div>
+
+        <Skeleton height={300}/>
+       
+        <Skeleton height={25} width={'30%'} className="mb-2"/>
+        <Skeleton height={30} width={'50%'}/>
+
+        <Skeleton height={30} width={'15%'} className="mb-2 mt-3"/>
+     
+        <Skeleton height={30} width={'25%'}/>
+        <Skeleton height={100}/>
+
+        <div className="d-flex gap-2 align-items-center mt-2 justify-content-between">
+          <Skeleton height={24} width={'100px'}/>
+          <Skeleton height={24} width={'40px'}/>
+        </div>
+    </div>
 
   return (
     <div>

@@ -30,7 +30,7 @@ export default function CategoryModal({
     update_at: "",
   };
 
-  const [formData, setFormData] = useState<CategoryData>(
+  const [formData, ] = useState<CategoryData>(
     categoryToEdit === null ? initialData : categoryToEdit
   );
 

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { OrderDetail, Sale } from "../../models/models";
+import { OrderDetail } from "../../models/models";
 import { Modal, Table } from "react-bootstrap";
 import { ContextSale, ContextSaleType } from "./Sale";
 import Button from "../../shared/btns/Button";
@@ -7,16 +7,6 @@ interface Props {
   orderDetails: OrderDetail[],
   setShowPdf: () => void,
 }
-let initialState: Sale = {
-  total: 0,
-  order_number: 0,
-  state: '',
-  customer_name: '',
-  customer_phone: '',
-  created_at: '',
-};
-
-let initialValues = initialState;
 export const SaleDetail = ({ orderDetails, setShowPdf }: Props) => {
   const contextValue = useContext<ContextSaleType | null>(ContextSale);
 
@@ -27,17 +17,6 @@ export const SaleDetail = ({ orderDetails, setShowPdf }: Props) => {
     showModal,
     setShowModal,
   } = contextValue;
-
-  if (saleToShow) {
-    initialValues = {
-      total: saleToShow.total,
-      order_number: saleToShow.order_number,
-      state: saleToShow.state,
-      customer_name: saleToShow.customer_name,
-      customer_phone: saleToShow.customer_phone,
-      created_at: saleToShow.created_at,
-    };
-  }
 
   const reset = () => {
     setShowModal(false);
