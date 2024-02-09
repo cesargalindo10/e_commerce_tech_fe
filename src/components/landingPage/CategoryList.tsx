@@ -41,7 +41,7 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
 
   }
 
-  let prevScrollPos = window.scrollY;
+ //let prevScrollPos = window.scrollY;
   let before =  categoryListRef.current?.querySelectorAll('.category-card')[0]?.querySelector('h4')?.
   getBoundingClientRect().width || 0;
   
@@ -63,7 +63,7 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
           // Actualiza el estado y detiene la iteración
           //setSelectedCategory(Number(item.id));
           found = true;
-          prevScrollPos = window.scrollY;
+          //prevScrollPos = window.scrollY;
          // console.log(before, px.width)
           if(before !== px.width){
             //other += px.width;
@@ -79,7 +79,7 @@ const CategoryList: React.FC<Props> = ({ categories, categoryListRef}) => {
         }
       });
       // Actualiza la posición anterior al final de la función
-      prevScrollPos = window.scrollY;
+      //prevScrollPos = window.scrollY;
     }
   };
   
