@@ -1,4 +1,4 @@
-import {useState} from "react"
+import { useState } from "react";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import "./Login.css";
@@ -9,6 +9,8 @@ import { PrivateRoutes } from "../../models/routes";
 import { createUser } from "../../redux/state/user";
 import { Roles } from "../../models/roles";
 import FormField from "../../shared/FormField";
+import { FaBullseye } from "react-icons/fa";
+import Loading from "../../shared/loading/Loading";
 
 interface User {
   username: string;
@@ -17,7 +19,8 @@ interface User {
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [errorUserPass, setErrorUserPass] = useState<String>('');
+  const [errorUserPass, setErrorUserPass] = useState<String>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   let initialState: User = {
     username: "",
@@ -30,6 +33,7 @@ export default function Login() {
       .min(2, "Must be at least 8 characters"),
   });
   const HandleonSubmit = async (values: User) => {
+    setLoading(true);
     let url = "api/login";
     try {
       const response: any = await APISERVICE.post(values, url);
@@ -42,50 +46,53 @@ export default function Login() {
           role: response.user.role,
           permissions: response.permissions,
         };
+        console.log(response);
         dispatch(createUser({ ...sesion, rol: Roles.USER }));
         navigate(`/${PrivateRoutes.PRIVATE}/ventas`, { replace: true });
-        navigate(0);
       } else {
         console.log("Invalid username or password");
       }
     } catch (error) {
       setErrorUserPass("*Invalid username or password");
+      setLoading(false);
     }
   };
 
   return (
-    <Formik
-      initialValues={initialState}
-      validationSchema={validationSchema}
-      onSubmit={(values: User) => {
-        HandleonSubmit(values);
-      }}
-    >
-      <div className="container-login-page">
-        <Form className="login-form">
-          <h2>Login</h2>
-          <div>
-            <FormField
-              name="username"
-              type="text"
-              placeHolder=""
-              label="Username"
-            />
-          </div>
-          <div>
-            <FormField
-              name="password"
-              type="password"
-              placeHolder=""
-              label="Password"
-            />
-          </div>
-          <p className="error-login">{errorUserPass}</p>
-          <button type="submit" className="btn-login">
-            Login
-          </button>
-        </Form>
-      </div>
-    </Formik>
+    <div>
+      <Formik
+        initialValues={initialState}
+        validationSchema={validationSchema}
+        onSubmit={(values: User) => {
+          HandleonSubmit(values);
+        }}
+      >
+        <div className="container-login-page">
+          <Form className="login-form">
+            <h2>Login</h2>
+            <div>
+              <FormField
+                name="username"
+                type="text"
+                placeHolder=""
+                label="Username"
+              />
+            </div>
+            <div>
+              <FormField
+                name="password"
+                type="password"
+                placeHolder=""
+                label="Password"
+              />
+            </div>
+            <p className="error-login">{errorUserPass}</p>
+            <button type="submit" className="btn-login">
+              Login
+            </button>
+          </Form>
+        </div>
+      </Formik>
+    </div>
   );
 }

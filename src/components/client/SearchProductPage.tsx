@@ -22,6 +22,7 @@ export default function SearchProductPage() {
   const [productos, setProductos] = useState<ProductBrand[]>([]);
   const [pageInfo, setPageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [verMas, setVerMas] = useState(true);
+  const [loading,setLoading] = useState(true)
 
   const body: search = {
     name: "",
@@ -43,6 +44,8 @@ export default function SearchProductPage() {
 
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false)
     }
   };
   const moreProducts = async () => {
@@ -87,7 +90,7 @@ export default function SearchProductPage() {
                 to={`/product/${producto.id}`}
                 className="link-detalle"
               >
-                <ProductForCategory producto={producto} />
+                <ProductForCategory producto={producto} loading={loading} />
               </Link>
             ))}
         </div>

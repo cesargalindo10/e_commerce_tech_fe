@@ -25,10 +25,10 @@ export default function UserModal({
     id:0,
     name: "",
     username: "",
-    phone:"",
-    state: true,
+    phone:"",  
     password:'',
     role:"",   
+    state: true,
   };
 
   const [formData, ] = useState<User>(
@@ -36,16 +36,18 @@ export default function UserModal({
   );
 
   const handleSubmit = (values: FormikValues) => {
+  
     const formData: User = {
       id:values.id,
       name: values.name || "",
       username: values.username || "",
       phone: values.phone || "",
-      password:values.password,
+      password:values.password ||"",
+      role:values.role || "",
       state: values.state,
-      role:values.role,
+      
     };
-    if (formData.id === 0) {
+    if (formData?.id === 0) {
       createUser(formData);
     } else {
       updateUser(formData, "" + formData.id);

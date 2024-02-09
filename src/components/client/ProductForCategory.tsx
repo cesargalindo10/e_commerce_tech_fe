@@ -1,10 +1,36 @@
+
 import { ProductBrand } from "../../models/models";
-const APIURL = import.meta.env.VITE_REACT_APP_API_URL_IMG
+import Skeleton from 'react-loading-skeleton';
+
+const APIURL = import.meta.env.VITE_REACT_APP_API_URL_IMG;
+
 interface Props {
-  producto: ProductBrand;
+  producto: ProductBrand; 
+  loading:boolean;
 }
 
-export default function ProductForCategory({ producto }: Props) {
+export default function ProductForCategory({ producto,loading }: Props) {
+  if (loading) {
+    return (
+      <div className="card_product-client">
+        <div className="card-body-client">
+          <div className="image-product-client">
+            <Skeleton height={200} width={200} />
+          </div>
+          <div className="product-info-client">
+            <p className="product-info-name-client">
+              <Skeleton count={2} />
+            </p>
+          </div>
+          <div className="product-price-name-client">
+            <Skeleton width={50} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+
   const { name, url_image, sale_price, code, brand } = producto;
   const cero = 0;
   const [integerPart, decimalPart] = sale_price
@@ -13,13 +39,13 @@ export default function ProductForCategory({ producto }: Props) {
 
   const superscriptExponent = `${decimalPart}`;
   return (
-    <div className="card_product">
-      <div className="card-body">
-        <div className="image-product">
+    <div className="card_product-client">
+      <div className="card-body-client">
+        <div className="image-product-client">
           <img src={APIURL + url_image} alt={name} />
         </div>
-        <div className="product-info">
-          <p className="product-info-name">{name}</p>
+        <div className="product-info-client">
+          <p className="product-info-name-client">{name}</p>
           <p>
             <span>Codigo:</span>
             {code}
@@ -28,7 +54,7 @@ export default function ProductForCategory({ producto }: Props) {
             <span>Marca:</span> {brand?.name}
           </p>
         </div>
-        <div className="product-price">
+        <div className="product-price-name-client">
           <span>{integerPart}</span>
           <span className="exponent">{superscriptExponent}</span>
           Bs.

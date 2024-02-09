@@ -79,7 +79,8 @@ export interface User {
     name:string,
     username:string,
     phone:string,
-    state:true,
     password:string,
     role:string
+    state:true,
+ 
 }
