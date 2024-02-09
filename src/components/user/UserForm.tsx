@@ -4,6 +4,7 @@ import FormField from "../../shared/FormField";
 import Button from "../../shared/btns/Button";
 import { User } from "../../models/models";
 
+
 interface CategoryFormProps {
   userToEdit: User;
   formData: User;
@@ -55,7 +56,7 @@ export default function UserForm({
         />
         <FormField
           name="password"
-          type="text"
+          type="password"
           placeHolder="Password"
           label="Password"
         />
@@ -69,22 +70,12 @@ export default function UserForm({
             ["Seller", "Seller"],
           ]}
         />
-           <FormField
-              name="state"
-              type="select"
-              label="Estado"
-              selectOptions={[
-                ["2", "Seleccione un estado"],
-                ["1", "Activo"],
-                ["0", "Inactivo"],
-              ]}
-            />
 
         <div className="modal-btns">
           <Button
             variant="main"
             type="submit"
-            text={userToEdit ? "Actualizar" : "Crear"}
+            text={userToEdit?.id ? "Actualizar" : "Crear"}
           />
           <Button variant="error" onClick={handleCancel} text="Cancelar" />{" "}
         </div>

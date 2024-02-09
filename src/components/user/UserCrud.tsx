@@ -4,6 +4,7 @@ import { PageInfo, User } from "../../models/models";
 import Button from "../../shared/btns/Button";
 import UserTable from "./UserTable";
 import UserModal from "./UserModal";
+import toast from "react-hot-toast";
 
 interface AppState {
   pageInfo: PageInfo | null;
@@ -12,28 +13,27 @@ interface AppState {
 
 export default function UserCrud() {
   const initialData: User = {
-    id:0,
+    id: 0,
     name: "",
     username: "",
-    phone:"",
+    phone: "",
+    password: "",
+    role: "",
     state: true,
-    password:'',
-    role:"",   
   };
 
   const [users, setUsers] = useState([]);
-  const [userToEdit, setUserToEdit] = useState(initialData);
+  const [userToEdit, setUserToEdit] = useState<User>(initialData);
   const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [showModal, setShowModal] = useState(false);
 
- 
   const getUsers = async (page: number = 1) => {
     try {
       const url = `api/users?page=${page}`;
-      const response: any = await APISERVICE.get(url);
-      if (response.success) {
-        setUsers(response.data);
-        setpageInfo(response.pageInfo);
+      const { success, data, pageInfo }: any = await APISERVICE.get(url);
+      if (success) {
+        setUsers(data);
+        setpageInfo(pageInfo);
       } else {
         console.log("Ocurrio un error al obtener ");
       }
@@ -44,32 +44,35 @@ export default function UserCrud() {
   const createUser = async (user: User) => {
     try {
       let url: string = "api/users";
-      const response = await APISERVICE.post(user, url);
-      if (response.status === 201) {
+      const { success, message }: any = await APISERVICE.post(user, url);
+      if (success) {
+        toast.success(message);
+        getUsers();
+      } else {
+        toast.error(message);
       }
-      getUsers();
     } catch (error) {
       console.error(error);
     }
   };
-  const updateUser = async (
-    user: User,
-    id: string
-  ): Promise<void> => {
+  const updateUser = async (user: User, id: string) => {
     try {
       let url: string = `api/users/${id}`;
-      const response = await APISERVICE.put(user, url);
-      if (response.status === 201) {
+      const { success, message }: any = await APISERVICE.put(user, url);
+      if (success) {
+        toast.success(message);
+        getUsers();
+      } else {
+        toast.error(message);
       }
-      getUsers();
     } catch (error) {
       console.error(error);
     }
   };
   const deleteUser = async (id: string) => {
     let url = `api/users/${id}`;
-    const response = await APISERVICE.delete(url);
-    if (response.status === 200) {
+    const { success }: any = await APISERVICE.delete(url);
+    if (success) {
       getUsers();
     }
   };
@@ -81,7 +84,7 @@ export default function UserCrud() {
   return (
     <div className="container-component">
       <h3 className="title-page">Usuarios</h3>
-      <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
+      <Button variant="new" onClick={() => setShowModal(true)} text="+New" />
       <UserTable
         users={users}
         setUserToEdit={setUserToEdit}

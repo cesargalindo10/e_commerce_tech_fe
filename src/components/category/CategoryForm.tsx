@@ -5,9 +5,9 @@ import Button from "../../shared/btns/Button";
 import { CategoryData } from "../../models/models";
 
 interface CategoryFormProps {
-  categoryToEdit: CategoryData;
-  formData: CategoryData;
-  handleSubmit: (formData: CategoryData) => void;
+  categoryToEdit: CategoryData|any;
+  formData: CategoryData|any;
+  handleSubmit: (formData: CategoryData|any) => void;
   handleCancel: () => void;
 }
 const CategoryFormSchema = Yup.object().shape({

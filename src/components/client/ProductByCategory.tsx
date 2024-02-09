@@ -19,6 +19,7 @@ export default function ProductByCategory() {
   const [category,setCategory] = useState<Category>()
   const [pageInfo, setPageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [verMas, setVerMas] = useState(true);
+  const [loading,setLoading] = useState(true)
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
     try {
@@ -47,6 +48,7 @@ export default function ProductByCategory() {
   );
   const getCategoryById = async () => {
     try {
+      
       const url = `category/${id}`;
       const { data } = await APISERVICE.get(url);
 
@@ -58,6 +60,8 @@ export default function ProductByCategory() {
       }
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false)
     }
   };
   useEffect(() => {
@@ -87,7 +91,7 @@ export default function ProductByCategory() {
               className="link-detalle"
               key={crypto.randomUUID()}
             >
-              <ProductForCategory producto={producto} />
+              <ProductForCategory producto={producto} loading={loading}/>
             </Link>
           ))}
         </div>

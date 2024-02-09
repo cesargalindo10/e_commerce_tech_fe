@@ -43,14 +43,12 @@ export const APISERVICE = {
 
   delete: async (url: string)=> {
     try {
-      const response = await axios.delete(`${API_URL + url}`, {
+      return await axios.delete(`${API_URL + url}`, {
         headers: {
           Authorization: token,
         },
       });
-      const data = response.data;
-      data.status = response.status;
-      return data;
+
     } catch (error) {
       console.error(error);
       throw error;
@@ -58,15 +56,13 @@ export const APISERVICE = {
   },
   put: async (body: any, url: string) => {
     try {
-      const response = await axios.put(`${API_URL}${url}`, body, {
+      return await axios.put(`${API_URL}${url}`, body, {
         headers: {
           Authorization: token,
           "Content-Type": "application/json",
         },
       });
-      const data = response.data;
-      data.status = response.status;
-      return data;
+
     } catch (error) {
       console.error(error);
       throw error;

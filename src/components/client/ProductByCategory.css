@@ -1,5 +1,6 @@
 :root {
   --colorMain: #3c8dbb;
+  --colorGrisSoft2: #e3e9ef;
 }
 
 .container_products {
@@ -17,10 +18,11 @@
 }
 .category-client h2 {
   width: 40%;
-  border-bottom: 3px solid #007bff;
+  border-bottom: 3px solid var(--colorMain);
   margin-bottom: -3px;
   text-align: center;
   max-width: 200px;
+  font-size: 1rem;
 }
 .infinite-scroll {
   width: 100%;
@@ -60,7 +62,7 @@
   padding: 10px;
   background-color: #fff;
   background-clip: border-box;
-  border: 2px solid #aea6a6;
+  border: 1px solid var(--colorGrisSoft2);
   border-radius: 0.25rem;
 }
 .card-body-client:hover {
@@ -108,8 +110,8 @@
 .product-price-name-client {
   color: #ff0001;
   display: flex;
-  /* align-items: end; */
-  /* Change the name of the class */
+   align-items: end; 
+
 }
 .exponent {
   position: relative;
@@ -125,7 +127,7 @@
     grid-template-rows: 1fr;
     grid-column-gap: 5px;
     grid-row-gap: 0px;
-    border: 2px solid #aea6a6;
+    border: 1px solid var(--colorGrisSoft2);
     backdrop-filter: blur(6px);
     border-radius: 3px;
     margin: 0 auto;

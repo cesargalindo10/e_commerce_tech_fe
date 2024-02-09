@@ -3,13 +3,14 @@ import CategoryForm from "./CategoryForm";
 import { FormikValues } from "formik";
 import { CategoryData } from "../../models/models";
 import { Modal } from "react-bootstrap";
+import { RiNumbersFill } from "react-icons/ri";
 
 interface CategoryModalProps {
   showModal: boolean;
   setShowModal: (value: boolean) => void;
   createCategory: (category: CategoryData) => void;
   updateCategory: (categoryE: CategoryData, id: string) => void;
-  categoryToEdit: CategoryData;
+  categoryToEdit: CategoryData|null;
   setCategoriToEdit: ([]: any) => void;
 }
 
@@ -29,9 +30,8 @@ export default function CategoryModal({
     create_at: "",
     update_at: "",
   };
-
-  const [formData, ] = useState<CategoryData>(
-    categoryToEdit === null ? initialData : categoryToEdit
+  const [formData,setFormData ] = useState<CategoryModalProps['categoryToEdit']>(
+    categoryToEdit ? categoryToEdit:initialData
   );
 
   const handleSubmit = (values: FormikValues) => {
@@ -44,18 +44,18 @@ export default function CategoryModal({
       update_at: values.update_at || null,
     };
 
-    if (formData.id === 0) {
+    if (formData.id ==0) {
       // Crear nuevo registro
       createCategory(formData);
     } else {
       // Actualizar registro existente
       updateCategory(formData, "" + formData.id);
     }
-    setCategoriToEdit(initialData);
+    setCategoriToEdit(null);
     setShowModal(false);
   };
   const handleCancel = () => {
-    setCategoriToEdit(initialData);
+    setCategoriToEdit(null);
     setShowModal(false);
   };
 
@@ -63,7 +63,7 @@ export default function CategoryModal({
     <Modal show={showModal} centered>
       <Modal.Header>
         <h5 className="title-header__modal">
-          {categoryToEdit.id ? "Actualizar Categoria" : "Crear nueva categoria"}
+          {categoryToEdit? "Actualizar Categoria" : "Crear nueva categoria"}
         </h5>
       </Modal.Header>
       <Modal.Body>

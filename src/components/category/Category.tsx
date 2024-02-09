@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { APISERVICE } from "../../infrastructure/api/api.service";
 import CategoryTable from "./CategoryTable";
-import CategoryModal from "./CategoryModal";
 import { CategoryData, PageInfo } from "../../models/models";
 import Button from "../../shared/btns/Button";
+import toast from "react-hot-toast";
+import CategoryModal from "./CategoryModal";
 
 interface AppState {
   pageInfo: PageInfo | null;
   categories: CategoryData[];
+  categoryToedit:CategoryData;
 }
 
 export default function Category() {
@@ -22,7 +24,7 @@ export default function Category() {
 
 
   const [categories, setCategories] = useState([]);
-  const [categoryToEdit, setCategoriToEdit] = useState(initialData);
+  const [categoryToEdit, setCategoriToEdit] = useState<AppState["categoryToedit"]|null>(null);
   const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
 
   const [showModal, setShowModal] = useState(false);
@@ -42,14 +44,16 @@ export default function Category() {
       console.error(error);
     }
   };
-  const createCategory = async (category: any)=> {
+  const createCategory = async (category: CategoryData)=> {
     try {
       let url: string = "api/categories";
-      const response = await APISERVICE.post(category, url);
+      const {success,message}:any= await APISERVICE.post(category, url);
 
-      if (response.status === 201) {
+      if (success) {
+        toast.success(message)
+        getCategories();
       }
-      getCategories(1);
+
     } catch (error) {
       console.error(error);
     }
@@ -60,11 +64,12 @@ export default function Category() {
   ) => {
     try {
       let url: string = `api/categories/${id}`;
-      const response = await APISERVICE.post(categoryUpdate, url);
-
-      if (response.status === 201) {
+      const {success,message}:any= await APISERVICE.put(categoryUpdate, url);
+      if (success) {
+        toast.success(message)
+        getCategories();
       }
-      getCategories();
+      
     } catch (error) {
       console.error(error);
     }
@@ -72,7 +77,7 @@ export default function Category() {
   const deleteCategory = async (id: string) => {
     let url = `api/categories/${id}`;
     const response = await APISERVICE.delete(url);
-    if (response.status === 200) {
+    if (response) {
       getCategories();
     }
   };
