@@ -1,12 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { APISERVICE, AxiosService } from "../../service/api.service";
 import { Brand, Category, PageInfo, Product } from "../../models/models";
 import ProductTable from "./ProductTable";
-import SearchRow from "../../shared/search/Search";
 import Button from "../../shared/btns/Button";
 import { BiPlus } from "react-icons/bi";
 import { ModalProduct } from "./ModalProduct";
 import toast from "react-hot-toast";
+import SearchDashboard from "../../shared/searchDashboard/SearchDashboard";
+import debounce from "just-debounce-it";
 
 interface AppState {
   products: Product[];
@@ -14,6 +15,9 @@ interface AppState {
   product: Product | null;
   categories: Category[];
   brands: Brand[];
+  filters: {
+    name: string;
+  } | null;
 }
 export interface ContextProductType {
   productToUpdate: Product | null;
@@ -35,7 +39,7 @@ export function Product() {
   const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [categories, setCategories] = useState<AppState["categories"]>([]);
   const [brands, setBrands] = useState<AppState["brands"]>([]);
-
+  const [filters, setFilters] = useState<AppState["filters"]>(null);
   useEffect(() => {
     getProducts(1);
     getCategories();
@@ -58,10 +62,11 @@ export function Product() {
     }
   };
 
-  const getProducts = async (page: number) => {
+  const getProducts = async (page: number, filtersP: AppState["filters"] = filters) => {
     const url = "api/product";
     const params = {
       page,
+      name: filtersP?.name,
     };
     const response: any = await AxiosService.get(url, params);
     if (response) {
@@ -120,11 +125,21 @@ export function Product() {
     }
   };
 
-  const filtercategories = () => {
-    //debouncedGetCategogies(category)
+  const filtercategories = (product: string) => {
+    setFilters(filters => ({...filters, name: product}))
+    debouncedGetCategogies(product)
   };
 
-  const clearFilter = () => {};
+  const debouncedGetCategogies = useCallback( debounce((search: string) => {
+    getProducts(pageInfo?.page || 1, { name: search });
+  },500)
+  ,[])
+
+
+  const clearFilter = () => {
+    setFilters(null);
+    getProducts(pageInfo?.page || 1, { name: '' });
+  };
 
   return (
     <ContextProduct.Provider
@@ -139,15 +154,15 @@ export function Product() {
     >
       <div className="container-component">
         <h3 className="title-page">Productos</h3>
-        <SearchRow
+        <SearchDashboard
           filterSomething={filtercategories}
-          placeHolder="Nombre del curso"
+          placeHolder="Nombre del producto"
           handleClear={clearFilter}
         >
           <Button variant="new" onClick={() => setShowModal(true)} text="Nuevo">
             <BiPlus />
           </Button>
-        </SearchRow>
+        </SearchDashboard>
 
         <ProductTable
           products={products}
