@@ -173,6 +173,9 @@ const DocumentPdf = ({
       url_image: '',
     } ],
   });
+  if(pageNumbers === 0){
+    newOrderDetails[0].greeting = true;
+  }
 
   const getMonth = () => {
     const months: Record<number, string> = {
