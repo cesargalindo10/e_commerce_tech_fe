@@ -5,6 +5,7 @@ import Button from "../../shared/btns/Button";
 import UserTable from "./UserTable";
 import UserModal from "./UserModal";
 import toast from "react-hot-toast";
+import Loading from "../../shared/loading/Loading";
 
 interface AppState {
   pageInfo: PageInfo | null;
@@ -84,7 +85,9 @@ export default function UserCrud() {
   return (
     <div className="container-component">
       <h3 className="title-page">Usuarios</h3>
-      <Button variant="new" onClick={() => setShowModal(true)} text="+New" />
+      <div className="component-mb-10">
+        <Button variant="new" onClick={() => setShowModal(true)} text="+New" />
+      </div>
       <UserTable
         users={users}
         setUserToEdit={setUserToEdit}
@@ -93,6 +96,7 @@ export default function UserCrud() {
         pageInfo={pageInfo}
         getCategories={getUsers}
       />
+      
       {showModal && (
         <UserModal
           showModal={showModal}

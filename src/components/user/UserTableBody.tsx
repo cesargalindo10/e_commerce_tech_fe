@@ -1,7 +1,6 @@
 import { MdPersonAddDisabled, MdModeEdit } from "react-icons/md";
 import { User } from "../../models/models";
 import Button from "../../shared/btns/Button";
-
 interface Props {
   users: User[];
   setUserToEdit: ([]: any) => void;
@@ -23,7 +22,7 @@ export default function UserTableBody({
   };
   return (
     <tbody>
-      {users &&
+      { users &&
         users.map((user) => (
           <tr key={user.id}>
             <td>{user.name}</td>
@@ -48,9 +47,12 @@ export default function UserTableBody({
               >
                 <MdPersonAddDisabled />
               </Button>
+              
             </td>
+            
           </tr>
         ))}
+        
     </tbody>
   );
 }

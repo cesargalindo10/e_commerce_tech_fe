@@ -9,7 +9,7 @@ import CategoryModal from "./CategoryModal";
 interface AppState {
   pageInfo: PageInfo | null;
   categories: CategoryData[];
-  categoryToedit:CategoryData;
+  categoryToedit: CategoryData;
 }
 
 export default function Category() {
@@ -17,20 +17,20 @@ export default function Category() {
     id: 0,
     name: "",
     description: "",
-    state:true,
+    state: true,
     create_at: "",
     update_at: "",
   };
 
-
   const [categories, setCategories] = useState([]);
-  const [categoryToEdit, setCategoriToEdit] = useState<AppState["categoryToedit"]|null>(null);
+  const [categoryToEdit, setCategoriToEdit] = useState<
+    AppState["categoryToedit"] | null
+  >(null);
   const [pageInfo, setpageInfo] = useState<AppState["pageInfo"] | null>(null);
 
   const [showModal, setShowModal] = useState(false);
 
- 
-  const getCategories = async (page: number=1)=> {
+  const getCategories = async (page: number = 1) => {
     try {
       const url = `api/categories?page=${page}`;
       const response: any = await APISERVICE.get(url);
@@ -44,32 +44,30 @@ export default function Category() {
       console.error(error);
     }
   };
-  const createCategory = async (category: CategoryData)=> {
+  const createCategory = async (category: CategoryData) => {
     try {
       let url: string = "api/categories";
-      const {success,message}:any= await APISERVICE.post(category, url);
+      const { success, message }: any = await APISERVICE.post(category, url);
 
       if (success) {
-        toast.success(message)
+        toast.success(message);
         getCategories();
       }
-
     } catch (error) {
       console.error(error);
     }
   };
-  const updateCategory = async (
-    categoryUpdate: CategoryData,
-    id: string
-  ) => {
+  const updateCategory = async (categoryUpdate: CategoryData, id: string) => {
     try {
       let url: string = `api/categories/${id}`;
-      const {success,message}:any= await APISERVICE.put(categoryUpdate, url);
+      const { success, message }: any = await APISERVICE.put(
+        categoryUpdate,
+        url
+      );
       if (success) {
-        toast.success(message)
+        toast.success(message);
         getCategories();
       }
-      
     } catch (error) {
       console.error(error);
     }
@@ -89,7 +87,10 @@ export default function Category() {
   return (
     <div className="container-component">
       <h3 className="title-page">Categorias</h3>
-      <Button variant="new" onClick={()=>setShowModal(true)} text="+New" />
+      <div className="component-mb-10">
+        <Button variant="new" onClick={() => setShowModal(true)} text="+New" />
+      </div>
+
       <CategoryTable
         items={categories}
         setCategoriToEdit={setCategoriToEdit}
