@@ -153,3 +153,6 @@ input:focus {
     border-top-left-radius: .3rem;
     border-bottom-left-radius: .3rem;
 }
+.component-mb-10{
+    margin-bottom: 10px;
+}

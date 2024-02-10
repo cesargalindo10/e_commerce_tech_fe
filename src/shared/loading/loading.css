@@ -1,10 +1,13 @@
+:root{
+  --colorMain: #3C8DBB;
+}
 .cargando {
     border: 5px solid #e2e2e2;
-    border-top-color: #26e;
-    border-right-color: #26e;
+    border-top-color: var(--colorMain);
+    border-right-color: var(--colorMain);
     border-radius: 50%;
-    height: 1.5rem;
-    width: 1.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
     animation: spiner 1s linear infinite;
     grid-column: 1 / 6;
     margin: 0 auto;
