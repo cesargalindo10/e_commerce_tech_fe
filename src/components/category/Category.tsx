@@ -13,15 +13,6 @@ interface AppState {
 }
 
 export default function Category() {
-  const initialData: CategoryData = {
-    id: 0,
-    name: "",
-    description: "",
-    state: true,
-    create_at: "",
-    update_at: "",
-  };
-
   const [categories, setCategories] = useState([]);
   const [categoryToEdit, setCategoriToEdit] = useState<
     AppState["categoryToedit"] | null
