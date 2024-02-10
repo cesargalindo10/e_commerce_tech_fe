@@ -3,7 +3,6 @@ import CategoryForm from "./CategoryForm";
 import { FormikValues } from "formik";
 import { CategoryData } from "../../models/models";
 import { Modal } from "react-bootstrap";
-import { RiNumbersFill } from "react-icons/ri";
 
 interface CategoryModalProps {
   showModal: boolean;

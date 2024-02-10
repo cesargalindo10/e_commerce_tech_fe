@@ -9,7 +9,6 @@ import { PrivateRoutes } from "../../models/routes";
 import { createUser } from "../../redux/state/user";
 import { Roles } from "../../models/roles";
 import FormField from "../../shared/FormField";
-import { FaBullseye } from "react-icons/fa";
 import Loading from "../../shared/loading/Loading";
 
 interface User {
@@ -54,45 +53,50 @@ export default function Login() {
       }
     } catch (error) {
       setErrorUserPass("*Invalid username or password");
-      setLoading(false);
+    } finally {
+     setLoading(false)
     }
   };
 
   return (
-    <div>
-      <Formik
-        initialValues={initialState}
-        validationSchema={validationSchema}
-        onSubmit={(values: User) => {
-          HandleonSubmit(values);
-        }}
-      >
-        <div className="container-login-page">
-          <Form className="login-form">
-            <h2>Login</h2>
-            <div>
-              <FormField
-                name="username"
-                type="text"
-                placeHolder=""
-                label="Username"
-              />
-            </div>
-            <div>
-              <FormField
-                name="password"
-                type="password"
-                placeHolder=""
-                label="Password"
-              />
-            </div>
-            <p className="error-login">{errorUserPass}</p>
-            <button type="submit" className="btn-login">
-              Login
-            </button>
-          </Form>
-        </div>
-      </Formik>
+    <div className="container-login-page">
+      {!loading ? (
+        <Formik
+          initialValues={initialState}
+          validationSchema={validationSchema}
+          onSubmit={(values: User) => {
+            HandleonSubmit(values);
+          }}
+        >
+          <div >
+            <Form className="login-form">
+              <h2>Login</h2>
+              <div>
+                <FormField
+                  name="username"
+                  type="text"
+                  placeHolder=""
+                  label="Username"
+                />
+              </div>
+              <div>
+                <FormField
+                  name="password"
+                  type="password"
+                  placeHolder=""
+                  label="Password"
+                />
+              </div>
+              <p className="error-login">{errorUserPass}</p>
+              <button type="submit" className="btn-login">
+                Login
+              </button>
+            </Form>
+          </div>
+        </Formik>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
