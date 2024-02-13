@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import debounce from "just-debounce-it";
 import ProductForCategory from "./ProductForCategory";
-import { PageInfo, Product, ProductBrand } from "../../models/models";
+import { ProductBrand } from "../../models/models";
 import "./ProductByCategory.css";
 import { APISERVICE } from "../../infrastructure/api/api.service";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -10,17 +10,12 @@ import Search from "../../shared/search/Search";
 import Header from "../../shared/header/Header";
 import Loading from "../../shared/loading/Loading";
 
-interface AppState {
-  pageInfo: PageInfo | null;
-  product: Product[];
-}
 interface search {
   name: string;
 }
 
 export default function SearchProductPage() {
   const [productos, setProductos] = useState<ProductBrand[]>([]);
-  const [pageInfo, setPageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [verMas, setVerMas] = useState(false);
   const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
