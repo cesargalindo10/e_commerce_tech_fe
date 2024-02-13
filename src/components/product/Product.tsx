@@ -54,7 +54,7 @@ export function Product() {
     }
   };
   const getCategories = async () => {
-    const url = "api/categories";
+    const url = "api/categories-all";
 
     const response = await AxiosService.get(url, "");
     if (response) {

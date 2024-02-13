@@ -1,6 +1,3 @@
-:root{
-  --colorMain: #3C8DBB;
-}
 .cargando {
     border: 5px solid #e2e2e2;
     border-top-color: var(--colorMain);
