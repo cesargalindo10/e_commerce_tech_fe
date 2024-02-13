@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import ProductForCategory from "./ProductForCategory";
-import { Category, PageInfo, Product, ProductBrand } from "../../models/models";
+import { Category, PageInfo, ProductBrand } from "../../models/models";
 import "./ProductByCategory.css";
 import { APISERVICE } from "../../infrastructure/api/api.service";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -16,7 +16,6 @@ interface AppState {
 export default function ProductByCategory() {
   const [productos, setProductos] = useState<AppState["product"]>([]);
   const [category, setCategory] = useState<Category>();
-  const [pageInfo, setPageInfo] = useState<AppState["pageInfo"] | null>(null);
   const [verMas, setVerMas] = useState(true);
   const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
@@ -30,8 +29,6 @@ export default function ProductByCategory() {
           new Set([...productos, ...response.data])
         );
         setProductos(uniqueProducts);
-
-        setPageInfo(response.pageInfo);
         return response;
       } else {
         console.log("Ocurrio un error al obtener ");
