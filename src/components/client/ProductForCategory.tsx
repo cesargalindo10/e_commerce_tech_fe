@@ -1,6 +1,7 @@
 
 import { ProductBrand } from "../../models/models";
 import Skeleton from 'react-loading-skeleton';
+import defatulImg from "../../assets/camara.jpeg"
 
 const APIURL = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 
@@ -42,7 +43,7 @@ export default function ProductForCategory({ producto,loading }: Props) {
     <div className="card_product-client">
       <div className="card-body-client">
         <div className="image-product-client">
-          <img src={APIURL + url_image} alt={name} />
+          <img src={url_image? APIURL + url_image:defatulImg} alt={name} />
         </div>
         <div className="product-info-client">
           <p className="product-info-name-client">{name}</p>

@@ -7,6 +7,7 @@
   width: 100%;
   margin-right: auto;
   margin-left: auto;
+  overflow: hidden;
 }
 .category-client {
   width: 100%;
@@ -24,8 +25,12 @@
   max-width: 200px;
   font-size: 1rem;
 }
+.infinite-scroll-component{
+  height: auto;
+  overflow: hidden;
+}
 .infinite-scroll {
-  width: 100%;
+ 
 }
 
 .fila {
