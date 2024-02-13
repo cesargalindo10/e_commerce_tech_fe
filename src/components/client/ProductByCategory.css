@@ -150,3 +150,15 @@
   }
 
 }
+
+.not-found-result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  font-size: 20px;
+  font-weight: 600;
+  color: #444;
+
+
+}

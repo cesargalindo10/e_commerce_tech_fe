@@ -29,6 +29,7 @@ export default function SearchProductPage() {
 
       body.name = value;
       const response: any = await APISERVICE.post(body, url);
+      console.log(response.data)
       if (response.data) {
         setProductos(response.data);
         return response;
@@ -44,13 +45,12 @@ export default function SearchProductPage() {
   const moreProducts = async () => {
     const response: any = await getProductsSearch(siguiente);
     const next = response.pageInfo?.next?.slice(-1);
-    if(response.pageInfo.next !== null){
+    if (response.pageInfo.next !== null) {
       setVerMas(true);
       setSiguente(next);
-    }else{
+    } else {
       setVerMas(false);
-    }  
-    
+    }
   };
   const debouncedMoreProducts = useCallback(debounce(moreProducts, 500), [
     moreProducts,
@@ -78,16 +78,17 @@ export default function SearchProductPage() {
           handleClear={clearFilter}
         />
         <div className="fila">
-          {productos &&
-            productos.map((producto) => (
-              <Link
-                key={crypto.randomUUID()}
-                to={`/product/${producto.id}`}
-                className="link-detalle"
-              >
-                <ProductForCategory producto={producto} loading={loading} />
-              </Link>
-            ))}
+          {productos  && productos.length>0?
+          (productos.map((producto) => (
+            <Link
+              key={crypto.randomUUID()}
+              to={`/product/${producto.id}`}
+              className="link-detalle"
+            >
+              <ProductForCategory producto={producto} loading={loading} />
+            </Link>
+          ))):(<p className="not-found-result">Resultados no encontrados</p>)
+            }
         </div>
       </InfiniteScroll>
     </div>
