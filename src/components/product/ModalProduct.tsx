@@ -55,7 +55,6 @@ export const ModalProduct = ({ updateCourse }: Props) => {
       return [String(category.id), category.name];
     }
   );
-
   const brandMapped: [string, string][] = brands?.map((brand: Brand) => {
     return [String(brand.id), brand.name];
   });

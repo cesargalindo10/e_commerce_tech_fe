@@ -29,7 +29,7 @@ export default function CategoryModal({
     create_at: "",
     update_at: "",
   };
-  const [formData,setFormData ] = useState<CategoryModalProps['categoryToEdit']>(
+  const [formData, ] = useState<CategoryModalProps['categoryToEdit']>(
     categoryToEdit ? categoryToEdit:initialData
   );
 

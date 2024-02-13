@@ -25,11 +25,10 @@ export default function SearchProductPage() {
   };
   const getProductsSearch = async (value: string = "", page: string = "1") => {
     try {
-      const url = `products?page=${page}`;
+      const url = `api/products?page=${page}`;
 
       body.name = value;
       const response: any = await APISERVICE.post(body, url);
-      console.log(response.data)
       if (response.data) {
         setProductos(response.data);
         return response;
@@ -57,6 +56,7 @@ export default function SearchProductPage() {
   ]);
   const clearFilter = () => {
     setProductos([]);
+    getProductsSearch("", "1");
   };
   useEffect(() => {
     getProductsSearch();
@@ -72,12 +72,19 @@ export default function SearchProductPage() {
         endMessage={<p></p>}
         style={{ overflow: "hidden" }}
       >
+        
+      <div className="category-client">
+        <h4>Busqueda</h4>
+      </div>
+      
+      <div className="content-page mt-2 mb-2">
         <Search
           placeHolder="Ingrese el nombre del producto"
           filterSomething={getProductsSearch}
           handleClear={clearFilter}
-        />
-        <div className="fila">
+          />
+      </div>
+      <div className="fila content-page">
           {productos  && productos.length>0?
           (productos.map((producto) => (
             <Link

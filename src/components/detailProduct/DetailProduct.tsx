@@ -29,7 +29,7 @@ function DetailProduct() {
   const getDetailProduct = async () => {
     try {
       setLoading(true)
-      const response = await AxiosService.get("product/" + id, "");
+      const response = await AxiosService.get("api/product/" + id, "");
       if (response) {
         const { data } = response;
         const existsProduct = cartList?.length > 0 && cartList.find((product: ProductDetail) => product?.id === data[0].id);

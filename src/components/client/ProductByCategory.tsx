@@ -22,7 +22,7 @@ export default function ProductByCategory() {
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
     try {
-      const url = `products/${id}?page=${page}`;
+      const url = `api/products/${id}?page=${page}`;
       const response: any = await APISERVICE.get(url);
       if (response.data) {
         const uniqueProducts = Array.from(
@@ -46,7 +46,7 @@ export default function ProductByCategory() {
 
   const getCategoryById = async () => {
     try {
-      const url = `category/${id}`;
+      const url = `api/category/${id}`;
       const { data } = await APISERVICE.get(url);
 
       if (data) {
@@ -80,12 +80,12 @@ export default function ProductByCategory() {
         loader={<Loading />}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>¡Yay! Lo has visto todo</b>
+            <b>No hay productos</b>
           </p>
         }
         style={{ overflow: "hidden" }}
       >
-        <div className="fila">
+        <div className="fila content-page">
           {productos?.map((producto) => (
             <Link
               to={`/product/${producto.id}`}

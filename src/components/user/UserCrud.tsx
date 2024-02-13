@@ -5,7 +5,6 @@ import Button from "../../shared/btns/Button";
 import UserTable from "./UserTable";
 import UserModal from "./UserModal";
 import toast from "react-hot-toast";
-import Loading from "../../shared/loading/Loading";
 
 interface AppState {
   pageInfo: PageInfo | null;
