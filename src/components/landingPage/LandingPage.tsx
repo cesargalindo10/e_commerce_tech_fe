@@ -32,7 +32,7 @@ function LandingPage() {
   const getProductWithCategories = async () => {
     try {
         setLoading(true)
-        const response = await AxiosService.get('api/categories/products', '')
+        const response = await AxiosService.get('categories/products', '')
         if(response){
             setCategoriesWithProducts(response.data)
         }
