@@ -16,9 +16,10 @@ interface AppState {
 export default function ProductByCategory() {
   const [productos, setProductos] = useState<AppState["product"]>([]);
   const [category, setCategory] = useState<Category>();
-  const [verMas, setVerMas] = useState(productos.length<=5? false:true);
+  const [verMas, setVerMas] = useState(true);
   const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
+
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
     try {
@@ -37,8 +38,13 @@ export default function ProductByCategory() {
       console.error(error);
     }
   };
-  const moreProducts = async () => {
+  const moreProducts = async () => {    
     const response: any = await getProductsByCategory(siguiente);
+    if(response.data.length <15){
+      setVerMas(false)
+    }else{
+      setVerMas(true)
+    }
     const next = response.pageInfo?.next?.slice(-1);
     response.pageInfo.next == null && setVerMas(false);
     setSiguente(next);
@@ -80,7 +86,7 @@ export default function ProductByCategory() {
         loader={<Loading />}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>No hay productos</b>
+            <b>No mas productos</b>
           </p>
         }
         style={{ overflow: "hidden" }}
