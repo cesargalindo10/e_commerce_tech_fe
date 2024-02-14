@@ -47,11 +47,11 @@ export default function ProductForCategory({ producto,loading }: Props) {
         </div>
         <div className="product-info-client">
           <p className="product-info-name-client">{name}</p>
-          <p>
+          <p style={{fontSize: '0.85rem'}}>
             <span>Codigo:</span>
             {code}
           </p>
-          <p>
+          <p style={{fontSize: '0.85rem'}}> 
             <span>Marca:</span> {brand?.name}
           </p>
         </div>

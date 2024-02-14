@@ -51,7 +51,7 @@ export default function Category() {
   const updateCategory = async (categoryUpdate: CategoryData, id: string) => {
     try {
       let url: string = `api/categories/${id}`;
-      const { success, message }: any = await APISERVICE.put(
+      const { success, message }: any = await APISERVICE.post(
         categoryUpdate,
         url
       );
