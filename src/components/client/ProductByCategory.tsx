@@ -16,7 +16,7 @@ interface AppState {
 export default function ProductByCategory() {
   const [productos, setProductos] = useState<AppState["product"]>([]);
   const [category, setCategory] = useState<Category>();
-  const [verMas, setVerMas] = useState(true);
+  const [verMas, setVerMas] = useState(productos.length<=5? false:true);
   const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
   const { id } = useParams();
