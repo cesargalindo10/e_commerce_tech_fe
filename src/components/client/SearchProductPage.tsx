@@ -16,7 +16,7 @@ interface search {
 
 export default function SearchProductPage() {
   const [productos, setProductos] = useState<ProductBrand[]>([]);
-  const [verMas, setVerMas] = useState(false);
+  const [verMas, setVerMas] = useState(true);
   const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
 
@@ -43,13 +43,14 @@ export default function SearchProductPage() {
   };
   const moreProducts = async () => {
     const response: any = await getProductsSearch(siguiente);
-    const next = response.pageInfo?.next?.slice(-1);
-    if (response.pageInfo.next !== null) {
-      setVerMas(true);
-      setSiguente(next);
-    } else {
-      setVerMas(false);
+    if(response.data.length <15){
+      setVerMas(false)
+    }else{
+      setVerMas(true)
     }
+    const next = response.pageInfo?.next?.slice(-1);
+    response.pageInfo.next == null && setVerMas(false);
+    setSiguente(next);
   };
   const debouncedMoreProducts = useCallback(debounce(moreProducts, 500), [
     moreProducts,
