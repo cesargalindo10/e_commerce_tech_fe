@@ -13,7 +13,20 @@ const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 interface Props {
   updateCourse: (product: Product, image: File | null,pdfFile: File | null,  params: string) => void;
 }
-let initialState: Product = {
+interface ProdModal {
+  id?:number,
+  name: string,
+  code: string,
+  url_image?: string,
+  url_pdf?: string,
+  sale_price: number,
+  cost_price: number,
+  state: boolean | string,
+  description?: string,
+  brand_id?: string
+  category_id?: string
+}
+let initialState: ProdModal = {
   name: "",
   code: "",
   url_image: "",
@@ -22,6 +35,8 @@ let initialState: Product = {
   cost_price: 0,
   state: "",
   description: "",
+  category_id: "",
+  brand_id: "",
 };
 
 enum typeFile {
@@ -71,12 +86,12 @@ export const ModalProduct = ({ updateCourse }: Props) => {
       cost_price: productToUpdate.cost_price,
       state: productToUpdate.state ? "1" : "0",
       description: productToUpdate.description,
-      category_id: productToUpdate.category_id,
-      brand_id: productToUpdate.brand_id,
+      category_id: String(productToUpdate.category_id),
+      brand_id: String(productToUpdate.brand_id),
     };
   }
 
-  const handleSend = (values: Product) => {
+  const handleSend = (values: ProdModal) => {
     /* new */
     const product: Product = {
       name: values.name,
@@ -85,8 +100,8 @@ export const ModalProduct = ({ updateCourse }: Props) => {
       cost_price: values.cost_price,
       state: values.state,
       description: values.description,
-      category_id: values.category_id,
-      brand_id: values.brand_id,
+      category_id: Number(values.category_id),
+      brand_id: Number(values.brand_id),
     };
     if (productToUpdate === null) {
       updateCourse(product, image,pdfFile ,"");
@@ -114,7 +129,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
       .strict(true),
     code: Yup.string().max(50, EM.tooLongMessage).nullable().strict(true),
     sale_price: Yup.number()
-      .min(1, EM.tooSortMessage)
+      .min(1, 'La cantidad debe ser mayor a 0')
       .max(100000, EM.tooLongMessage)
       .required(EM.requiredMessage),
     cost_price: Yup.number()
@@ -125,8 +140,12 @@ export const ModalProduct = ({ updateCourse }: Props) => {
     state: Yup.string()
       .required(EM.requiredMessage)
       .oneOf(["0", "1"], "Seleccione un estado"),
-    brand_id: Yup.string().required(EM.requiredMessage),
-    category_id: Yup.string().required(EM.requiredMessage),
+    brand_id: Yup.string()
+      .required(EM.requiredMessage)
+      .oneOf( [...brandMapped.map((brand) => brand[0])], "Seleccione una marca"),
+    category_id: Yup.string()
+      .required(EM.requiredMessage)
+      .oneOf([...categoryMapped.map((cat) => cat[0])], "Seleccione una categoria"),
   });
 
   const handleManageFile = (event: ChangeEvent<HTMLInputElement>, set: React.Dispatch<React.SetStateAction<File | null>>, type: string) => {
@@ -153,7 +172,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
       <Modal.Body>
         <Formik
           initialValues={initialValues}
-          onSubmit={(values: Product) => handleSend(values)}
+          onSubmit={(values: ProdModal) => handleSend(values)}
           validationSchema={yupSchema}
         >
           <Form>
@@ -215,6 +234,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
               selectOptions={[["x", "Seleccione una marca"], ...brandMapped]}
             />
 
+            <p className="mt-2 mb-0">Imagen</p>
             <Field
               className="input-file"
               type="file"
@@ -248,7 +268,7 @@ export const ModalProduct = ({ updateCourse }: Props) => {
                 <span className="custom-file-icon">
                    <FaFileArrowDown />
                 </span>
-                {fileNameDescription.length > 0 ? fileNameDescription : "Select a file" }
+                {fileNameDescription.length > 0 ? fileNameDescription : "Seleccione un archivo" }
             </label>
             <input 
               onChange={(e: ChangeEvent<HTMLInputElement>) => {handleManageFile(e, setPdfFile, typeFile.pdf), setFileDescription(e.target.value)}}

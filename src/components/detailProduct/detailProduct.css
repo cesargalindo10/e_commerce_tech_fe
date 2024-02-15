@@ -27,6 +27,12 @@
 .product-detail-name p{
     margin: 0;
 }
+
+.product-price-dp{
+    color: var(--colorRed);
+    font-size: .75rem;
+}
+
 .product-detail-price{
     text-align: right;
     display: block;
