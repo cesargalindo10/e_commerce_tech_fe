@@ -3,6 +3,8 @@ import * as Yup from "yup";
 import FormField from "../../shared/FormField";
 import Button from "../../shared/btns/Button";
 import { User } from "../../models/models";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 declare module "yup" {
   interface StringSchema {
@@ -76,6 +78,7 @@ export default function UserForm({
   handleSubmit,
   handleCancel,
 }: CategoryFormProps) {
+  const [showPassword, setShowPassword] = useState(false);
   const CategoryFormSchema = Yup.object().shape({
     name: Yup.string()
       .required("* El nombre es obligatorio")
@@ -85,8 +88,11 @@ export default function UserForm({
       .required("El nombre de usuario es obligatorio")
       .min(3, "El nombre de usuario debe tener al menos 3 caracteres")
       .max(50, "El nombre de usuario no debe tener más de 50 caracteres"),
-      phone: Yup.string()
-      .matches(/^([67])?\d{7,8}$/, "Ingrese un número de teléfono válido en Bolivia")
+    phone: Yup.string()
+      .matches(
+        /^([67])?\d{7,8}$/,
+        "Ingrese un número de teléfono válido en Bolivia"
+      )
       .required("El número de teléfono es obligatorio"),
 
     password:
@@ -143,12 +149,28 @@ export default function UserForm({
           placeHolder="Numero de telefono"
           label="Phone"
         />
-        <FormField
-          name="password"
-          type="password"
-          placeHolder="Password"
-          label="Password"
-        />
+
+        <div style={{ position: "relative"}}>
+        <span
+            style={{
+              position: "absolute",
+              right: "10px",         
+              paddingTop:"10px",
+              cursor: "pointer",
+            }}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? <FiEye /> : <FiEyeOff />}
+          </span>
+        </div>
+          <FormField
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeHolder="Password"
+            label="Password"
+          />
+         
+
         <FormField
           name="role"
           type="select"
