@@ -112,7 +112,7 @@ function DetailProduct() {
 
         <div className="dintance-bar"></div>
 
-        <p className="product-price product-detail-price mb-0">
+        <p className="product-price-dp product-detail-price mb-0">
           {product?.sale_price?.split(".")[0]}
           <span className="product-price-after">00</span>
           <span className="ml">Bs.</span>
