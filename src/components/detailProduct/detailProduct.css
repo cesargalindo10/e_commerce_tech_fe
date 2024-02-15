@@ -29,13 +29,15 @@
 }
 
 .product-price-dp{
+    display: flex;
+    align-items: start;
+    justify-content: right;
     color: var(--colorRed);
     font-size: .75rem;
 }
 
 .product-detail-price{
     text-align: right;
-    display: block;
     font-size: 1rem;
     font-weight: bold;
 }

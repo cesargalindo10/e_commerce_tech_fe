@@ -1,6 +1,3 @@
-:root{
-  --coloMain:#3C8DBB;
-}
 .sidebar-container {
   display: flex;
 }
@@ -42,12 +39,12 @@ main {
 }
 
 .link-side:hover {
-  background: var(--coloMain);
+  background: var(--colorMain);
   color: #000;
   transition: all 0.5s;
 }
 .active {
-  background: var(--coloMain);
+  background: var(--colorMain);
   color: #000;
 }
 .icon,
