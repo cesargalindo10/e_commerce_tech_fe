@@ -42,7 +42,7 @@ function Footer() {
           </div>
           <div>
             <PiPhone />
-            <p>+51 999 999 999</p>
+            <p>+591 79342271</p>
           </div>
         </section>
       </div>

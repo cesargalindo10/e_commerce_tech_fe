@@ -216,7 +216,7 @@ const DocumentPdf = ({
               <Text style={styles.headerText}>
                 {city +
                   ", " +
-                  new Date().getDate() +
+                  new Date().getDate() + ' ' +
                   getMonth() +
                   " de " +
                   new Date().getFullYear()}

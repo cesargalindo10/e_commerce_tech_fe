@@ -23,7 +23,6 @@ export const SaleDetail = ({ orderDetails, setShowPdf }: Props) => {
   };
 
   const showPdf = () => {
-    console.log('pdfdf')
     setShowModal(false);
     setShowPdf();
   }

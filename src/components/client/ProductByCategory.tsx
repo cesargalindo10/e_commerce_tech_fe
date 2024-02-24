@@ -86,7 +86,10 @@ export default function ProductByCategory() {
         loader={<Loading />}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>No mas productos</b>
+            {
+              productos?.length === 0 ?  <span>No existen productos</span>:
+                <span>No existen más productos</span>
+            }
           </p>
         }
         style={{ overflow: "hidden" }}

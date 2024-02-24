@@ -25,6 +25,8 @@ export interface Category{
     id?: number,
     name: string,
     description?: string
+    url_image?: string,
+    billboard?: boolean
 }
 export interface Brand{
     id?: number,
