@@ -1,10 +1,14 @@
-import { Roles } from "./roles";
-
-export interface UserInfo {
-  id: number;
-  name: string;
-  username: string;
+export interface userInfo{
+  user:UserSesion;
   token:string;
-  rol: Roles;
-  permissions:[];
+
+}
+export interface UserSesion {
+  id?:number;
+  name:string;
+  state:boolean;
+  username:string;
+  role:string;
+  permissions:[]
+
 }

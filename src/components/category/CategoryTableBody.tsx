@@ -1,18 +1,23 @@
 import { MdOutlineClosedCaptionDisabled, MdModeEdit } from "react-icons/md";
 import { CategoryData } from "../../models/models";
 import Button from "../../shared/btns/Button";
+import { RowImage } from "../../shared/rowImage/RowImage";
+import defaultimg from "../../assets/img/defaulimg.png";
+const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 
 interface Props {
   categories: CategoryData[];
   setCategoriToEdit: ([]: any) => void;
   setShowModal: (boolean: any) => void;
   deleteCategory: (id: string) => void;
+  showBillboardCategory:(id:string)=>void;
 }
 export default function CategoryTableBody({
   categories,
   setCategoriToEdit,
   setShowModal,
   deleteCategory,
+  showBillboardCategory
 }: Props) {
   const onEdit = (category: any) => {
     setCategoriToEdit(category);
@@ -21,6 +26,9 @@ export default function CategoryTableBody({
   const onDelete = (id: string) => {
     deleteCategory(id);
   };
+  const showBillboard = (id:string)=>{
+    showBillboardCategory(id)
+  }
   return (
     <tbody>
       {categories &&
@@ -30,13 +38,30 @@ export default function CategoryTableBody({
             <td>{category.name}</td>
             <td>{category.description}</td>
             <td>
-              {category.state ? (
-                <Button text="Activo" variant="success" />
+              {category.url_image ? (
+                <RowImage
+                  url_image={APIURLIMG + category.url_image}
+                  type="row"
+                />
               ) : (
-                <Button text="Inactivo" variant="error" />
+                <RowImage url_image={defaultimg} type="row" />
+              )}
+            </td>
+            <td style={{cursor:"default"}}>
+              {category.state ? (
+                <button style={{cursor:"default"}} className="btn-gral btn--success ">Activo</button>
+              ) : (
+                <button style={{cursor:"default"}}  className="btn-gral btn--error">Inactivo</button>
               )}
             </td>
             <td>
+              {category.billboard ? (
+                <Button text="Ocultar" variant="main"onClick={()=>showBillboard("" + category.id)} />
+              ) : (
+                <Button text="Mostrar" variant="error" onClick={()=>showBillboard("" + category.id)} />
+              )}
+            </td>
+            <td className="col-2" >
               <Button variant="main" onClick={() => onEdit(category)}>
                 <MdModeEdit />
               </Button>

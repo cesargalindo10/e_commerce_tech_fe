@@ -32,12 +32,12 @@ export interface Brand{
     description?: string
 }
 export interface CategoryData{
-    id:number;
+    id?:number;
     name: string;
     description: string;
     state:boolean;
-    create_at: string | null;
-    update_at: string | null;
+    url_image?:string;
+    billboard:boolean;
 }
 export interface Sale{
     id?: number,

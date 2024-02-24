@@ -35,10 +35,13 @@ export default function Category() {
       console.error(error);
     }
   };
-  const createCategory = async (category: CategoryData) => {
+  const createCategory = async (category: CategoryData,image:File|null) => {
     try {
       let url: string = "api/categories";
-      const { success, message }: any = await APISERVICE.post(category, url);
+      const formData=new FormData
+      formData.append("data", JSON.stringify(category));      
+      if (image) formData.append("file", image);
+      const { success, message }: any = await APISERVICE.posWithImage(formData, url,"POST");
 
       if (success) {
         toast.success(message);
@@ -48,12 +51,14 @@ export default function Category() {
       console.error(error);
     }
   };
-  const updateCategory = async (categoryUpdate: CategoryData, id: string) => {
+  const updateCategory = async (categoryUpdate: CategoryData, id: string , image:File|null) => {
     try {
-      let url: string = `api/categories/${id}`;
-      const { success, message }: any = await APISERVICE.post(
-        categoryUpdate,
-        url
+      let url: string = `api/categories/${id}`;      const formData=new FormData
+      formData.append("data", JSON.stringify(categoryUpdate));      
+      if (image) formData.append("file", image);
+      const { success, message }: any = await APISERVICE.posWithImage(
+        formData,
+        url,"POST"
       );
       if (success) {
         toast.success(message);
@@ -66,6 +71,13 @@ export default function Category() {
   const deleteCategory = async (id: string) => {
     let url = `api/categories/${id}`;
     const response = await APISERVICE.delete(url);
+    if (response) {
+      getCategories();
+    }
+  };
+  const showBillboardCategory = async (id: string) => {
+    let url = `api/categories-billboard/${id}`;
+    const response = await APISERVICE.delete(url); 
     if (response) {
       getCategories();
     }
@@ -89,6 +101,7 @@ export default function Category() {
         deleteCategory={deleteCategory}
         pageInfo={pageInfo}
         getCategories={getCategories}
+        showBillboardCategory={showBillboardCategory}
       />
       {showModal && (
         <CategoryModal

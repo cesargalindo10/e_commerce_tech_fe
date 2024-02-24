@@ -23,7 +23,7 @@ export const APISERVICE = {
      
     } catch (error) {
       console.error(error);
-      throw error; // Puedes manejar el error aquí o dejarlo propagar
+      throw error;
     }
   },
   post: async (body: any, url: string) => {
@@ -31,7 +31,6 @@ export const APISERVICE = {
       const response = await axios.post(`${API_URL}${url}`, body, {
         headers: {
           Authorization: token,
-          "Content-Type": "application/json",
         },
       });
       return response;
@@ -40,7 +39,29 @@ export const APISERVICE = {
       throw error;
     }
   },
+  posWithImage: async (body: any, url: string,method:string) => {
+    try {
+        const response = await fetch(`${API_URL + url}`, {
+            method: method,
+            headers: {
+                'authorization': token,
+            },
+            body: body
+        });
 
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+
+        const data = await response.json(); 
+        console.log(data);
+
+        return data;
+    } catch (error) {
+        console.error('Error en la solicitud:', error);
+        throw error; 
+    }
+},
   delete: async (url: string)=> {
     try {
       return await axios.delete(`${API_URL + url}`, {
@@ -67,25 +88,5 @@ export const APISERVICE = {
       console.error(error);
       throw error;
     }
-  },
-};
-export const AxiosService = {
-  get: (url: string, params: any) => {
-    console.log(`${API_URL + url}`)
-    return axios.get(`${API_URL + url}`, {
-      params: params,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json", // Puedes ajustar el tipo de contenido según tus necesidades
-      },
-    });
-  },
-
-  post: <T>(body: T, url: string, params: string) => {
-    return axios.post(`${API_URL + url + params}`, body);
-  },
-
-  patch: <T>(body: T, url: string, params: string) => {
-    return axios.patch(`${API_URL + url + params}`, body);
   },
 };

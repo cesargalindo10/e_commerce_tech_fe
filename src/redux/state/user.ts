@@ -1,34 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { UserInfo } from "../../models/user.model";
-import { Roles } from "../../models/roles";
+import { UserSesion, userInfo } from "../../models/user.model";
 import { clearLocalStorage, persistLocalStorage } from "../../utilities/localSotorage.utility";
 
-export const initialStateEmpty: UserInfo = {
-    id:0,
-    name: '',
-    username: '',
-    token:'',
-    rol: Roles.ANOMIMOUS,
-    permissions:[]
+export const userEmpty: UserSesion = {
+  id:0,
+  name:"",
+  state:false,
+  username:"",
+  role:'',
+  permissions:[]
+}
+const stateEmpty:userInfo={
+  user:userEmpty,
+  token:"",
 }
 const UserKey = 'user';
 export const userSlice = createSlice({
     name:'user',
-    initialState:localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')as string):initialStateEmpty,
+    initialState:localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')as string):stateEmpty,
     reducers:{
         createUser: (state, action) => {
             state
-            persistLocalStorage<UserInfo>(UserKey, action.payload);
+            persistLocalStorage<userInfo>(UserKey, action.payload);
             return action.payload;
           },
           updateUser: (state, action) => {
             const result = { ...state, ...action.payload };
-            persistLocalStorage<UserInfo>(UserKey, result);
+            persistLocalStorage<userInfo>(UserKey, result);
             return result;
           },
           resetUser: () => {
             clearLocalStorage(UserKey);
-            return initialStateEmpty;
+            return stateEmpty;
           }
     }
 });
