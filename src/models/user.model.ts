@@ -1,7 +1,7 @@
 export interface userInfo{
   user:UserSesion;
   token:string;
-
+  id?: number
 }
 export interface UserSesion {
   id?:number;

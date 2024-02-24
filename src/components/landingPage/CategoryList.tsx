@@ -34,7 +34,7 @@ const CategoryList: React.FC<Props> = ({ categories }) => {
       <div className="">
         <div
           style={{ zIndex: 1 }}
-          className={`backdrop ${showCategories ? "show" : ""}`}
+          className={`backdrop2 ${showCategories ? "show" : ""}`}
           onClick={() => setShowCategories(false)}
         >
           {" "}
@@ -43,7 +43,7 @@ const CategoryList: React.FC<Props> = ({ categories }) => {
         <div className="category-list-container">
           <ul className="category-list-nav">
             <li
-              className="d-flex align-items-center gap-2"
+              className="d-flex align-items-center gap-1"
               onClick={() => setShowCategories(!showCategories)}
             >
               <span className="mb-1">

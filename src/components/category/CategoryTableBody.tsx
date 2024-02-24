@@ -65,7 +65,7 @@ export default function CategoryTableBody({
               <Button variant="main" onClick={() => onEdit(category)}>
                 <MdModeEdit />
               </Button>
-
+              {' '}
               <Button
                 variant="error"
                 onClick={() => onDelete("" + category.id)}

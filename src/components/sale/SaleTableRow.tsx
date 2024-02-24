@@ -57,24 +57,24 @@ export default function SaleTableRow({ sale }: Props) {
     await updateSale()
     getSales()
 
-    const message = `Hola ${sale.customer_name}, el pedido ha sido confirmado.`;
+    const message = `Hola ${sale.customer_name}, tu pedido ha sido confirmado.`;
     const ordereDetailMessage =
       `Fecha: ${
         sale.created_at?.slice(0, 10) + " " + sale.created_at?.slice(11, 19)
       }%0A` +
       `Numero de pedido: ${sale.order_number}%0A` +
-      `Total: ${sale.total}%0A` +
       `Nombre cliente: ${sale.customer_name}%0A%0A` +
-      `Detalles del pedido: %0A`;
-    const orderDetails = response?.map((orderDetail: OrderDetail) => {
-      return (
-        `${orderDetail.quantity}x ` +
-        `${orderDetail.name}` +
-        `${orderDetail.total}%0A`
-      );
+      `Detalles del pedido:%0A`;
+
+    let orderDetailT = ''
+    response?.forEach((orderDetail: OrderDetail) => {
+       orderDetailT += `${orderDetail.quantity}x ` + ` ${orderDetail.name} ` + ` Bs. ${orderDetail.total}%0A` 
     });
+
+    const total = `Total: ${sale.total}%0A`;
+    console.log(orderDetailT);
     window.open(
-      `https://wa.me/${sale.customer_phone}?text=${message}%0A%0A${ordereDetailMessage}%0A%0A${orderDetails}`
+      `https://wa.me/${sale.customer_phone}?text=${message}%0A%0A${ordereDetailMessage}%0A${orderDetailT}%0A${total}`
     );
   };
 

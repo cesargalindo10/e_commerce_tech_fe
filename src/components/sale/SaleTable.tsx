@@ -20,7 +20,7 @@ export default function SaleTable({
           <thead >
             <tr>
               <th>Fecha</th>  
-              <th>Numero de Pedido</th>  
+              <th>#Pedido</th>  
               <th>Total</th>  
               <th>Estado</th>   
               <th>Nombre Cliente</th>   

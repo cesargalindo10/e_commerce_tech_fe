@@ -5,6 +5,7 @@
     top: 0;
     position: fixed;
     display: none;
+    z-index: 100;
 }
 .backdrop.active{
     display: block;

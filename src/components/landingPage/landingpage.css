@@ -9,7 +9,6 @@
 
 .category-list-nav{
     display: flex;
-    z-index: 11;
     list-style: none;
     position: relative;
     align-items: center;
@@ -172,7 +171,7 @@
     }
 
     /* Category list */
-    .backdrop{
+    .backdrop2{
         background-color: rgba(0, 0, 0, 0.5);
         height: 100%;
         width: 100%;
@@ -182,7 +181,7 @@
         display: none;
         transition: .3s;
     }
-    .backdrop.show{
+    .backdrop2.show{
         display: block;
     }
     .category-list{
@@ -206,5 +205,8 @@
    
     .menu-title.show{
         display: block;
+    }
+    .category-list-nav{
+        justify-content: center;
     }
 }

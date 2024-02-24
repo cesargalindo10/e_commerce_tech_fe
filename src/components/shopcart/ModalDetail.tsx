@@ -54,7 +54,7 @@ function ModalDetail({ show, onHide, setShowModalConfirm}: Props) {
     }
     try {
       setLoading(true)
-      const response = await APISERVICE.post(body, 'sale', '');
+      const response = await APISERVICE.post(body, 'api/sale', '');
       if(response){
         onHide()
         setShowModalConfirm()
@@ -136,6 +136,8 @@ function ModalDetail({ show, onHide, setShowModalConfirm}: Props) {
             </tr>
           </tbody>
         </Table>
+
+        <p style={{fontSize: '14px', textAlign: 'center'}}>*Después de confirmar tu pedido, nos pondremos en contacto contigo para coordinar la entrega y/o la opción de recogerlo.</p>
       </Modal.Body>
       <Modal.Footer>
         <button className="btn-next" onClick={handleConfirm}>Confirmar</button>

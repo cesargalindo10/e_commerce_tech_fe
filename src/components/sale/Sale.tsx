@@ -7,6 +7,7 @@ import useSale from "./useSale";
 import { PDFViewer } from "@react-pdf/renderer";
 import DocumentPdf from "./DocumentPdf";
 import './sale.css'
+import Button from "../../shared/btns/Button";
 interface AppState{
     sales: Sale [],
     pageInfo: PageInfo | null,
@@ -67,10 +68,15 @@ export function Sale (){
      
     };
   
+    const handleGetSales = () => {
+      getSales(pageInfo?.page)
+    }
     return (
       <ContextSale.Provider value={{saleToShow, setSaleToShow, showModal, setShowModal, getOrderDetails, getSales}}>
         <div className="container-component">
          <h3 className="title-page">Ventas</h3>
+         <Button text="Actualizar" onClick={handleGetSales} variant="success" />
+         <div className="mb-3"></div>
          {/*  <SearchRow
             filterSomething={filtercategories}
             placeHolder="Nombre del curso"

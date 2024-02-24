@@ -24,7 +24,7 @@ export default function CategoryTable({
 }: Props) {
   return (
     <>
-      <Table striped bordered hover>
+      <Table striped bordered hover responsive>
         <CategoryTableHeader />
         <CategoryTableBody
           categories={items}

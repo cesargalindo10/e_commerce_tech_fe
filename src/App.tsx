@@ -1,19 +1,21 @@
 import { Navigate, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/global.css";
-import Private from "./pages/Private";
-import Login from "./pages/Login/Login";
 import RoutesWithNotFound from "./utilities/RoutesWithNotFound";
 import { PrivateRoutes, PublicRoutes } from "./models/routes";
 import AuthGuard from "./guards/auth.guard";
-import ProductByCategory from "./components/client/ProductByCategory";
-import SearchProductPage from "./components/client/SearchProductPage";
-import LandingPage from "./components/landingPage/LandingPage";
-import DetailProduct from "./components/detailProduct/DetailProduct";
-import ShopCart from "./components/shopcart/ShopCart";
+import { Suspense, lazy } from "react";
 
+const LandingPage = lazy(() => import('./components/landingPage/LandingPage'))
+const Private = lazy(() => import('./pages/Private'))
+const DetailProduct = lazy(() => import('./components/detailProduct/DetailProduct'))
+const ShopCart = lazy(() => import('./components/shopcart/ShopCart'))
+const SearchProductPage = lazy(() => import('./components/client/SearchProductPage'))
+const ProductByCategory = lazy(() => import('./components/client/ProductByCategory'))
+const Login = lazy(() => import('./pages/Login/Login'))
 function App() {
   return (
+      <Suspense fallback={<div>Loading...</div>}>
     <RoutesWithNotFound>
       <Route path="/" element={<LandingPage/>}/>
       <Route path="product/:id" element={<DetailProduct/>}/>
@@ -26,6 +28,7 @@ function App() {
         <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
       </Route>
     </RoutesWithNotFound>
+    </Suspense>
   );
 }
 
