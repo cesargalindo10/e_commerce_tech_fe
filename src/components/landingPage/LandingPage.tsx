@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
 import CategoryList from './CategoryList'
-import { AxiosService } from '../../service/api.service'
 import { Category } from '../../models/models'
 import './landingpage.css'
 import CategoriesAll from './Category/CategoryAll'
 import Header from '../../shared/header/Header'
 import Footer from '../../shared/footer/Footer'
 import Skeleton from 'react-loading-skeleton'
+import useCategory from '../hooks/useCategory'
+import { stylesHeader } from '../../utilities/shared'
 
 export interface ProductCat{  
     id: number,
@@ -22,32 +22,7 @@ export interface AppState {
     'categoriesWithProducts': CatWithProd[]
 }
 function LandingPage() {
-    const [categoriesWithProducts, setCategoriesWithProducts] = useState<AppState['categoriesWithProducts']>([]);
-    const categoryListRef = useRef<HTMLUListElement>(null);
-    const [loading, setLoading] = useState(false);
-   useEffect(() => {
-    getProductWithCategories()
-   },[])
-     
-  const getProductWithCategories = async () => {
-    try {
-        setLoading(true)
-        const response = await AxiosService.get('api/categories/products', '')
-        if(response){
-            setCategoriesWithProducts(response.data)
-        }
-    } catch (error) {
-        
-    } finally {
-      setLoading(false)
-    }
-  }
-
- const styles: React.CSSProperties = {   
-  position: 'sticky',
-  top: 0,
-  boxShadow: '-1px 2px 6px 0px rgba(0,0,0,0.55)',
- }
+  const { loading, categoriesWithProducts } = useCategory();
 
  if(loading) return <div className='content-page mt-3'>
         <div className='d-flex gap-2 align-items-center justify-content-between'>
@@ -113,13 +88,12 @@ function LandingPage() {
     </div>
  return (
     <>
-    <div style={styles}>
+    <div style={stylesHeader}>
       <Header/>
-    {/* header */}
-      <CategoryList categories={categoriesWithProducts} categoryListRef={categoryListRef}/> 
+      <CategoryList categories={categoriesWithProducts}/> 
     </div>
     <main className='content-page'>
-        <CategoriesAll categories={categoriesWithProducts} categoryListRef={categoryListRef}/>
+        <CategoriesAll categories={categoriesWithProducts}/>
     </main>
     <Footer/>
     </>

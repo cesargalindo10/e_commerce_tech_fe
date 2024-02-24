@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 
 interface Props {
   categories: AppState["categoriesWithProducts"];
-  categoryListRef: React.RefObject<HTMLUListElement>;
 }
 
-function CategoriesAll({ categories,categoryListRef }: Props) {
+function CategoriesAll({ categories }: Props) {
 
   return (
-    <ul className='categories-all' ref={categoryListRef}>
+    <ul className='categories-all'>
         {
             categories?.length > 0 ? categories.map(category => (
               <li key={category.id} className='category-card' id={category?.id+"" }>

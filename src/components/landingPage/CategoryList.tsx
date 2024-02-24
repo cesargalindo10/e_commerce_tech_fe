@@ -3,17 +3,17 @@ import React, { useEffect, useState } from "react";
 import "./landingpage.css"; // Asegúrate de tener este archivo para los estilos
 import { AppState } from "./LandingPage";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 import { RowImage } from "../../shared/rowImage/RowImage";
 import defaultimg from "../../assets/img/defaulimg.png";
 const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
 interface Props {
   categories: AppState["categoriesWithProducts"];
-  categoryListRef: React.RefObject<HTMLUListElement>;
 }
 
 const CategoryList: React.FC<Props> = ({ categories }) => {
+  const { id } = useParams();
   const [selectedCategory, setSelectedCategory] = useState<number | undefined>(
     0
   );
@@ -25,10 +25,13 @@ const CategoryList: React.FC<Props> = ({ categories }) => {
     setSelectedCategory(categories[0]?.id);
   }, [categories]);
 
+  useEffect(() => {
+    setShowCategories(false);
+  },[id])
+
   const categoriesBillboard = categories.filter(
     (category) => category.billboard === true
   );
-
   return (
     <>
       <div className="">
@@ -55,7 +58,7 @@ const CategoryList: React.FC<Props> = ({ categories }) => {
               categoriesBillboard.map((category) => (
                 <li
                   key={category.id}
-                  onClick={() => navigate(`category/${category.id}`)}
+                  onClick={() => navigate(`/category/${category.id}`)}
                 >
                   {category.name}
                 </li>
@@ -81,7 +84,7 @@ const CategoryList: React.FC<Props> = ({ categories }) => {
                 className={`category-item ${
                   selectedCategory === category.id ? "selected" : ""
                 }`}
-                onClick={() => navigate(`category/${category.id}`)}
+                onClick={() => navigate(`/category/${category.id}`)}
                 id={category?.id + "li"}
               >
                 <div className="d-flex align-items-center gap-1">
@@ -98,6 +101,7 @@ const CategoryList: React.FC<Props> = ({ categories }) => {
                 <Link
                   className="category-card-link"
                   to={`/category/${category.id}`}
+                  replace={true}
                 >
                   <span>
                     <BsArrowRight />
