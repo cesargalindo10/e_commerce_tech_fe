@@ -54,8 +54,6 @@ export const APISERVICE = {
         }
 
         const data = await response.json(); 
-        console.log(data);
-
         return data;
     } catch (error) {
         console.error('Error en la solicitud:', error);
