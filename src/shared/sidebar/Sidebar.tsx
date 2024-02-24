@@ -16,7 +16,7 @@ interface Props {
 const Sidebar = ({ children }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  const permission = useSelector((state: AppStore) => state.user);
+  const permission = useSelector((state: AppStore) => state.user.user);
   const icons = {
     productos: <TbParking />,
     categorias: <BiCategory />,

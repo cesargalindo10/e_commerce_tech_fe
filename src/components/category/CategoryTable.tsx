@@ -11,6 +11,7 @@ interface Props {
   deleteCategory: (id: string) => void;
   pageInfo: PageInfo |null;
   getCategories: (page: number) => void;
+  showBillboardCategory:(id:string)=>void;
 }
 export default function CategoryTable({
   items,
@@ -19,6 +20,7 @@ export default function CategoryTable({
   deleteCategory,
   pageInfo,
   getCategories,
+  showBillboardCategory
 }: Props) {
   return (
     <>
@@ -29,6 +31,7 @@ export default function CategoryTable({
           setCategoriToEdit={setCategoriToEdit}
           setShowModal={setShowModal}
           deleteCategory={deleteCategory}
+          showBillboardCategory={showBillboardCategory}
         />
       </Table>
       {items.length > 0 && (

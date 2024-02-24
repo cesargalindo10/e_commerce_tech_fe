@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { PrivateRoutes } from "../../models/routes";
 import { createUser } from "../../redux/state/user";
-import { Roles } from "../../models/roles";
 import FormField from "../../shared/FormField";
 import Loading from "../../shared/loading/Loading";
+import toast from "react-hot-toast";
 
 interface User {
   username: string;
@@ -38,15 +38,11 @@ export default function Login() {
       const response: any = await APISERVICE.post(values, url);
       if (response) {
         let sesion = {
-          id: response.user.id,
-          name: response.user.name,
-          username: response.user.username,
-          token: response.token,
-          role: response.user.role,
-          permissions: response.permissions,
+          user:response.user,
+          token:response.access_token
         };
-        console.log(response);
-        dispatch(createUser({ ...sesion, rol: Roles.USER }));
+        dispatch(createUser({ ...sesion}));
+        !response.user.state && toast.error("Usuario Inactivo")
         navigate(`/${PrivateRoutes.PRIVATE}/ventas`, { replace: true });
       } else {
         console.log("Invalid username or password");

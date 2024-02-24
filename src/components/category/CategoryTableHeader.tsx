@@ -14,14 +14,22 @@ const columns = [
       id: 3,
     },
     {
-      title: "state",
+      title: "Imagen",
       id: 4,
     },
- 
+    {
+      title:"State",
+      id:5
+    }, 
+    {
+      title:"Billboard",
+      id:6
+    }, 
     {
         title:"Actions",
-        id:5
-    }
+        id:7
+    },
+ 
   ];
 export default function CategoryTableHeader() {
 

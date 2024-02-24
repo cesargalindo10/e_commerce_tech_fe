@@ -10,7 +10,7 @@ interface Props{
 }
 export default function HeaderAdmin({children}:Props) {
 
- const user = useSelector((store: AppStore) => store.user)
+ const user = useSelector((store: AppStore) => store.user.user)
  const dispatch = useDispatch();
  const navigate = useNavigate()
  const logOut=()=>{
