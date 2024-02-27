@@ -36,16 +36,15 @@ export default function Login() {
     let url = "api/login";
     try {
       const response: any = await APISERVICE.post(values, url);
-      if (response) {
+      if (response.success) {
         let sesion = {
           user:response.user,
           token:response.access_token
         };
         dispatch(createUser({ ...sesion}));
-        !response.user.state && toast.error("Usuario Inactivo")
         navigate(`/${PrivateRoutes.PRIVATE}/ventas`, { replace: true });
       } else {
-        console.log("Invalid username or password");
+        toast.error(response.message)
       }
     } catch (error) {
       setErrorUserPass("*Invalid username or password");

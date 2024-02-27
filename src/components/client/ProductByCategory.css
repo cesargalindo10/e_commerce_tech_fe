@@ -11,10 +11,10 @@
   justify-content: center;
   margin: 0 auto;
   border-bottom: 3px solid #d9d9d9;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 .category-client h2 {
-  padding: .7rem 1.5rem .7rem 1.5rem;
+  padding: 0.7rem 1.5rem 0.7rem 1.5rem;
   border-bottom: 3px solid var(--colorMain);
   margin-bottom: -3px;
   text-align: center;
@@ -22,21 +22,10 @@
   font-size: 1rem;
   font-weight: bold;
 }
-.category-client h4{
-  padding: .7rem 1.5rem .7rem 1.5rem;
-  border-bottom: 3px solid var(--colorMain);
-  margin-bottom: -3px;
-  text-align: center;
-  max-width: 200px;
-  font-size: 1rem;
-  font-weight: bold;
-}
-.infinite-scroll-component{
+
+.infinite-scroll-component {
   height: auto;
   overflow: hidden;
-}
-.infinite-scroll {
- 
 }
 
 .fila {
@@ -55,7 +44,6 @@
   background-color: transparent;
 }
 .card_product-client {
-  position: relative;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -75,6 +63,7 @@
   background-clip: border-box;
   border: 1px solid var(--colorGrisSoft2);
   border-radius: 0.25rem;
+
 }
 .card-body-client:hover {
   border: 2px solid var(--colorMain);
@@ -97,7 +86,6 @@
 .product-info-client {
   max-width: 100%;
   padding-left: 10px;
-
 }
 .product-info-client p {
   margin: 0;
@@ -106,11 +94,11 @@
   font-size: small;
   margin: 2px 0;
   color: #7f7f7f;
-  opacity: 0.7;
+
 }
 
 .product-info-name-client {
- /*  white-space: nowrap;
+  /*  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; */
   font-size: 0.75rem;
@@ -120,16 +108,14 @@
 .product-price-name-client {
   color: var(--colorRed);
   display: flex;
-   align-items: end; 
-
+  align-items: end;
 }
-.exponent {
-  position: relative;
-  top: -0.5em;
+.exponent {  
+  margin-bottom: 10px;
   font-size: 0.75em;
 }
 @media only screen and (max-width: 430px) {
-  .card-body-client{
+  .card-body-client {
     height: 140px;
     width: 100%;
     display: grid;
@@ -138,12 +124,11 @@
     grid-column-gap: 5px;
     grid-row-gap: 0px;
     border: 1px solid var(--colorGrisSoft2);
-    backdrop-filter: blur(6px);
-    border-radius: .2rem;
+    border-radius: 0.2rem;
     margin: 0 auto;
     margin-top: 5px;
   }
- 
+
   .product-info-client {
     max-width: 200px;
     padding-left: 10px;
@@ -151,9 +136,7 @@
     flex-direction: column;
     align-items: start;
     justify-content: center;
-
   }
-
 }
 
 .not-found-result {
@@ -164,6 +147,14 @@
   font-size: 20px;
   font-weight: 600;
   color: #444;
-
-
+}
+.contenedor-buscador{
+  width: 60%;
+  min-width: 400px;
+  height: 50px;
+  margin-top: 10px;
+  
+}
+.contatiner-header-client{
+  background-color: white;
 }

@@ -7,18 +7,22 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Header from "../../shared/header/Header";
-import Loading from "../../shared/loading/Loading";
+import useCategory from "../hooks/useCategory";
+import CategoryList from "../landingPage/CategoryList";
+import { esqueleton } from "./EsqueletonClient";
+import { stylesHeader } from "../../utilities/shared";
 
 interface AppState {
   pageInfo: PageInfo | null;
   product: ProductBrand[];
 }
+
 export default function ProductByCategory() {
   const [productos, setProductos] = useState<AppState["product"]>([]);
   const [category, setCategory] = useState<Category>();
   const [verMas, setVerMas] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
+  const { loading, categoriesWithProducts } = useCategory();
 
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
@@ -26,10 +30,19 @@ export default function ProductByCategory() {
       const url = `api/products/${id}?page=${page}`;
       const response: any = await APISERVICE.get(url);
       if (response.data) {
-        const uniqueProducts = Array.from(
-          new Set([...productos, ...response.data])
-        );
-        setProductos(uniqueProducts);
+        if (verMas) {
+          const uniqueProducts = Array.from(
+            new Set([...productos, ...response.data])
+          );
+          setProductos(uniqueProducts);
+        } else {
+          setProductos((prevProducts) => {
+            const uniqueProducts = Array.from(
+              new Set([...prevProducts, ...response.data])
+            );
+            return uniqueProducts;
+          });
+        }
         return response;
       } else {
         console.log("Ocurrio un error al obtener ");
@@ -38,12 +51,12 @@ export default function ProductByCategory() {
       console.error(error);
     }
   };
-  const moreProducts = async () => {    
+  const moreProducts = async () => {
     const response: any = await getProductsByCategory(siguiente);
-    if(response.data.length <15){
-      setVerMas(false)
-    }else{
-      setVerMas(true)
+    if (response.data.length < 6) {
+      setVerMas(false);
+    } else {
+      setVerMas(true);
     }
     const next = response.pageInfo?.next?.slice(-1);
     response.pageInfo.next == null && setVerMas(false);
@@ -63,49 +76,50 @@ export default function ProductByCategory() {
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
   useEffect(() => {
+    setProductos([]);
     getCategoryById();
     moreProducts();
-  }, []);
+  }, [id]);
 
   return (
-    <div className="container_products">
-      <Header />
-      <div className="category-client">
-        <h2>{category?.name}</h2>
+    <>
+      <div style={stylesHeader}>
+        <Header />
+        <CategoryList categories={categoriesWithProducts}/>
       </div>
-
-      <InfiniteScroll
-        dataLength={productos && productos.length}
-        next={moreProducts}
-        hasMore={verMas}
-        loader={<Loading />}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            {
-              productos?.length === 0 ?  <span>No existen productos</span>:
+      <main className="content-page">
+        <InfiniteScroll
+          dataLength={productos && productos.length}
+          next={moreProducts}
+          hasMore={verMas}
+          loader={esqueleton}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              {productos?.length === 0 ? (
+                <span>No existen productos</span>
+              ) : (
                 <span>No existen más productos</span>
-            }
-          </p>
-        }
-        style={{ overflow: "hidden" }}
-      >
-        <div className="fila content-page">
-          {productos?.map((producto) => (
-            <Link
-              to={`/product/${producto.id}`}
-              className="link-detalle"
-              key={crypto.randomUUID()}
-            >
-              <ProductForCategory producto={producto} loading={loading} />
-            </Link>
-          ))}
-        </div>
-      </InfiniteScroll>
-    </div>
+              )}
+            </p>
+          }
+          style={{ overflow: "hidden" }}
+        >
+          <div className="fila ">
+            {productos?.map((producto) => (
+              <Link
+                to={`/product/${producto.id}`}
+                className="link-detalle"
+                key={crypto.randomUUID()}
+              >
+                <ProductForCategory producto={producto} />
+              </Link>
+            ))}
+          </div>
+        </InfiniteScroll>
+      </main>
+    </>
   );
 }

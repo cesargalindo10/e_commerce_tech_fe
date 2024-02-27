@@ -8,7 +8,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import Search from "../../shared/search/Search";
 import Header from "../../shared/header/Header";
-import Loading from "../../shared/loading/Loading";
+import { esqueleton } from "./EsqueletonClient";
+import { stylesHeader } from "../../utilities/shared";
 
 interface search {
   name: string;
@@ -17,7 +18,6 @@ interface search {
 export default function SearchProductPage() {
   const [productos, setProductos] = useState<ProductBrand[]>([]);
   const [verMas, setVerMas] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [siguiente, setSiguente] = useState("");
 
   const body: search = {
@@ -37,16 +37,14 @@ export default function SearchProductPage() {
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
   const moreProducts = async () => {
     const response: any = await getProductsSearch(siguiente);
-    if(response.data.length <15){
-      setVerMas(false)
-    }else{
-      setVerMas(true)
+    if (response.data.length < 15) {
+      setVerMas(false);
+    } else {
+      setVerMas(true);
     }
     const next = response.pageInfo?.next?.slice(-1);
     response.pageInfo.next == null && setVerMas(false);
@@ -63,42 +61,45 @@ export default function SearchProductPage() {
     getProductsSearch();
   }, []);
   return (
-    <div className="container_products">
-      <Header />
-      <InfiniteScroll
-        dataLength={productos && productos.length}
-        next={debouncedMoreProducts}
-        hasMore={verMas}
-        loader={<Loading />}
-        endMessage={<p></p>}
-        style={{ overflow: "hidden" }}
-      >
-        
-      <div className="category-client">
-        <h4>Busqueda</h4>
+    <>
+      <div style={stylesHeader} className="contatiner-header-client">
+        <Header />
+        <div className="content-page contenedor-buscador">
+            <Search
+              placeHolder="Ingrese el nombre del producto"
+              filterSomething={getProductsSearch}
+              handleClear={clearFilter}
+            />
+          </div>
       </div>
-      
-      <div className="content-page mt-2 mb-2">
-        <Search
-          placeHolder="Ingrese el nombre del producto"
-          filterSomething={getProductsSearch}
-          handleClear={clearFilter}
-          />
+      <div className="container_products">
+        <InfiniteScroll
+          dataLength={productos && productos.length}
+          next={debouncedMoreProducts}
+          hasMore={verMas}
+          loader={esqueleton}
+          endMessage={<p></p>}
+          style={{ overflow: "hidden" }}
+        >
+
+
+          <div className="fila content-page">
+            {productos && productos.length > 0 ? (
+              productos.map((producto) => (
+                <Link
+                  key={crypto.randomUUID()}
+                  to={`/product/${producto.id}`}
+                  className="link-detalle"
+                >
+                  <ProductForCategory producto={producto} />
+                </Link>
+              ))
+            ) : (
+              <p className="not-found-result">Resultados no encontrados</p>
+            )}
+          </div>
+        </InfiniteScroll>
       </div>
-      <div className="fila content-page">
-          {productos  && productos.length>0?
-          (productos.map((producto) => (
-            <Link
-              key={crypto.randomUUID()}
-              to={`/product/${producto.id}`}
-              className="link-detalle"
-            >
-              <ProductForCategory producto={producto} loading={loading} />
-            </Link>
-          ))):(<p className="not-found-result">Resultados no encontrados</p>)
-            }
-        </div>
-      </InfiniteScroll>
-    </div>
+    </>
   );
 }
