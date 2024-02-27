@@ -53,7 +53,7 @@ export default function ProductByCategory() {
   };
   const moreProducts = async () => {
     const response: any = await getProductsByCategory(siguiente);
-    if (response.data.length < 6) {
+    if (response.data.length < 15) {
       setVerMas(false);
     } else {
       setVerMas(true);
