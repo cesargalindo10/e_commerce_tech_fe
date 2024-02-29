@@ -63,10 +63,11 @@
   background-clip: border-box;
   border: 1px solid var(--colorGrisSoft2);
   border-radius: 0.25rem;
+  transition: border 0.3s ease;
 
 }
 .card-body-client:hover {
-  border: 2px solid var(--colorMain);
+  border: 1px solid var(--colorMain);
   cursor: pointer;
 }
 .image-product-client {

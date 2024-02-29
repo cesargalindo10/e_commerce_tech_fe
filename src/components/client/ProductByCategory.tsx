@@ -19,10 +19,10 @@ interface AppState {
 
 export default function ProductByCategory() {
   const [productos, setProductos] = useState<AppState["product"]>([]);
-  const [category, setCategory] = useState<Category>();
+  const [, setCategory] = useState<Category>();
   const [verMas, setVerMas] = useState(true);
   const [siguiente, setSiguente] = useState("");
-  const { loading, categoriesWithProducts } = useCategory();
+  const { categoriesWithProducts } = useCategory();
 
   const { id } = useParams();
   const getProductsByCategory = async (page: string = "1") => {
