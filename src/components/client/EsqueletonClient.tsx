@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 
 export const Card = (
-    <div className="card_product-client">
+    <div className="card_product-client" style={{zIndex: -1}}>
       <div className="card-body-client">
         <div className="image-product-client">
           <Skeleton height={99} width={99} />
@@ -18,7 +18,7 @@ export const Card = (
     </div>
   );
   export const esqueleton = (
-    <div className="container_products">
+    <div className="container_products" style={{zIndex: -1}}>
       <div className="fila content-page">
         <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
           {Card}

@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "@react-pdf/renderer";
 
-import logo from "../../assets/img/logo.png";
+import logo from "../../assets/img/logoblue.png";
 import footer from "../../assets/img/footer.png";
 import { OrderDetail, Sale } from "../../models/models";
 const APIURLIMG = import.meta.env.VITE_REACT_APP_API_URL_IMG;
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   headerTextTitle: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
   },
   image: {
@@ -234,7 +234,7 @@ const DocumentPdf = ({
             </View>
           )}
 
-          <Text style={styles.title}>Detalle de Orden</Text>
+          <Text style={styles.title}>#{saleToShow?.order_number } Detalle de Orden</Text>
           <View style={styles.table}>
             <View style={styles.tableRow}>
               <View style={[styles.tableColHeader, styles.colHeaderItem]}>
