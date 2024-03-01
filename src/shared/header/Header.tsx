@@ -13,7 +13,7 @@ function Header() {
       <div className="content-page header-landing">
       <Link className="header-logo" to={"/"}>
         <RowImage url_image={logo} width={80} />
-       {/*  <h2>Sedelec</h2> */}
+       {/*  <h2>Sedeelec</h2> */}
       </Link> 
       <div className="header-icons">
         <Link to={"/searchproduct"} className="header-icons-cart">

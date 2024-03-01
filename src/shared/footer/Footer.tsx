@@ -12,13 +12,13 @@ function Footer() {
         <Link to={"https://www.facebook.com/sedeelec"} target="_blank">
          <FaFacebook />
         </Link>
-        <Link to={'https://www.instagram.com/servicios_de_electrotecnia/'}>
+        <Link to={'https://www.instagram.com/servicios_de_electrotecnia/'} target="_blank">
          <FaInstagram />
         </Link>
-        <Link to={'https://www.tiktok.com/@sedeelec?lang=es'}>
+        <Link to={'https://www.tiktok.com/@sedeelec?lang=es'} target="_blank">
           <FaTiktok />
         </Link>
-        <Link to={'https://maps.app.goo.gl/4TjpCaDobm1wW9rMA'}>
+        <Link to={'https://maps.app.goo.gl/4TjpCaDobm1wW9rMA'} target="_blank">
           <LuMapPin />
         </Link>
       </section>
