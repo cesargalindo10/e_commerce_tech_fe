@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import "./search.css"
+import debounce from 'just-debounce-it';
 
 interface SearchRowProps {
   placeHolder: string;
-  filterSomething: (value: string) => void;
+  filterSomething: (value: string,page:string) => void;
   handleClear: () => void;
   children?: React.ReactNode
 }
@@ -17,10 +18,12 @@ export default function Search({ placeHolder, filterSomething, handleClear, chil
       inputSearchRef.current.focus();
     }
   }, []);
-
+  const debouncedFilterSomething = debounce((value:any) => {
+    filterSomething(value,"");
+  }, 500); 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    filterSomething(value);
+    debouncedFilterSomething(value);
     setSearch(value);
   };
 
