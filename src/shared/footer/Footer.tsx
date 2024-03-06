@@ -1,17 +1,26 @@
-import { FaFacebook, FaGoogle, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import "./footer.css";
 import { BiHome } from "react-icons/bi";
 import { MdEmail } from "react-icons/md";
 import { PiPhone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { LuMapPin } from "react-icons/lu";
 function Footer() {
   return (
     <footer className="footer">
       <section className="footer-social my-3">
-        <FaFacebook />
-        <FaInstagram />
-        <FaTiktok />
-        <FaGoogle />
+        <Link to={"https://www.facebook.com/sedeelec"} target="_blank">
+         <FaFacebook />
+        </Link>
+        <Link to={'https://www.instagram.com/servicios_de_electrotecnia/'} target="_blank">
+         <FaInstagram />
+        </Link>
+        <Link to={'https://www.tiktok.com/@sedeelec?lang=es'} target="_blank">
+          <FaTiktok />
+        </Link>
+        <Link to={'https://maps.app.goo.gl/4TjpCaDobm1wW9rMA'} target="_blank">
+          <LuMapPin />
+        </Link>
       </section>
 
       <div className="footer-container">
@@ -25,16 +34,16 @@ function Footer() {
               <Link to={"/shop-cart"}>Pedidos</Link>
             </li>
 
-            <li>
+            {/* <li>
               <Link to="#">Términos y Condiciones</Link>
-            </li>
+            </li> */}
           </ul>
         </section>
         <section className="footer-contact">
           <h4>Contacto</h4>
           <div>
             <BiHome />
-            <p>Av. San Martín 123, Lima 123</p>
+            <p>Av. Villazon km 5</p>
           </div>
           <div>
             <MdEmail />

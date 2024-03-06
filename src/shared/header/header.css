@@ -1,6 +1,8 @@
 .header-landing-bg{
     background: rgb(44,90,164);
-    background: linear-gradient(270deg, rgba(44,90,164,1) 0%, rgba(12,55,124,1) 52%, rgba(1,37,93,1) 100%);
+    /* background: linear-gradient(270deg, rgba(44,90,164,1) 0%, rgba(12,55,124,1) 52%, rgba(1,37,93,1) 100%); */
+    background: linear-gradient(270deg, rgba(1,37,93,1)  0%, rgba(12,55,124,1) 52%, rgba(44,90,164,1)  100%);
+
     padding: .7rem 0;
 }
 .header-landing{

@@ -15,7 +15,7 @@ const ProductByCategory = lazy(() => import('./components/client/ProductByCatego
 const Login = lazy(() => import('./pages/Login/Login'))
 function App() {
   return (
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div></div>}>
     <RoutesWithNotFound>
       <Route path="/" element={<LandingPage/>}/>
       <Route path="product/:id" element={<DetailProduct/>}/>
